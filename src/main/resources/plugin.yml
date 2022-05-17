@@ -1,6 +1,6 @@
 name: LiquidStarval
 version: '${project.version}'
-main: de.starvalcity.base.core.Core
+main: de.starvalcity.base.Core
 api-version: 1.16
 authors: [ Nirflector, Donaris ]
 description: StarvalCity API Reference
