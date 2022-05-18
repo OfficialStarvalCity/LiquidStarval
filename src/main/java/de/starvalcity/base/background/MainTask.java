@@ -6,7 +6,7 @@ import de.starvalcity.base.background.def.Task;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class FileTask extends Task implements Scheduleable {
+public class MainTask extends Task implements Scheduleable {
 
     private final String taskName;
     private final int taskId;
@@ -15,7 +15,7 @@ public class FileTask extends Task implements Scheduleable {
 
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
 
-    public FileTask(String name, int id, long delay) {
+    public MainTask(String name, int id, long delay) {
         this.taskName = name;
         this.taskId = id;
         this.scheduleDelay = delay;
@@ -26,7 +26,7 @@ public class FileTask extends Task implements Scheduleable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                setRunning();
+
             }
         }.runTaskLater(plugin, 100L);
     }
@@ -36,9 +36,9 @@ public class FileTask extends Task implements Scheduleable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                setSleeping();
+
             }
-        }.runTaskLater(plugin, 20L);
+        }.runTaskLater(plugin, 60L);
     }
 
     @Override
@@ -49,34 +49,5 @@ public class FileTask extends Task implements Scheduleable {
     @Override
     public long getScheduleDelay() {
         return this.scheduleDelay;
-    }
-
-    @Override
-    public void setTaskStatus(boolean status) {
-        this.isRunning = status;
-    }
-
-    public void setRunning() {
-        if (!isRunning) {
-            isRunning = true;
-        }
-    }
-
-    public void setSleeping() {
-        if (isRunning) {
-            isRunning = false;
-        }
-    }
-
-    public int getTaskId() {
-        return this.taskId;
-    }
-
-    public String getTaskName() {
-        return this.taskName;
-    }
-
-    public boolean isRunning() {
-        return this.isRunning;
     }
 }

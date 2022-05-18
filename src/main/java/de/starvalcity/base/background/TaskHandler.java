@@ -3,47 +3,27 @@ package de.starvalcity.base.background;
 import de.starvalcity.base.background.def.Task;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TODO:
+ * - Possibility to change schedule delay of a specific task individually
+ * - Graphical interface to visualize all tasks
+ */
 public class TaskHandler {
 
-    private static Map<Integer, Task> tasks = new HashMap<>();
-    private static Map<Integer, Task> activeTasks = new HashMap<>();
+    private final FileTask fileTask = new FileTask("FileTask", 2, 100L);
 
-    private final FileTask fileTask = new FileTask();
+    private static Map<Integer, Task> tasks;
+    private static Map<Task, Boolean> taskStates;
 
-    public static Map<Integer, Task> getTasks() {
-        return tasks;
-    }
-
-    public void setup() {
+    public void initializeTasks() {
         tasks.put(2, fileTask);
     }
 
-    public static Map<Integer, Task> getActiveTasks() {
-        return activeTasks;
+    public void setTaskStatus(@NotNull Task task, boolean isRunning) {
+        task.setTaskStatus(isRunning);
+        taskStates.put(task, isRunning);
     }
 
-    public void setActiveTask(int id, @NotNull Task task) {
-        if (task.isRunning) {
-            return;
-        } else {
-            activeTasks.put(id, task);
-            task.setRunning();
-        }
-    }
-
-    public int getTaskId(@NotNull Task task) {
-        return task.getTaskId();
-    }
-
-    public String getTaskName(@NotNull Task task) {
-        return task.getTaskName();
-    }
-
-    public void setInactiveTask(Integer id, Task task) {
-        activeTasks.remove(id, task);
-        task.setSleeping();
-    }
 }

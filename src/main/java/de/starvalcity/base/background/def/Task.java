@@ -3,35 +3,15 @@ package de.starvalcity.base.background.def;
 public abstract class Task {
 
     public String taskName;
-    public int id;
+    public int taskId;
     public boolean isRunning;
 
-    public abstract void start();
+    public abstract void execute();
 
-    public abstract void stop();
+    public abstract void terminate();
 
-    public void setRunning() {
-        if (!isRunning) {
-            isRunning = true;
-        }
-    }
-
-    public void setSleeping() {
-        if (isRunning) {
-            isRunning = false;
-        }
-    }
-
-    public String getTaskName() {
-        return this.taskName;
-    }
-
-    public int getTaskId() {
-        return this.id;
-    }
-
-    public boolean isRunning() {
-        return this.isRunning;
+    public void setTaskStatus(boolean status) {
+        this.isRunning = status;
     }
 
 }

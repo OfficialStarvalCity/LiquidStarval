@@ -4,10 +4,6 @@ public interface Scheduleable {
 
     void setScheduleDelay(long delay);
 
-    long getScheduleDelay(long delay);
-
-    void setRunning();
-
-    void setSleeping();
+    long getScheduleDelay();
 
 }
