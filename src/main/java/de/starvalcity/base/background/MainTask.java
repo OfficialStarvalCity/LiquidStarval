@@ -50,4 +50,16 @@ public class MainTask extends Task implements Scheduleable {
     public long getScheduleDelay() {
         return this.scheduleDelay;
     }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
 }

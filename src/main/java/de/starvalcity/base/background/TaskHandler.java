@@ -17,13 +17,25 @@ public class TaskHandler {
     private static Map<Integer, Task> tasks;
     private static Map<Task, Boolean> taskStates;
 
-    public void initializeTasks() {
-        tasks.put(2, fileTask);
+    public static void setTasks(Map<Integer, Task> tasks) {
+        TaskHandler.tasks = tasks;
+    }
+
+    public static void setTaskStates(Map<Task, Boolean> taskStates) {
+        TaskHandler.taskStates = taskStates;
     }
 
     public void setTaskStatus(@NotNull Task task, boolean isRunning) {
         task.setTaskStatus(isRunning);
         taskStates.put(task, isRunning);
+    }
+
+    public void executeTask(@NotNull Task task) {
+        task.execute();
+    }
+
+    public void terminateTask(@NotNull Task task) {
+        task.terminate();
     }
 
 }
