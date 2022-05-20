@@ -26,9 +26,9 @@ public class MainTask extends Task implements Scheduleable {
         new BukkitRunnable() {
             @Override
             public void run() {
-
+                System.out.println("[Task] Starting Main Task ...");
             }
-        }.runTaskLater(plugin, 100L);
+        }.runTaskLater(plugin, 200L);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MainTask extends Task implements Scheduleable {
             public void run() {
 
             }
-        }.runTaskLater(plugin, 60L);
+        }.runTaskLater(plugin, 100L);
     }
 
     @Override

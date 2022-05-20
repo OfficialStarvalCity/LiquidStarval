@@ -12,14 +12,7 @@ import java.util.Map;
  */
 public class TaskHandler {
 
-    private final FileTask fileTask = new FileTask("FileTask", 2, 100L);
-
-    private static Map<Integer, Task> tasks;
     private static Map<Task, Boolean> taskStates;
-
-    public static void setTasks(Map<Integer, Task> tasks) {
-        TaskHandler.tasks = tasks;
-    }
 
     public static void setTaskStates(Map<Task, Boolean> taskStates) {
         TaskHandler.taskStates = taskStates;

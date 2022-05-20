@@ -1,6 +1,7 @@
 package de.starvalcity.base.background;
 
 import de.starvalcity.base.Core;
+import de.starvalcity.base.background.def.CustomizedFile;
 import de.starvalcity.base.background.def.Scheduleable;
 import de.starvalcity.base.background.def.Task;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,7 @@ public class FileTask extends Task implements Scheduleable {
             @Override
             public void run() {
                 setRunning();
+                createDefaultFiles();
             }
         }.runTaskLater(plugin, 100L);
     }
@@ -78,5 +80,14 @@ public class FileTask extends Task implements Scheduleable {
 
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    public void createDefaultFiles() {
+        CustomizedFile taskConfiguration = new CustomizedFile("plugins//Liquid//Configuration", "TaskConfiguration.yml");
+        if (!taskConfiguration.exist()) {
+            taskConfiguration.setDefaultValue("Testing", true);
+            taskConfiguration.save();
+        }
+        taskConfiguration.save();
     }
 }

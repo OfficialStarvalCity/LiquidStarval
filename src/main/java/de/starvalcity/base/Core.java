@@ -8,7 +8,7 @@ public final class Core extends JavaPlugin {
     private static Core plugin;
 
     private Pluginbase pluginbase;
-    private  TaskHandler taskHandler;
+    private TaskHandler taskHandler;
 
     @Override
     public void onEnable() {
@@ -20,7 +20,7 @@ public final class Core extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        this.getPluginbase().onShutdown();
     }
 
     public static Core getPlugin() {
