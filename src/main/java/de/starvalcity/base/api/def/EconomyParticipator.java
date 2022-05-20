@@ -15,14 +15,6 @@ public interface EconomyParticipator {
 
     String formatBalance(double amount);
 
-    void setCurrencyName(String name);
-
-    void setCurrencyNamePlural(String name);
-
-    void setCurrencyMinorName(String name);
-
-    void setCurrencyMinorNamePlural(String name);
-
     EconomyResponse withdraw(StarvalPlayer starvalPlayer, double amount);
 
     EconomyResponse deposit(StarvalPlayer starvalPlayer, double amount);
