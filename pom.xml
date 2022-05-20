@@ -53,11 +53,18 @@
         </resources>
     </build>
 
+
     <repositories>
+
+        <!-- PaperMC Repository -->
+
         <repository>
             <id>papermc-repo</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
+
+        <!-- Sonatype Repository -->
+
         <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
@@ -65,6 +72,9 @@
     </repositories>
 
     <dependencies>
+
+        <!-- PaperMC Dependency -->
+
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
