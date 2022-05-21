@@ -2,7 +2,7 @@ package de.starvalcity.base.api.def.economy;
 
 public class EconomyResponse {
 
-    public static enum EconomyResponseType {
+    public enum EconomyResponseType {
         NOT_IMPLEMENTED(1),
         FAILURE(2),
         SUCCESS(3);
