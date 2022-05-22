@@ -51,9 +51,6 @@ public abstract class StarvalPlayer implements Comparable<StarvalPlayer>, Econom
         return getUniqueId().compareTo(other.getUniqueId());
     }
 
-
-
-
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -92,6 +89,26 @@ public abstract class StarvalPlayer implements Comparable<StarvalPlayer>, Econom
 
     public boolean isBankAccountMember() {
         return isBankAccountMember;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public long getFirstJoin() {
+        return firstJoin;
+    }
+
+    public long getLastSeen() {
+        return lastSeen;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getBankAccountBalance() {
+        return bankAccountBalance;
     }
 
     public String getName() {
