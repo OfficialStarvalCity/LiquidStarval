@@ -4,13 +4,14 @@ import de.starvalcity.base.api.def.StarvalPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Faction implements Comparable<Faction> {
 
     public enum FactionType {
 
-        NEUTRAL(0), BAD (1), GOOD (2);
+        NEUTRAL(0), BAD(1), GOOD(2);
 
         private int id;
 
@@ -23,15 +24,15 @@ public class Faction implements Comparable<Faction> {
     public int id;
     public FactionType factionType;
     public StarvalPlayer owner;
-    public List<StarvalPlayer> members;
     public double balance;
 
-    public Faction(String name, int id, FactionType factionType, StarvalPlayer owner, @Nullable List<StarvalPlayer> members, double balance) {
+    private List<StarvalPlayer> members = new ArrayList<>();
+
+    public Faction(String name, int id, FactionType factionType, StarvalPlayer owner, double balance) {
         this.name = name;
         this.id = id;
         this.factionType = factionType;
         this.owner = owner;
-        this.members = members;
         this.balance = balance;
     }
 

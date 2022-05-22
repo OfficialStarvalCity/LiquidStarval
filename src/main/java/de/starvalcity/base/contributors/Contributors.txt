@@ -10,6 +10,7 @@ Economy References:
 Faction References:
  - Luck
  - Phaed
+ - RoinujNosde
  - SacredLabyrinth
  - SavageLabs
 
