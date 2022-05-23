@@ -1,6 +1,7 @@
 package de.starvalcity.base.api.def;
 
 import de.starvalcity.base.api.def.faction.Faction;
+import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
@@ -23,6 +24,7 @@ public abstract class StarvalPlayer implements Comparable<StarvalPlayer>, Econom
     private boolean isBankAccountMember;
 
     private @Nullable Faction faction;
+    private @Nullable FactionRank factionRank;
     private boolean isFactionOwner;
     private int kills;
     private int deaths;

@@ -1,24 +1,44 @@
 package de.starvalcity.base.api.def.faction;
 
+import de.starvalcity.base.api.def.StarvalPlayer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class FactionRank implements Comparable<FactionRank> {
 
     private String name;
+    private int level;
     private Set<String> permissions;
+    private List<StarvalPlayer> members;
 
-    public FactionRank(String name) {
-        setName(name);
-        permissions = new HashSet<String>();
+    public FactionRank(String name, int level) {
+        this.name = name;
+        this.level = level;
     }
 
-    public void setName(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be empty or null.");
-        }
+    @Override
+    public int compareTo(@NotNull FactionRank other) {
+        return Integer.compare(other.level, level);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+        FactionRank other = (FactionRank) object;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        return true;
     }
 
     public void setPermissions(Set<String> permissions) {
@@ -28,41 +48,9 @@ public class FactionRank implements Comparable<FactionRank> {
         this.permissions = permissions;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        FactionRank other = (FactionRank) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public Set<String> getPermissions() {
         return permissions;
     }
 
-    @Override
-    public int compareTo(@NotNull FactionRank other) {
-        return Integer.compare(permissions.size(), other.permissions.size());
-    }
 }

@@ -22,6 +22,8 @@ public class Pluginbase {
     }
 
     public void onShutdown() {
+        taskHandler.terminateTask(mainTask);
+        taskHandler.terminateTask(fileTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 

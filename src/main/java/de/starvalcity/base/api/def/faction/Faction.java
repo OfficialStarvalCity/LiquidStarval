@@ -20,11 +20,11 @@ public class Faction implements Comparable<Faction> {
         }
     }
 
-    public String name;
-    public int id;
-    public FactionType factionType;
-    public StarvalPlayer owner;
-    public double balance;
+    private String name;
+    private int id;
+    private FactionType factionType;
+    private StarvalPlayer owner;
+    private double balance;
 
     private List<StarvalPlayer> members = new ArrayList<>();
 

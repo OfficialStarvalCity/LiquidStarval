@@ -1,0 +1,11 @@
+
+--- Perms ---
+starvalcity.factions.own.deposit - Erlaubt es Nutzern in die Kasse ihrer Fraktion Geld einzahlen zu können
+starvalcity.factions.own.invite - Erlaubt es Nutzern, andere Nutzer in ihre Fraktion einzuladen
+starvalcity.factions.own.showbalance - Erlaubt es Nutzern den aktuellen Kontostand ihrer Fraktion einsehen zu können
+starvalcity.factions.own.withdraw - Erlaubt es Nutzern aus der Kasse ihrer Fraktion Geld abheben zu können
+
+starvalcity.factions.other.deposit - Erlaubt es Nutzern, Geld in Kassen anderer Fraktionen einzahlen zu können
+starvalcity.factions.other.invite - Erlaubt es Nutzern, andere Nutzer in andere Fraktionen einzuladen
+starvalcity.factions.other.showbalance - Erlaubt es Nutzern den aktuellen Kontostand anderer Fraktionen einsehen zu können
+starvalcity.factions.other.withdraw - Erlaubt es Nutzern, Geld aus Kassen anderer Fraktionen auszahlen zu können

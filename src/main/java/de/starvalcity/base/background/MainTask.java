@@ -23,20 +23,24 @@ public class MainTask extends Task implements Scheduleable {
 
     @Override
     public void execute() {
+        System.out.println("[Task] Starting Main Task ...");
         new BukkitRunnable() {
             @Override
             public void run() {
-                System.out.println("[Task] Starting Main Task ...");
+                System.out.println("[Task] Main Task started!");
+                setRunning();
             }
         }.runTaskLater(plugin, 200L);
     }
 
     @Override
     public void terminate() {
+        System.out.println("[Task] Terminating Main Task ...");
         new BukkitRunnable() {
             @Override
             public void run() {
-
+                System.out.println("[Task] Main Task terminated!");
+                setSleeping();
             }
         }.runTaskLater(plugin, 100L);
     }
@@ -50,6 +54,19 @@ public class MainTask extends Task implements Scheduleable {
     public long getScheduleDelay() {
         return this.scheduleDelay;
     }
+
+    public void setRunning() {
+        if (!isRunning) {
+            isRunning = true;
+        }
+    }
+
+    public void setSleeping() {
+        if (isRunning) {
+            isRunning = false;
+        }
+    }
+
 
     public String getTaskName() {
         return taskName;
