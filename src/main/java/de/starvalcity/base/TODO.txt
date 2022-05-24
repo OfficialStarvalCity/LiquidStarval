@@ -1,3 +1,4 @@
 
+ - Connect economy functions with faction functions
  - Exception Handling
  - Silent Methods

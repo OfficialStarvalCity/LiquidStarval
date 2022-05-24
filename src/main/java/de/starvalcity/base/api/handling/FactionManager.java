@@ -3,6 +3,8 @@ package de.starvalcity.base.api.handling;
 import de.starvalcity.base.Core;
 import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.api.def.faction.Faction;
+import de.starvalcity.base.api.def.faction.FactionResponse;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,15 +26,16 @@ public class FactionManager {
     public void clearData() {
         factions.clear();
         factionMembers.clear();
+        members.clear();
     }
 
     public void importFaction(Faction faction) {
         this.factions.put(faction.getId(), faction);
     }
 
-    public void createFaction(String name, int id, Faction.FactionType factionType, StarvalPlayer owner, double balance) {
+    public void createFaction(String name, int id, Faction.FactionType factionType, @Nullable StarvalPlayer owner, double balance) {
         if (factions.containsKey(id)) {
-
+            
         }
     }
 

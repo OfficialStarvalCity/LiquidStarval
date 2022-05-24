@@ -1,15 +1,16 @@
-package de.starvalcity.base.api.def.economy;
+package de.starvalcity.base.api.def.faction;
 
-public class EconomyResponse {
+public class FactionResponse {
 
-    public enum EconomyResponseType {
-        NOT_IMPLEMENTED(1),
-        FAILURE(2),
-        SUCCESS(3);
+    public enum FactionResponseType {
+
+        NOT_IMPLEMENTED(0),
+        FAILURE(1),
+        SUCCESS(2);
 
         private int id;
 
-        EconomyResponseType(int id) {
+        FactionResponseType(int id) {
             this.id = id;
         }
 
@@ -18,14 +19,12 @@ public class EconomyResponse {
         }
     }
 
-    public final double amount;
-    public final double balance;
-    public final EconomyResponseType responseType;
+    public final String cause;
+    public final FactionResponseType responseType;
     public final String errorMessage;
 
-    public EconomyResponse(double amount, double balance, EconomyResponseType responseType, String errorMessage) {
-        this.amount = amount;
-        this.balance = balance;
+    public FactionResponse(String cause, FactionResponseType responseType, String errorMessage) {
+        this.cause = cause;
         this.responseType = responseType;
         this.errorMessage = errorMessage;
     }
@@ -42,4 +41,5 @@ public class EconomyResponse {
                 return false;
         }
     }
+
 }

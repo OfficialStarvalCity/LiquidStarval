@@ -28,7 +28,7 @@ public class Faction implements Comparable<Faction> {
 
     private List<StarvalPlayer> members = new ArrayList<>();
 
-    public Faction(String name, int id, FactionType factionType, StarvalPlayer owner, double balance) {
+    public Faction(String name, int id, FactionType factionType, @Nullable StarvalPlayer owner, double balance) {
         this.name = name;
         this.id = id;
         this.factionType = factionType;
