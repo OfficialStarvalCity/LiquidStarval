@@ -1,15 +1,18 @@
 package de.starvalcity.base.api.def;
 
+import de.starvalcity.base.api.def.economy.BankAccount;
+import de.starvalcity.base.api.def.economy.EconomyResponse;
 import de.starvalcity.base.api.def.faction.Faction;
 import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public abstract class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, FactionParticipator {
+public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, FactionParticipator {
 
     private Player player;
     private String name;
@@ -119,5 +122,105 @@ public abstract class StarvalPlayer implements Comparable<StarvalPlayer>, Econom
 
     public UUID getUniqueId() {
         return uniqueId;
+    }
+
+    @Override
+    public double getBalance(Object object) {
+        return balance;
+    }
+
+    @Override
+    public boolean has(StarvalPlayer starvalPlayer, double amount) {
+        return false;
+    }
+
+    @Override
+    public boolean hasBankAccount(StarvalPlayer starvalPlayer) {
+        return false;
+    }
+
+    @Override
+    public String formatBalance(double amount) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse withdraw(StarvalPlayer starvalPlayer, double amount) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse deposit(StarvalPlayer starvalPlayer, double amount) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse isBankAccountOwner(String name, StarvalPlayer starvalPlayer) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse isBankAccountMember(String name, StarvalPlayer starvalPlayer) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse withdrawFromBankAccount(String name, double amount) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse depositFromBankAccount(String name, double amount) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse createBankAccount(StarvalPlayer starvalPlayer, String name) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse deleteBankAccount(String name) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse getBankAccountBalance(String name) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse bankAccountHasBalance(String name, double amount) {
+        return null;
+    }
+
+    @Override
+    public List<BankAccount> getBankAccounts() {
+        return null;
+    }
+
+    @Override
+    public boolean createPlayerAccount(StarvalPlayer starvalPlayer) {
+        return false;
+    }
+
+    @Override
+    public boolean isInAFaction(StarvalPlayer starvalPlayer) {
+        return false;
+    }
+
+    @Override
+    public boolean isFactionOwner(StarvalPlayer starvalPlayer) {
+        return false;
+    }
+
+    @Override
+    public Faction getFaction(StarvalPlayer starvalPlayer) {
+        return null;
+    }
+
+    @Override
+    public String getFactionString(StarvalPlayer starvalPlayer) {
+        return null;
     }
 }
