@@ -10,7 +10,6 @@ public class DateConverter {
 
     }
 
-
     public static double differenceInMonths(Timestamp date1, Timestamp date2) {
         return differenceInMonths(new Date(date1.getTime()), new Date(date2.getTime()));
     }
