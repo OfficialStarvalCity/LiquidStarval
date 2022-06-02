@@ -25,6 +25,7 @@ public class Faction implements Comparable<Faction> {
     private FactionType factionType;
     private StarvalPlayer owner;
     private double balance;
+    private double monthlySalary;
 
     private List<StarvalPlayer> members = new ArrayList<>();
 
@@ -65,6 +66,9 @@ public class Faction implements Comparable<Faction> {
         return balance;
     }
 
+    public double getMonthlySalary() {
+        return monthlySalary;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -87,5 +91,9 @@ public class Faction implements Comparable<Faction> {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void setMonthlySalary(double monthlySalary) {
+        this.monthlySalary = monthlySalary;
     }
 }

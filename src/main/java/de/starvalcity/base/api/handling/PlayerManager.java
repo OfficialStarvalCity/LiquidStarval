@@ -15,12 +15,8 @@ public class PlayerManager {
     private final Map<StarvalID, StarvalPlayer> playerStarvalIds = new HashMap<>();
 
     private final Map<StarvalID, Double> playerBalances = new HashMap<>();
-    private final Map<StarvalID, Faction> playerFaction = new HashMap<>();
+    private final Map<StarvalID, Faction> playerFactions = new HashMap<>();
 
-    public void attachPlayer(Player player) {
-        StarvalPlayer attachedPlayer = new StarvalPlayer(player, player.getName(), player.getUniqueId());
-        playerUniqueIds.put(player.getUniqueId(), player);
-        playerStarvalIds.put(StarvalID.randomID(), attachedPlayer);
-    }
+
 
 }

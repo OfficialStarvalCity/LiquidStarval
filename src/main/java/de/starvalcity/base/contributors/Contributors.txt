@@ -3,6 +3,7 @@ Thanks for inspiration & helping!
 General References:
  - Kody Simpson
  - TheSourceCode
+ - Uwe Schulz
 
 Economy References:
  - Milkbowl

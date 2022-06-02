@@ -7,36 +7,36 @@ import java.util.List;
 
 public interface EconomyParticipator {
 
-    double getBalance(Object object);
+    //--------------------------------------------------------------------------------------------------//
+    // Instance Account
+    //--------------------------------------------------------------------------------------------------//
 
-    boolean has(StarvalPlayer starvalPlayer, double amount);
+    boolean hasEnoughMoney(double requiredAmount);
 
-    boolean hasBankAccount(StarvalPlayer starvalPlayer);
+    double getBalance();
 
-    String formatBalance(double amount);
+    void setDefaultBalance();
 
-    EconomyResponse withdraw(StarvalPlayer starvalPlayer, double amount);
+    void setBalance(double amount);
 
-    EconomyResponse deposit(StarvalPlayer starvalPlayer, double amount);
+    void addMoney(double amount);
 
-    EconomyResponse isBankAccountOwner(String name, StarvalPlayer starvalPlayer);
+    void removeMoney(double amount);
 
-    EconomyResponse isBankAccountMember(String name, StarvalPlayer starvalPlayer);
+    //--------------------------------------------------------------------------------------------------//
+    // Bank Account
+    //--------------------------------------------------------------------------------------------------//
 
-    EconomyResponse withdrawFromBankAccount(String name, double amount);
+    void createBankAccount(int id, String name, Object owner);
 
-    EconomyResponse depositFromBankAccount(String name, double amount);
+    void deleteBankAccount(int id);
 
-    EconomyResponse createBankAccount(StarvalPlayer starvalPlayer, String name);
+    //--------------------------------------------------------------------------------------------------//
+    // Transactions
+    //--------------------------------------------------------------------------------------------------//
 
-    EconomyResponse deleteBankAccount(String name);
+    EconomyResponse deposit(Object instance, double amount, StarvalID starvalID);
 
-    EconomyResponse getBankAccountBalance(String name);
-
-    EconomyResponse bankAccountHasBalance(String name, double amount);
-
-    List<BankAccount> getBankAccounts();
-
-    boolean createPlayerAccount(StarvalPlayer starvalPlayer);
+    EconomyResponse withdraw(Object instance, double amount, StarvalID starvalID);
 
 }
