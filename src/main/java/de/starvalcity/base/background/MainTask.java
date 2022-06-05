@@ -11,7 +11,6 @@ public class MainTask extends Task implements Scheduleable {
     private final String taskName;
     private final int taskId;
     private long scheduleDelay;
-    private boolean isRunning = false;
 
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
 
@@ -28,7 +27,6 @@ public class MainTask extends Task implements Scheduleable {
             @Override
             public void run() {
                 System.out.println("[Task] Main Task started!");
-                setRunning();
             }
         }.runTaskLater(plugin, 200L);
     }
@@ -40,7 +38,6 @@ public class MainTask extends Task implements Scheduleable {
             @Override
             public void run() {
                 System.out.println("[Task] Main Task terminated!");
-                setSleeping();
             }
         }.runTaskLater(plugin, 100L);
     }
@@ -55,28 +52,11 @@ public class MainTask extends Task implements Scheduleable {
         return this.scheduleDelay;
     }
 
-    public void setRunning() {
-        if (!isRunning) {
-            isRunning = true;
-        }
-    }
-
-    public void setSleeping() {
-        if (isRunning) {
-            isRunning = false;
-        }
-    }
-
-
     public String getTaskName() {
         return taskName;
     }
 
     public int getTaskId() {
         return taskId;
-    }
-
-    public boolean isRunning() {
-        return isRunning;
     }
 }

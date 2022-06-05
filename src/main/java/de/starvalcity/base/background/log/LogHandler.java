@@ -22,7 +22,6 @@ public class LogHandler {
         System.out.println(log + ". Response: " + response);
     }
 
-
     public void factionLog(String message, Response response) {
         System.out.println("FactionLog > " + message + ". Response: " + response);
     }

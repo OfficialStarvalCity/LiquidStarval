@@ -69,6 +69,7 @@ public class Faction implements Comparable<Faction> {
     public double getMonthlySalary() {
         return monthlySalary;
     }
+
     public void setName(String name) {
         this.name = name;
     }
