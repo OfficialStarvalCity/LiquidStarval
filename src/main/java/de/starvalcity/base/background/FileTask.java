@@ -12,7 +12,9 @@ public class FileTask extends Task implements Scheduleable {
     private final String taskName;
     private final int taskId;
     private long scheduleDelay;
-    private boolean isRunning = false;
+
+    public CustomizedFile taskConfiguration = new CustomizedFile
+            ("plugins//Liquid//Configuration", "TaskConfiguration.yml");
 
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
 
@@ -27,7 +29,6 @@ public class FileTask extends Task implements Scheduleable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                setRunning();
                 createDefaultFiles();
             }
         }.runTaskLater(plugin, 100L);
@@ -38,7 +39,6 @@ public class FileTask extends Task implements Scheduleable {
         new BukkitRunnable() {
             @Override
             public void run() {
-                setSleeping();
             }
         }.runTaskLater(plugin, 20L);
     }
@@ -58,18 +58,6 @@ public class FileTask extends Task implements Scheduleable {
         this.isRunning = status;
     }
 
-    public void setRunning() {
-        if (!isRunning) {
-            isRunning = true;
-        }
-    }
-
-    public void setSleeping() {
-        if (isRunning) {
-            isRunning = false;
-        }
-    }
-
     public int getTaskId() {
         return this.taskId;
     }
@@ -78,12 +66,7 @@ public class FileTask extends Task implements Scheduleable {
         return this.taskName;
     }
 
-    public boolean isRunning() {
-        return this.isRunning;
-    }
-
     public void createDefaultFiles() {
-        CustomizedFile taskConfiguration = new CustomizedFile("plugins//Liquid//Configuration", "TaskConfiguration.yml");
         if (!taskConfiguration.exist()) {
             taskConfiguration.setDefaultValue("Testing", true);
             taskConfiguration.save();

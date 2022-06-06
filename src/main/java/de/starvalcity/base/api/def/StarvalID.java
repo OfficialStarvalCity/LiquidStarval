@@ -1,5 +1,7 @@
 package de.starvalcity.base.api.def;
 
+import org.jetbrains.annotations.Contract;
+
 import java.security.SecureRandom;
 
 public class StarvalID implements Comparable<StarvalID> {

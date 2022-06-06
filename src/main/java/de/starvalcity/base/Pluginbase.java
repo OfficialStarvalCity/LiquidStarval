@@ -56,4 +56,8 @@ public class Pluginbase {
     public TaskHandler getTaskHandler() {
         return taskHandler;
     }
+
+    public FileTask getFileTask() {
+        return fileTask;
+    }
 }
