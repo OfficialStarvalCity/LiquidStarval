@@ -17,6 +17,8 @@ public class PlayerManager {
     private final Map<StarvalID, Double> playerBalances = new HashMap<>();
     private final Map<StarvalID, Faction> playerFactions = new HashMap<>();
 
+    public void attachPlayer(Player player) {
 
+    }
 
 }

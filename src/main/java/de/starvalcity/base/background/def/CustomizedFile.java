@@ -1,5 +1,6 @@
 package de.starvalcity.base.background.def;
 
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -14,6 +15,23 @@ public class CustomizedFile {
     public CustomizedFile(String FilePath, String FileName) {
         this.file = new File(FilePath, FileName);
         this.yamlConfiguration = YamlConfiguration.loadConfiguration(this.file);
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public YamlConfiguration getYamlConfiguration() {
+        return yamlConfiguration;
+    }
+
+    public void reload() {
+        try {
+            yamlConfiguration.save(file);
+            yamlConfiguration.load(file);
+        } catch (IOException | InvalidConfigurationException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean exist() {
