@@ -1,10 +1,10 @@
 package de.starvalcity.base.api.def;
 
-import de.starvalcity.base.api.def.economy.BankAccount;
 import de.starvalcity.base.api.def.economy.EconomyResponse;
 
-import java.util.List;
-
+/**
+ *
+ */
 public interface EconomyParticipator {
 
     //--------------------------------------------------------------------------------------------------//

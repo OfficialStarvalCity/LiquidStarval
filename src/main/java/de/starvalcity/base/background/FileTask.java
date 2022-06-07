@@ -7,16 +7,23 @@ import de.starvalcity.base.background.def.Task;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FileTask extends Task implements Scheduleable {
 
     private final String taskName;
     private final int taskId;
     private long scheduleDelay;
 
+    public CustomizedFile dbConfiguration = new CustomizedFile
+            ("plugins//Liquid//Configuration", "DatabaseConfiguration.yml");
     public CustomizedFile taskConfiguration = new CustomizedFile
             ("plugins//Liquid//Configuration", "TaskConfiguration.yml");
 
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
+
+    public static List<CustomizedFile> customizedFiles = new ArrayList<>();
 
     public FileTask(String name, int id, long delay) {
         this.taskName = name;
@@ -70,7 +77,15 @@ public class FileTask extends Task implements Scheduleable {
         if (!taskConfiguration.exist()) {
             taskConfiguration.setDefaultValue("Testing", true);
             taskConfiguration.save();
+            customizedFiles.add(1, taskConfiguration);
         }
         taskConfiguration.save();
+
+        if (!dbConfiguration.exist()) {
+            dbConfiguration.setDefaultValue("Use_Threads", false);
+            dbConfiguration.save();
+            customizedFiles.add(2, dbConfiguration);
+        }
+        dbConfiguration.save();
     }
 }
