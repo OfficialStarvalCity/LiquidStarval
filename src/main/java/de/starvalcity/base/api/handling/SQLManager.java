@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class SQLManager {
 
@@ -76,6 +77,21 @@ public class SQLManager {
         }
     }
 
+    public ResultSet query(String command) {
+        if (command == null)
+            return null;
+            ResultSet resultSet = null;
+            try {
+                if (dbManager.getConnection() != null) {
+                    Statement statement = dbManager.getConnection().createStatement();
+                    resultSet = statement.executeQuery(command);
+                }
+            } catch (Exception exception) {
+                logHandler.sqlLog(command, exception);
+            }
+            return resultSet;
+    }
+
     public Boolean existsTable(String table) {
         try {
             ResultSet tables = dbManager.getConnection().getMetaData().getTables(null, null, table, null);
@@ -96,6 +112,15 @@ public class SQLManager {
             logHandler.sqlLog("[TABLE] " + table +  " | [COLUMN] " + column, exception);
             return false;
         }
+    }
+
+    public Boolean existsObject(String table, String column, Object object) {
+        try {
+            ResultSet resultSet = query("SELECT * FROM " + table + " WHERE " + column + "=" + "'" + object + "'" + ";");
+            if (resultSet.next())
+                return true;
+        } catch (Exception exception) {}
+            return false;
     }
 
     public void executeAsynchronously(String query, String sqlType) {

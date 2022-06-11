@@ -7,6 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Die {@link CustomizedFile} ist eine benutzerdefinierte Implementation
+ * von einer {@link org.bukkit.configuration.Configuration}.
+ */
 public class CustomizedFile {
 
     private final File file;
