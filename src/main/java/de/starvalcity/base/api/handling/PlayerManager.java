@@ -29,7 +29,7 @@ public class PlayerManager {
                         preparedStatement.setString(1, player.getName());
                         preparedStatement.setString(2, player.getUniqueId().toString());
                         preparedStatement.executeUpdate();
-                        storageManager.
+                        storageManager.addPlayer(starvalID, starvalPlayer);
                         return;
                     }
                 }

@@ -15,18 +15,31 @@ import java.sql.SQLException;
 
 public class Pluginbase {
 
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Deklarierte Variablen
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Managers
     private DatabaseManager dbManager;
     private SQLManager sqlManager;
     private StorageManager storageManager;
 
+    public static final PluginManager pluginManager = Bukkit.getPluginManager();
+
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Initialisierte Variablen
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Handlers
     private final LogHandler logHandler = new LogHandler();
     private final TaskHandler taskHandler = new TaskHandler();
 
+    // Tasks
     private final MainTask mainTask = new MainTask("MainTask", 1, 100L);
     private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
-    public static final PluginManager pluginManager = Bukkit.getPluginManager();
-
+    /**
+     * Startup Logik
+     * Server-Start Funktion
+     */
     public void onStartup() {
         this.dbManager = new DatabaseManager();
         connectDatabase();
@@ -35,6 +48,10 @@ public class Pluginbase {
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
+    /**
+     * Shutdown Logik
+     * Server-Stop Funktion
+     */
     public void onShutdown() {
         dbManager.disconnect();
         taskHandler.terminateTask(mainTask);
@@ -42,6 +59,10 @@ public class Pluginbase {
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
+    /**
+     * Datenbank Verbindung
+     * Verbindet die MySQL Datenbank mit dem Plugin
+     */
     public void connectDatabase() {
         try {
             dbManager.connect();
@@ -54,6 +75,10 @@ public class Pluginbase {
         }
     }
 
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Getters
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Managers
     public DatabaseManager getDbManager() {
         return dbManager;
     }
@@ -66,6 +91,7 @@ public class Pluginbase {
         return storageManager;
     }
 
+    // Handlers
     public LogHandler getLogHandler() {
         return logHandler;
     }
@@ -74,7 +100,12 @@ public class Pluginbase {
         return taskHandler;
     }
 
+    // Tasks
     public FileTask getFileTask() {
         return fileTask;
+    }
+
+    public MainTask getMainTask() {
+        return mainTask;
     }
 }

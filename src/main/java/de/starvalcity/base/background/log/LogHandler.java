@@ -7,17 +7,24 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.logging.Level;
+
+/**
+ * Der LogHandler sorgt für das allgemeine Logging und ist dem {@link java.util.logging.Logger} ähnlich.
+ */
 public class LogHandler {
 
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
 
-    public LogHandler() {
-    }
+    /**
+     * Constructor
+     */
+    public LogHandler() {}
 
     /**
-     * Default Log
-     * (used internally)
-     * @param log message
+     * Standard Log
+     * (interne Funktion)
+     * @param log nachricht
      */
     public void log(String log) {
         System.out.println(log);
@@ -25,8 +32,8 @@ public class LogHandler {
 
     /**
      * SQL Log
-     * Logs a sql response
-     * @param query query
+     * Logt einen SQL Befehl mit Exception
+     * @param query befehl
      * @param exception exception
      */
     public void sqlLog(String query, Exception exception) {
@@ -40,14 +47,24 @@ public class LogHandler {
 
     /**
      * Command Log
-     * Logs a command response
-     * @param commandSender executor
-     * @param command command
-     * @param response response type
+     * Logt einen Befehl
+     * @param commandSender sender
+     * @param command befehl
+     * @param response antwort
      */
     public void logCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull Response response) {
-        System.out.println("CMD Log > Executed Command: " + command.getName());
-        System.out.println("CMD Log > Executor: " + commandSender.getName());
-        System.out.println("CMD Log > Response: " + response.toString());
+        System.out.println("CMD Log > Ausgeführter Befehl: " + command.getUsage());
+        System.out.println("CMD Log > Sender: " + commandSender.getName());
+        System.out.println("CMD Log > Antwort: " + response.toString());
+    }
+
+    /**
+     * Log With Level
+     * Logt mit einem Level
+     * @param log log
+     * @param level level
+     */
+    public void logWithLevel(String log, Level level) {
+        plugin.getLogger().log(level, log);
     }
 }
