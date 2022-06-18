@@ -20,25 +20,25 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private long firstJoin;
     private long lastSeen;
 
-    private boolean hasBankAccount;
-    private boolean isBankAccountOwner;
-    private boolean isBankAccountMember;
-    private double bankAccountBalance;
-    private double balance;
-    private int bankAccountId;
+    private boolean hasBankAccount; // - Hat der Spieler bereits ein Konto
+    private boolean isBankAccountOwner; // - Ist der Spieler Besitzer von einem Konto oder von mehreren Konten
+    private boolean isBankAccountMember; // - Ist der Spieler Mitglied von einem Konto oder von mehreren Konten
+    private double bankAccountBalance; // - Kontostand eines Kontos, welches der Spieler besitzt
+    private double balance; // - Gesamter Kontostand des Spielers // TODO
+    private double readyCash; // - Bargeld des Spielers
 
-    private @Nullable Faction faction;
-    private @Nullable FactionRank factionRank;
-    private boolean isFactionOwner;
-    private int kills;
-    private int deaths;
+    private Faction faction; // - Fraktion des Spielers
+    private @Nullable FactionRank factionRank; // - Fraktionsrang des Spielers
+    private boolean isFactionOwner; // - Ist der Spieler Inhaber einer Fraktion
+    private int kills; // - Morde an andere Spieler
+    private int deaths; // - Tode des Spielers
 
-    private List<BankAccount> bankAccounts = new ArrayList<>();
+    private List<BankAccount> bankAccounts = new ArrayList<>(); // - Konten des Spielers
 
-    private Map<StarvalID, BankAccount> bankAccountIds = new HashMap<>();
+    private Map<StarvalID, BankAccount> bankAccountIds = new HashMap<>(); // - Konten und KontenIDs des Spielers
 
-    private Set<String> pastFactions = new HashSet<>();
-    private Set<String> pastStaffRanks = new HashSet<>();
+    private Set<String> pastFactions = new HashSet<>(); // - Vergangene Fraktionen des Spielers
+    private Set<String> pastStaffRanks = new HashSet<>(); // - Vergangene Ränge des Spielers
 
     public StarvalPlayer(Player player, String name, UUID uniqueId, StarvalID starvalId) {
         setPlayer(player);
@@ -150,6 +150,14 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         }
     }
 
+    public boolean isBankAccountMember(@NotNull BankAccount bankAccount) {
+        if (bankAccount.getMembers().contains(this)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //--------------------------------------------------------------------------------------------------//
     // Economy Setters
     //--------------------------------------------------------------------------------------------------//
@@ -179,6 +187,14 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     public List<BankAccount> getBankAccounts() {
         return bankAccounts;
+    }
+
+    public double getBankAccountBalance(int id) {
+        return getBankAccounts().get(id).getBalance();
+    }
+
+    public double getReadyCash() {
+        return readyCash;
     }
 
     //--------------------------------------------------------------------------------------------------//
