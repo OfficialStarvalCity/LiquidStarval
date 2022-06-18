@@ -14,4 +14,15 @@ public abstract class Task {
         this.isRunning = status;
     }
 
+    public void setRunning() {
+        this.isRunning = true;
+    }
+
+    public void setSleeping() {
+        this.isRunning = false;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
 }

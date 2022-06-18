@@ -33,10 +33,12 @@ public class FileTask extends Task implements Scheduleable {
 
     @Override
     public void execute() {
+        System.out.println("[FileTask] Executing FileTask ...");
         new BukkitRunnable() {
             @Override
             public void run() {
                 createDefaultFiles();
+                System.out.println("[FileTask] Checking required files ...");
             }
         }.runTaskLater(plugin, 100L);
     }

@@ -4,9 +4,11 @@ import de.starvalcity.base.api.handling.DatabaseManager;
 import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.api.handling.StorageManager;
 import de.starvalcity.base.background.FileTask;
-import de.starvalcity.base.background.MainTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
+import de.starvalcity.base.utilities.DataStructurizer;
+import de.starvalcity.base.utilities.DateConverter;
+import de.starvalcity.base.utilities.Formatter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,6 +27,10 @@ public class Pluginbase {
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
+    // Utilities
+    private DataStructurizer dataStructurizer;
+    private DateConverter dateConverter;
+    private Formatter formatter;
     /*------------------------------------------------------------------------------------------------------------*/
     // Initialisierte Variablen
     /*------------------------------------------------------------------------------------------------------------*/
@@ -33,7 +39,6 @@ public class Pluginbase {
     private final TaskHandler taskHandler = new TaskHandler();
 
     // Tasks
-    private final MainTask mainTask = new MainTask("MainTask", 1, 100L);
     private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
     /**
@@ -43,7 +48,6 @@ public class Pluginbase {
     public void onStartup() {
         this.dbManager = new DatabaseManager();
         connectDatabase();
-        taskHandler.executeTask(mainTask);
         taskHandler.executeTask(fileTask);
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
@@ -54,7 +58,6 @@ public class Pluginbase {
      */
     public void onShutdown() {
         dbManager.disconnect();
-        taskHandler.terminateTask(mainTask);
         taskHandler.terminateTask(fileTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
@@ -91,6 +94,20 @@ public class Pluginbase {
         return storageManager;
     }
 
+    // Utilities
+
+    public DataStructurizer getDataStructurizer() {
+        return dataStructurizer;
+    }
+
+    public DateConverter getDateConverter() {
+        return dateConverter;
+    }
+
+    public Formatter getFormatter() {
+        return formatter;
+    }
+
     // Handlers
     public LogHandler getLogHandler() {
         return logHandler;
@@ -105,7 +122,4 @@ public class Pluginbase {
         return fileTask;
     }
 
-    public MainTask getMainTask() {
-        return mainTask;
-    }
 }

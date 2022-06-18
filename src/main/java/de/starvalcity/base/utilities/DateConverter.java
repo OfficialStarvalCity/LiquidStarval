@@ -4,11 +4,12 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Der {@link DateConverter} sorgt für die Umwandlung von Zeiten.
+ */
 public class DateConverter {
 
-    private DateConverter() {
-
-    }
+    private DateConverter() {}
 
     public static double differenceInMonths(Timestamp date1, Timestamp date2) {
         return differenceInMonths(new Date(date1.getTime()), new Date(date2.getTime()));

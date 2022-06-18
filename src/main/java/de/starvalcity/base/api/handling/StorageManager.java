@@ -21,6 +21,11 @@ public class StorageManager {
 
     private Pluginbase pluginbase = new Pluginbase();
 
+    // Datenstrukturen
+    /**
+     * Datenstrukturen (Arrays, HashMaps, Lists, TreeMaps) werden als interne Speicheroption genutzt, als
+     * sogenannte Zwischenablage, um ein Backup im Hintergrund laufen zu haben.
+     */
     public HashMap<StarvalID, StarvalPlayer> idStarvalPlayerHashMap = new HashMap<>();
 
     public HashMap<Integer, Faction> integerFactionHashMap = new HashMap<>();
