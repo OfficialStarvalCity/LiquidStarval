@@ -3,6 +3,7 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.handling.DatabaseManager;
 import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.api.handling.StorageManager;
+import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
@@ -39,6 +40,7 @@ public class Pluginbase {
     private final TaskHandler taskHandler = new TaskHandler();
 
     // Tasks
+    private final EventTask eventTask = new EventTask("EventTask", 4);
     private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
     /**
@@ -49,6 +51,7 @@ public class Pluginbase {
         this.dbManager = new DatabaseManager();
         connectDatabase();
         taskHandler.executeTask(fileTask);
+        taskHandler.executeTask(eventTask);
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
@@ -59,6 +62,7 @@ public class Pluginbase {
     public void onShutdown() {
         dbManager.disconnect();
         taskHandler.terminateTask(fileTask);
+        taskHandler.terminateTask(eventTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
@@ -118,6 +122,10 @@ public class Pluginbase {
     }
 
     // Tasks
+    public EventTask getEventTask() {
+        return eventTask;
+    }
+
     public FileTask getFileTask() {
         return fileTask;
     }
