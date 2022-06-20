@@ -1,6 +1,7 @@
 package de.starvalcity.base.api.handling;
 
 import de.starvalcity.base.Core;
+import de.starvalcity.base.api.def.StarvalID;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.def.CustomizedFile;
 import de.starvalcity.base.background.log.LogHandler;
@@ -49,7 +50,7 @@ public class SQLManager implements Listener {
             System.out.println(1);
             if (playerIsAttached(uuid) != true) {
                 PreparedStatement insert = databaseManager.getConnection().prepareStatement("INSERT INTO " +
-                        databaseManager.getPlayerTable() + " (UUID,NAME,STARVALID,FIRSTSEEN,LASTSEEN,RANK,LOCATION VALUES(?,?,?,?,?,?,?)");
+                        databaseManager.getPlayerTable() + " (UUID,NAME,FIRSTSEEN,LASTSEEN,RANK,LOCATION VALUES(?,?,?,?,?,?,?)");
                 insert.setString(1, uuid.toString());
                 insert.setString(2, player.getName());
                 insert.setLong(3, (new Date().getTime()));
@@ -58,6 +59,31 @@ public class SQLManager implements Listener {
                 insert.executeUpdate();
                 System.out.println("Player inserted.");
             }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void setFirstSeen(UUID uuid) {
+        try {
+            PreparedStatement statement = databaseManager.getConnection()
+                    .prepareStatement("UPDATE " + databaseManager.getPlayerTable() + " SET FIRSTSEEN=? WHERE UUID=?");
+            statement.setLong(1, (new Date().getTime()));
+            statement.setString(2, uuid.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getFirstSeen(UUID uuid) {
+        try {
+            PreparedStatement preparedStatement = databaseManager.getConnection().
+                    prepareStatement("SELECT * FROM " + databaseManager.getPlayerTable() + " WHERE UUID=?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            System.out.println(resultSet.getLong("FIRSTSEEN"));
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
