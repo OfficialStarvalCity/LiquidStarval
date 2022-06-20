@@ -7,10 +7,12 @@ import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
+import de.starvalcity.base.command.TestCommand;
 import de.starvalcity.base.utilities.DataStructurizer;
 import de.starvalcity.base.utilities.DateConverter;
 import de.starvalcity.base.utilities.Formatter;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,22 +24,22 @@ public class Pluginbase {
     // Deklarierte Variablen
     /*------------------------------------------------------------------------------------------------------------*/
     // Managers
-    private DatabaseManager dbManager;
-    private SQLManager sqlManager;
-    private StorageManager storageManager;
+    private DatabaseManager dbManager = new DatabaseManager();
+    private SQLManager sqlManager = new SQLManager();
+    private StorageManager storageManager = new StorageManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
     // Utilities
-    private DataStructurizer dataStructurizer;
+    private DataStructurizer dataStructurizer = new DataStructurizer();
     private DateConverter dateConverter;
-    private Formatter formatter;
+    private Formatter formatter = new Formatter();
     /*------------------------------------------------------------------------------------------------------------*/
     // Initialisierte Variablen
     /*------------------------------------------------------------------------------------------------------------*/
     // Handlers
     private final LogHandler logHandler = new LogHandler();
-    private final TaskHandler taskHandler = new TaskHandler();
+    private TaskHandler taskHandler = new TaskHandler();
 
     // Tasks
     private final EventTask eventTask = new EventTask("EventTask", 4);
@@ -49,6 +51,7 @@ public class Pluginbase {
      */
     public void onStartup() {
         this.dbManager = new DatabaseManager();
+        initialize();
         connectDatabase();
         taskHandler.executeTask(fileTask);
         taskHandler.executeTask(eventTask);
@@ -80,6 +83,14 @@ public class Pluginbase {
         if (dbManager.isConnected()) {
             System.out.println("[Database] Database is connected!");
         }
+    }
+
+    public void initialize() {
+        loadCommands();
+    }
+
+    public void loadCommands() {
+        JavaPlugin.getPlugin(Core.class).getCommand("attachinfo").setExecutor((CommandExecutor) new TestCommand());
     }
 
     /*------------------------------------------------------------------------------------------------------------*/

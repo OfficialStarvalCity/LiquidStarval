@@ -8,6 +8,8 @@ import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerManager {
 
@@ -17,6 +19,8 @@ public class PlayerManager {
     private StorageManager storageManager;
 
     String attachPlayerQuery = "INSERT IGNORE INFO sc_players (NAME,UUID) VALUES (?,?)";
+
+    private List<Player> attachedPlayers = new ArrayList<>();
 
     public void attachPlayer(Player player) {
         try {
@@ -30,12 +34,21 @@ public class PlayerManager {
                         preparedStatement.setString(2, player.getUniqueId().toString());
                         preparedStatement.executeUpdate();
                         storageManager.addPlayer(starvalID, starvalPlayer);
+                        attachedPlayers.add(player);
                         return;
                     }
                 }
             }
         } catch (SQLException sqlException) {
             logHandler.sqlLog(attachPlayerQuery, sqlException);
+        }
+    }
+
+    public boolean isAttached(Player player) {
+        if (attachedPlayers.contains(player)) {
+            return true;
+        } else {
+            return false;
         }
     }
 

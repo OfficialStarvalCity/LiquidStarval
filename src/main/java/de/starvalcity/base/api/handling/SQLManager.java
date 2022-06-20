@@ -4,138 +4,62 @@ import de.starvalcity.base.Core;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.def.CustomizedFile;
 import de.starvalcity.base.background.log.LogHandler;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.UUID;
 
-public class SQLManager {
+public class SQLManager implements Listener {
 
-    private CustomizedFile dbConfig = FileTask.customizedFiles.get(2);
-    private DatabaseManager dbManager;
-    private LogHandler logHandler;
+    private DatabaseManager databaseManager = new DatabaseManager();
+    private JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
 
-    public ResultSet select(String query) {
+    public boolean playerIsAttached(UUID uuid) {
         try {
-            return dbManager.getConnection().createStatement().executeQuery(query);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            logHandler.sqlLog(query, sqlException);
-        }
-        return null;
-    }
+            PreparedStatement statement = databaseManager.getConnection().
+                    prepareStatement("SELECT * FROM " + databaseManager.getPlayerTable() + " WHERE UUID=?");
+            statement.setString(1, uuid.toString());
 
-    public void insert(String query) {
-        if (dbConfig.getObject("Use_Threads").equals(true)) {
-            executeAsynchronously(query, "INSERT");
-        } else {
-            try {
-                dbManager.getConnection().createStatement().executeUpdate(query);
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-                logHandler.sqlLog(query, sqlException);
-            }
-        }
-    }
-
-    public void update(String query) {
-        if (dbConfig.getObject("Use_Threads").equals(true)) {
-            executeAsynchronously(query, "UPDATE");
-        } else {
-            try {
-                dbManager.getConnection().createStatement().executeUpdate(query);
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-                logHandler.sqlLog(query, sqlException);
-            }
-        }
-    }
-
-    public void delete(String query) {
-        if (dbConfig.getObject("Use_Threads").equals(true)) {
-            executeAsynchronously(query, "DELETE");
-        } else {
-            try {
-                dbManager.getConnection().createStatement().executeUpdate(query);
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-                logHandler.sqlLog(query, sqlException);
-            }
-        }
-    }
-
-    public Boolean execute(String query) {
-        try {
-            dbManager.getConnection().createStatement().execute(query);
-            return true;
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            logHandler.sqlLog(query, sqlException);
-            return false;
-        }
-    }
-
-    public ResultSet query(String command) {
-        if (command == null)
-            return null;
-            ResultSet resultSet = null;
-            try {
-                if (dbManager.getConnection() != null) {
-                    Statement statement = dbManager.getConnection().createStatement();
-                    resultSet = statement.executeQuery(command);
-                }
-            } catch (Exception exception) {
-                logHandler.sqlLog(command, exception);
-            }
-            return resultSet;
-    }
-
-    public Boolean existsTable(String table) {
-        try {
-            ResultSet tables = dbManager.getConnection().getMetaData().getTables(null, null, table, null);
-            return tables.next();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-            logHandler.sqlLog(table, sqlException);
-            return false;
-        }
-    }
-
-    public Boolean existsColumn(String table, String column) {
-        try {
-            ResultSet col = dbManager.getConnection().getMetaData().getColumns(null, null, table, column);
-            return col.next();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            logHandler.sqlLog("[TABLE] " + table +  " | [COLUMN] " + column, exception);
-            return false;
-        }
-    }
-
-    public Boolean existsObject(String table, String column, Object object) {
-        try {
-            ResultSet resultSet = query("SELECT * FROM " + table + " WHERE " + column + "=" + "'" + object + "'" + ";");
-            if (resultSet.next())
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                System.out.println("Player found!");
                 return true;
-        } catch (Exception exception) {}
-            return false;
+            }
+            System.out.println("Player NOT found!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public void executeAsynchronously(String query, String sqlType) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                try {
-                    if (dbManager.getConnection() != null) {
-                        dbManager.getConnection().createStatement().executeQuery(query);
-                    }
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
-                    logHandler.sqlLog(query + " | [SQL TYPE] " + sqlType, sqlException);
-                }
+    public void attachPlayer(final UUID uuid, Player player) {
+        try {
+            PreparedStatement preparedStatement = databaseManager.getConnection().prepareStatement("SELECT * FROM " +
+                    databaseManager.getPlayerTable() + " WHERE UUID=?");
+            preparedStatement.setString(1, uuid.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            System.out.println(1);
+            if (playerIsAttached(uuid) != true) {
+                PreparedStatement insert = databaseManager.getConnection().prepareStatement("INSERT INTO " +
+                        databaseManager.getPlayerTable() + " (UUID,NAME,STARVALID,FIRSTSEEN,LASTSEEN,RANK,LOCATION VALUES(?,?,?,?,?,?,?)");
+                insert.setString(1, uuid.toString());
+                insert.setString(2, player.getName());
+                insert.setLong(3, (new Date().getTime()));
+                insert.setString(4, null);
+                insert.setString(5, player.getLocation().toString());
+                insert.executeUpdate();
+                System.out.println("Player inserted.");
             }
-        }.runTaskAsynchronously(JavaPlugin.getPlugin(Core.class));
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 }
