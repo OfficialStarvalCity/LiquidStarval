@@ -2,31 +2,32 @@ package de.starvalcity.base;
 
 import de.starvalcity.base.api.handling.DatabaseManager;
 import de.starvalcity.base.api.handling.SQLManager;
-import de.starvalcity.base.api.handling.StorageManager;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
-import de.starvalcity.base.command.TestCommand;
 import de.starvalcity.base.utilities.DataStructurizer;
 import de.starvalcity.base.utilities.DateConverter;
 import de.starvalcity.base.utilities.Formatter;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.SQLException;
-
+/**
+ * Die {@link Pluginbase} stellt eine benutzerdefinierte Implementation von den Klassen {@link JavaPlugin},
+ * {@link org.bukkit.plugin.PluginBase} und {@link org.bukkit.plugin.Plugin} dar. Sie stellt das zentrale Fundament
+ * des Plugins dar mit allen Getter- und Setter-Funktionen.
+ */
 public class Pluginbase {
 
     /*------------------------------------------------------------------------------------------------------------*/
     // Deklarierte Variablen
     /*------------------------------------------------------------------------------------------------------------*/
+    // Plugin
+    private JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
     // Managers
     private DatabaseManager dbManager = new DatabaseManager();
     private SQLManager sqlManager = new SQLManager();
-    private StorageManager storageManager = new StorageManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
@@ -45,16 +46,19 @@ public class Pluginbase {
     private final EventTask eventTask = new EventTask("EventTask", 4);
     private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Logiken
+    /*------------------------------------------------------------------------------------------------------------*/
+
     /**
      * Startup Logik
      * Server-Start Funktion
      */
     public void onStartup() {
         this.dbManager = new DatabaseManager();
-        initialize();
-        connectDatabase();
         taskHandler.executeTask(fileTask);
         taskHandler.executeTask(eventTask);
+        initialize();
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
@@ -63,39 +67,31 @@ public class Pluginbase {
      * Server-Stop Funktion
      */
     public void onShutdown() {
-        dbManager.disconnect();
+        plugin.saveConfig();
         taskHandler.terminateTask(fileTask);
         taskHandler.terminateTask(eventTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
     /**
-     * Datenbank Verbindung
-     * Verbindet die MySQL Datenbank mit dem Plugin
+     * Initialisierung
+     * Aufruf aller Hintergrundmethoden
      */
-    public void connectDatabase() {
-        try {
-            dbManager.connect();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("[Database] Database is not connected!");
-        }
-        if (dbManager.isConnected()) {
-            System.out.println("[Database] Database is connected!");
-        }
-    }
-
     public void initialize() {
         loadCommands();
-    }
-
-    public void loadCommands() {
-        JavaPlugin.getPlugin(Core.class).getCommand("attachinfo").setExecutor((CommandExecutor) new TestCommand());
+        loadConfig();
+        connectDatabase();
     }
 
     /*------------------------------------------------------------------------------------------------------------*/
     // Getters
     /*------------------------------------------------------------------------------------------------------------*/
+    // Plugin
+
+    public JavaPlugin getPlugin() {
+        return plugin;
+    }
+
     // Managers
     public DatabaseManager getDbManager() {
         return dbManager;
@@ -105,12 +101,7 @@ public class Pluginbase {
         return sqlManager;
     }
 
-    public StorageManager getStorageManager() {
-        return storageManager;
-    }
-
     // Utilities
-
     public DataStructurizer getDataStructurizer() {
         return dataStructurizer;
     }
@@ -139,6 +130,35 @@ public class Pluginbase {
 
     public FileTask getFileTask() {
         return fileTask;
+    }
+
+    /*------------------------------------------------------------------------------------------------------------*/
+    // Hintergrundmethoden
+    /*------------------------------------------------------------------------------------------------------------*/
+
+    /**
+     * Laden der Konfiguration
+     * Lädt die Konfigurationsdatei
+     */
+    public void loadConfig() {
+        plugin.getConfig().options().copyDefaults(false);
+        plugin.saveConfig();
+    }
+
+    /**
+     * Datenbank Verbindung
+     * Verbindet die MySQL Datenbank mit dem Plugin
+     */
+    public void connectDatabase() {
+        dbManager.setupMySQL();
+    }
+
+    /**
+     * Laden der Befehle
+     * Lädt alle Befehle
+     */
+    public void loadCommands() {
+
     }
 
 }

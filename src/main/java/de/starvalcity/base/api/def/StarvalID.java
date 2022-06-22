@@ -9,7 +9,7 @@ public class StarvalID implements Comparable<StarvalID> {
     private final long mostSigBits;
     private final long leastSigBits;
 
-    private StarvalID(byte[] data) {
+    public StarvalID(byte[] data) {
         long msb = 0;
         long lsb = 0;
         assert data.length == 16 : "data must be 16 bytes in length";
