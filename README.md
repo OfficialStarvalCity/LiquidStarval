@@ -20,7 +20,7 @@ jeder möglichst einfach lesen und verstehen kann. Ein Projekt jedes Mal neu kom
 Änderungen daran vorzunehmen, nimmt unnötig viel Zeit in Anspruch und ist in der Regel nicht zielführend.
 
 ### Schritt 3: Pull Request
-Reiche einen Pull Request ein unter dem Zweig (Branch) "development". Bitte achte darauf, alle nötigen Details zu deinem Pull Request
+Reiche einen Pull Request unter dem Zweig (Branch) "development" ein. Bitte achte darauf, alle nötigen Details zu deinem Pull Request
 hinzuzufügen. Falls Du weitere Hilfe dazu brauchst, kontaktiere die Development-Leitung.
 
 #### Weitere Informationen
