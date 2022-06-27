@@ -40,11 +40,14 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private Set<String> pastFactions = new HashSet<>(); // - Vergangene Fraktionen des Spielers
     private Set<String> pastStaffRanks = new HashSet<>(); // - Vergangene Ränge des Spielers
 
-    public StarvalPlayer(Player player, String name, UUID uniqueId, StarvalID starvalId) {
+    public StarvalPlayer(Player player, String name, UUID uniqueId) {
         setPlayer(player);
         setName(name);
         setUniqueId(uniqueId);
-        setStarvalId(starvalId);
+    }
+
+    public StarvalPlayer getStarvalPlayer() {
+        return this;
     }
 
     @Override

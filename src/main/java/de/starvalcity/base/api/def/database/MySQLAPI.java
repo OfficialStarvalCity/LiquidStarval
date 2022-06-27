@@ -1,5 +1,7 @@
 package de.starvalcity.base.api.def.database;
 
+import de.starvalcity.base.api.def.StarvalID;
+import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.background.log.LogHandler;
 import org.bukkit.entity.Player;
 
@@ -76,12 +78,6 @@ public class MySQLAPI {
 
     public static void createTable() {
 
-    }
-
-    public static void attachPlayer(Player player) {
-        if (!player.hasPlayedBefore()) {
-
-        }
     }
 
 }
