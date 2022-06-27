@@ -1,6 +1,8 @@
 package de.starvalcity.base;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
+import de.starvalcity.base.api.def.listening.FirstJoinListener;
+import de.starvalcity.base.api.handling.DataManager;
 import de.starvalcity.base.api.handling.DatabaseManager;
 import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.background.EventTask;
@@ -27,6 +29,7 @@ public class Pluginbase {
     // Plugin
     private JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
     // Managers
+    private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
     private SQLManager sqlManager = new SQLManager();
 
@@ -79,6 +82,7 @@ public class Pluginbase {
      * Aufruf aller Hintergrundmethoden
      */
     public void initialize() {
+        loadEvents();
         loadCommands();
         loadConfig();
         connectDatabase();
@@ -94,6 +98,10 @@ public class Pluginbase {
     }
 
     // Managers
+    public DataManager getDataManager() {
+        return dataManager;
+    }
+
     public DatabaseManager getDbManager() {
         return dbManager;
     }
@@ -152,6 +160,14 @@ public class Pluginbase {
      */
     public void connectDatabase() {
         MySQLAPI.connect();
+    }
+
+    /**
+     * Laden der Events
+     * Lädt alle Events und Listener
+     */
+    public void loadEvents() {
+        pluginManager.registerEvents(new FirstJoinListener(), plugin);
     }
 
     /**
