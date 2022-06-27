@@ -79,7 +79,9 @@ public class MySQLAPI {
     }
 
     public static void attachPlayer(Player player) {
+        if (!player.hasPlayedBefore()) {
 
+        }
     }
 
 }

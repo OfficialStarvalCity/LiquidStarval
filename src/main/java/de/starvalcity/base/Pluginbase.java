@@ -1,5 +1,6 @@
 package de.starvalcity.base;
 
+import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.handling.DatabaseManager;
 import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.background.EventTask;
@@ -150,7 +151,7 @@ public class Pluginbase {
      * Verbindet die MySQL Datenbank mit dem Plugin
      */
     public void connectDatabase() {
-        dbManager.setupMySQL();
+        MySQLAPI.connect();
     }
 
     /**

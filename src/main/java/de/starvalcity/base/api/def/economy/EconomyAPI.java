@@ -13,7 +13,7 @@ public class EconomyAPI {
     public static void createTable() {
         try {
             PreparedStatement statement = MySQLAPI.getStatement(
-                    "CREATE TABLE IF NOT EXISTS sc_economy (Spielername VARCHAR(100), UUID VARCHAR(100), Kontostand INT(100)");
+                    "CREATE TABLE IF NOT EXISTS sc_economy (Spielername VARCHAR(100), UUID VARCHAR(100), StarvalID VARCHAR(100)");
             statement.executeUpdate();
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -21,10 +21,6 @@ public class EconomyAPI {
         }
     }
 
-    public static void attachPlayer(Player player) {
-        try {
 
-        }
-    }
 
 }
