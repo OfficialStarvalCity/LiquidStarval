@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.logging.Level;
 
@@ -39,6 +40,18 @@ public class LogHandler {
     public void sqlLog(String query, Exception exception) {
         System.out.println("SQL Log > Exception: " + exception);
         System.out.println("SQL Log > Query: " + query);
+    }
+
+    /**
+     * SQL Error
+     * Logt einen SQL Fehler mit Exception
+     * @param query befehl
+     * @param message nachricht
+     * @param exception exception
+     */
+    public void sqlError(@Nullable String query, String message, @NotNull Exception exception) {
+        System.err.println("SQL Error > " + message + " Exception: " + exception.getMessage());
+        System.err.println("SQL Error > Query: " + query);
     }
 
     public void sqlInfo(String message) {

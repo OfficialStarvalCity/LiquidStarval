@@ -28,6 +28,8 @@ public class Pluginbase {
     /*------------------------------------------------------------------------------------------------------------*/
     // Plugin
     private JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
+    // APIs
+    private MySQLAPI mySQLAPI = new MySQLAPI();
     // Managers
     private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
@@ -95,6 +97,11 @@ public class Pluginbase {
 
     public JavaPlugin getPlugin() {
         return plugin;
+    }
+
+    // APIs
+    public MySQLAPI getMySQLAPI() {
+        return mySQLAPI;
     }
 
     // Managers

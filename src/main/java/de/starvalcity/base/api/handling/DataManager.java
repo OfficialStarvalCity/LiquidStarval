@@ -1,9 +1,12 @@
 package de.starvalcity.base.api.handling;
 
+import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.StarvalPlayer;
+import de.starvalcity.base.api.def.database.MySQLAPI;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Data Manager
@@ -17,6 +20,8 @@ import java.util.HashMap;
 public class DataManager {
 
     private HashMap<Player, StarvalPlayer> attachedPlayers = new HashMap<>();
+
+    private Pluginbase plugin = new Pluginbase();
 
     public void attachPlayer(Player player) {
         if (!player.hasPlayedBefore()) {

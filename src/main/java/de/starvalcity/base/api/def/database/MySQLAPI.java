@@ -28,10 +28,10 @@ public class MySQLAPI {
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true",
                         username, password);
-                log.sqlInfo("[Datenbank] MySQL Verbindung erfolgreich hergestellt.");
+                log.sqlInfo("MySQL Verbindung erfolgreich hergestellt.");
             } catch (SQLException sqlException) {
                 sqlException.printStackTrace();
-                log.sqlInfo("[Datenbank] MySQL Verbindung fehlgeschlagen. Exception: " + sqlException.getMessage());
+                log.sqlError(null, "MySQL Verbindung fehlgeschlagen.", sqlException);
             }
         }
     }
@@ -42,7 +42,7 @@ public class MySQLAPI {
             log.sqlInfo("[Datenbank] MySQL Verbindung erfolgreich geschlossen.");
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
-            log.sqlInfo("[Datenbank] MySQL Schließung fehlgeschlagen. Exception: " + sqlException.getMessage());
+            log.sqlError(null, "MySQL Trennung der Verbindung fehlgeschlagen.", sqlException);
         }
     }
 
@@ -54,7 +54,7 @@ public class MySQLAPI {
                 return statement;
             } catch (SQLException sqlException) {
                 sqlException.printStackTrace();
-                log.sqlInfo("[Datenbank] MySQL Statement fehlgeschlagen. Exception: " + sqlException.getMessage());
+                log.sqlError(sql, "Statement fehlgeschlagen.", sqlException);
             }
         }
         return null;
@@ -70,14 +70,34 @@ public class MySQLAPI {
                 return resultSet;
             } catch (SQLException sqlException) {
                 sqlException.printStackTrace();
-                log.sqlInfo("[Datenbank] MySQL ResultSet fehlgeschlagen. Exception: " + sqlException.getMessage());
+                log.sqlError(sql, "ResultSet fehlgeschlagen.", sqlException);
             }
         }
         return null;
     }
 
-    public static void createTable() {
+    public static boolean update(String query) {
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            return true;
+        } catch (SQLException sqlException) {
+            log.sqlError(query, "Update fehlgeschlagen.", sqlException);
+            return false;
+        }
+    }
 
+    public static ResultSet query(String query) {
+        ResultSet rs = null;
+
+        try {
+            Statement st = connection.createStatement();
+            rs = st.executeQuery(query);
+        } catch (SQLException sqlException) {
+            log.sqlError(query, "Query fehlgeschlagen.", sqlException);
+        }
+        return rs;
     }
 
 }
