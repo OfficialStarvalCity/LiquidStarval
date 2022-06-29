@@ -2,11 +2,9 @@ package de.starvalcity.base.api.handling;
 
 import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.StarvalPlayer;
-import de.starvalcity.base.api.def.database.MySQLAPI;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Data Manager
@@ -19,15 +17,27 @@ import java.util.Set;
  */
 public class DataManager {
 
-    private HashMap<Player, StarvalPlayer> attachedPlayers = new HashMap<>();
+    private final HashMap<Player, StarvalPlayer> attachedPlayers = new HashMap<>();
 
-    private Pluginbase plugin = new Pluginbase();
+    private final Pluginbase plugin = new Pluginbase();
 
     public void attachPlayer(Player player) {
         if (!player.hasPlayedBefore()) {
             StarvalPlayer starvalPlayer = new StarvalPlayer(player, player.getName(), player.getUniqueId());
             attachedPlayers.put(player, starvalPlayer);
         }
+    }
+
+    public void unattachPlayer(Player player) {
+        attachedPlayers.remove(player);
+    }
+
+    public HashMap<Player, StarvalPlayer> getAttachedPlayers() {
+        return attachedPlayers;
+    }
+
+    public boolean isAttached(Player player) {
+        return attachedPlayers.containsKey(player);
     }
 
     public StarvalPlayer getStarvalPlayer(Player player) {

@@ -1,7 +1,6 @@
 package de.starvalcity.base.api.def;
 
 import de.starvalcity.base.api.def.economy.BankAccount;
-import de.starvalcity.base.api.def.economy.EconomyResponse;
 import de.starvalcity.base.api.def.faction.Faction;
 import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
@@ -225,12 +224,12 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     }
 
     @Override
-    public EconomyResponse deposit(Object instance, double amount, StarvalID starvalID) {
-        return null;
+    public void deposit(Object instance, double amount, StarvalID starvalID) {
+
     }
 
     @Override
-    public EconomyResponse withdraw(Object instance, double amount, StarvalID starvalID) {
-        return null;
+    public void withdraw(Object instance, double amount, StarvalID starvalID) {
+
     }
 }

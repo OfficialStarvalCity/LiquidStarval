@@ -1,7 +1,5 @@
 package de.starvalcity.base.api.def;
 
-import de.starvalcity.base.api.def.economy.EconomyResponse;
-
 /**
  *
  */
@@ -35,8 +33,8 @@ public interface EconomyParticipator {
     // Transactions
     //--------------------------------------------------------------------------------------------------//
 
-    EconomyResponse deposit(Object instance, double amount, StarvalID starvalID);
+    void deposit(Object instance, double amount, StarvalID starvalID);
 
-    EconomyResponse withdraw(Object instance, double amount, StarvalID starvalID);
+    void withdraw(Object instance, double amount, StarvalID starvalID);
 
 }
