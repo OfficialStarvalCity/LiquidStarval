@@ -19,8 +19,6 @@ public class DataManager {
 
     private final HashMap<Player, StarvalPlayer> attachedPlayers = new HashMap<>();
 
-    private final Pluginbase plugin = new Pluginbase();
-
     public void attachPlayer(Player player) {
         if (!player.hasPlayedBefore()) {
             StarvalPlayer starvalPlayer = new StarvalPlayer(player, player.getName(), player.getUniqueId());

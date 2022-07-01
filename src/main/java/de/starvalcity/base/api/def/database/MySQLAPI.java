@@ -1,9 +1,6 @@
 package de.starvalcity.base.api.def.database;
 
-import de.starvalcity.base.api.def.StarvalID;
-import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.background.log.LogHandler;
-import org.bukkit.entity.Player;
 
 import java.sql.*;
 
@@ -88,13 +85,11 @@ public class MySQLAPI {
         }
     }
 
-    public static boolean execute(String query) {
+    public static void execute(String query) {
         try {
             getConnection().createStatement().execute(query);
-            return true;
         } catch (SQLException sqlException) {
             log.sqlError(query, "Query fehlgeschlagen.", sqlException);
-            return false;
         }
     }
 

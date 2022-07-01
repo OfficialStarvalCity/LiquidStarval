@@ -1,26 +1,24 @@
 package de.starvalcity.base.api.def.economy;
 
-import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.background.log.LogHandler;
 
 public class EconomyAPI {
 
-    private LogHandler log = new LogHandler();
-    private Pluginbase plugin = new Pluginbase();
+    private static LogHandler log = new LogHandler();
 
-    private String tableSetupQuery = "CREATE TABLE IF NOT EXISTS `sc_economy` ("
-            + " `UUID` varchar(64) NOT NULL,"
-            + " `StarvalID` varchar(64) NOT NULL,"
-            + " `Playername` varchar(100) NOT NULL,"
-            + " `ReadyCash` double(64,2),"
-            + " `BankBalance` double(64,2),"
-            + " `Balance` double(64,2),"
-            + " `SalaryAmount` double(64,2)"
-            + " PRIMARY KEY (`StarvalID`),"
-            + " UNIQUE KEY `uq_starvaleconomy_1` (`StarvalID`));";
+    private static String tableSetupQuery = "CREATE TABLE `sc_economy` (" +
+            " `UUID` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci," +
+            " `StarvalID` VARCHAR(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci," +
+            " `Playername` VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci," +
+            " `ReadyCash` DOUBLE(64.2) DEFAULT NULL," +
+            " `BankBalance` DOUBLE(64.2) DEFAULT NULL," +
+            " `Balance` DOUBLE(64.2) DEFAULT NULL," +
+            " `SalaryAmount` DOUBLE(64.2) DEFAULT NULL," +
+            " PRIMARY KEY (`StarvalID`)" +
+            ");";
 
-    public void setupTable() {
+    public static void setupTable() {
         if (MySQLAPI.isConnected()) {
             if (!MySQLAPI.existsTable("sc_economy")) {
                 MySQLAPI.execute(tableSetupQuery);

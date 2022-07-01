@@ -1,6 +1,7 @@
 package de.starvalcity.base;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
+import de.starvalcity.base.api.def.economy.EconomyAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.DataManager;
 import de.starvalcity.base.api.handling.DatabaseManager;
@@ -27,8 +28,9 @@ public class Pluginbase {
     // Deklarierte Variablen
     /*------------------------------------------------------------------------------------------------------------*/
     // Plugin
-    private JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
+    private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
     // APIs
+    private EconomyAPI economyAPI = new EconomyAPI();
     private MySQLAPI mySQLAPI = new MySQLAPI();
     // Managers
     private DataManager dataManager = new DataManager();
@@ -73,6 +75,7 @@ public class Pluginbase {
      * Server-Stop Funktion
      */
     public void onShutdown() {
+        MySQLAPI.disconnect();
         plugin.saveConfig();
         taskHandler.terminateTask(fileTask);
         taskHandler.terminateTask(eventTask);
@@ -88,6 +91,7 @@ public class Pluginbase {
         loadCommands();
         loadConfig();
         connectDatabase();
+        loadDependencies();
     }
 
     /*------------------------------------------------------------------------------------------------------------*/
@@ -100,6 +104,10 @@ public class Pluginbase {
     }
 
     // APIs
+    public EconomyAPI getEconomyAPI() {
+        return economyAPI;
+    }
+
     public MySQLAPI getMySQLAPI() {
         return mySQLAPI;
     }
@@ -183,6 +191,14 @@ public class Pluginbase {
      */
     public void loadCommands() {
 
+    }
+
+    /**
+     * Laden aller APIs
+     * Lädt alle APIs
+     */
+    public void loadDependencies() {
+        EconomyAPI.setupTable();
     }
 
 }
