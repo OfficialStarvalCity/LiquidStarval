@@ -54,6 +54,21 @@ public class LogHandler {
         System.err.println("SQL Error > Query: " + query);
     }
 
+    /**
+     * SQL Verbindungsfehler
+     * Logt einen SQL Verbindungsfehler mit Problemhilfe
+     */
+    public void sqlConnectionError() {
+        System.err.println("SQL Error > Database is not connected.");
+        System.err.println("SQL Helper > Please make sure all credentials and login information are correct.");
+        System.err.println("SQL Helper > Please make sure that the database is running.");
+    }
+
+    /**
+     * SQL Info
+     * Logt eine SQL Information
+     * @param message nachricht
+     */
     public void sqlInfo(String message) {
         System.out.println("SQL Info > " + message);
     }

@@ -1,1 +1,22 @@
 20L =^= 1 second
+
+- sc_economy -
+1 UUID
+2 StarvalID
+3 Playername
+4 ReadyCash
+5 BankBalance
+6 Balance
+7 SalaryAmount
+
+- sc_players -
+1 UUID
+2 StarvalID
+3 Playername
+4 FirstSeen
+5 LastSeen
+6 Playtime
+7 Rank
+8 Balance
+9 Faction
+10 FactionRank

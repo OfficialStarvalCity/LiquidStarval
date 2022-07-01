@@ -88,6 +88,16 @@ public class MySQLAPI {
         }
     }
 
+    public static boolean execute(String query) {
+        try {
+            getConnection().createStatement().execute(query);
+            return true;
+        } catch (SQLException sqlException) {
+            log.sqlError(query, "Query fehlgeschlagen.", sqlException);
+            return false;
+        }
+    }
+
     public static ResultSet query(String query) {
         ResultSet rs = null;
 
@@ -100,4 +110,27 @@ public class MySQLAPI {
         return rs;
     }
 
+    public static boolean existsTable(String table) {
+        try {
+            ResultSet tables = getConnection().getMetaData().getTables(null, null, table, null);
+            return tables.next();
+        } catch (SQLException sqlException) {
+            log.sqlError(table, "Query fehlgeschlagen. Tabelle existiert nicht oder anderer Fehler.", sqlException);
+            return false;
+        }
+    }
+
+    public static boolean existsColumn(String table, String column) {
+        try {
+            ResultSet columns = getConnection().getMetaData().getColumns(null, null, table, column);
+            return columns.next();
+        } catch (Exception exception) {
+            log.sqlError(table + column, "Query fehlgeschlagen. Tabelle oder Spalte existiert nicht oder anderer Fehler." , exception);
+            return false;
+        }
+    }
+
+    public static Connection getConnection() {
+        return connection;
+    }
 }
