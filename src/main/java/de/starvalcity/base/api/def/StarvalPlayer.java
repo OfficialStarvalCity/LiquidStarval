@@ -214,16 +214,6 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     }
 
     @Override
-    public void createBankAccount(int id, String name, Object owner) {
-
-    }
-
-    @Override
-    public void deleteBankAccount(int id) {
-
-    }
-
-    @Override
     public void deposit(Object instance, double amount, StarvalID starvalID) {
 
     }

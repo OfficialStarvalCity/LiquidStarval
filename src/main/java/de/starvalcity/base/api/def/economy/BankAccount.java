@@ -15,15 +15,17 @@ public class BankAccount {
     private StarvalID starvalID;
     private StarvalPlayer creator;
     private Object owner;
+    private BankAccountType accountType;
     private List<StarvalPlayer> members;
 
     private double balance;
 
-    public BankAccount(String name, StarvalID starvalID, StarvalPlayer creator, @Nullable Object owner) {
+    public BankAccount(String name, StarvalID starvalID, StarvalPlayer creator, @Nullable Object owner, BankAccountType accountType) {
         this.name = name;
         this.starvalID = starvalID;
         this.creator = creator;
         this.owner = owner;
+        this.accountType = accountType;
     }
 
     public String getName() {
@@ -40,6 +42,10 @@ public class BankAccount {
 
     public Object getOwner() {
         return owner;
+    }
+
+    public BankAccountType getAccountType() {
+        return accountType;
     }
 
     public List<StarvalPlayer> getMembers() {
@@ -64,6 +70,10 @@ public class BankAccount {
 
     public void setOwner(Object owner) {
         this.owner = owner;
+    }
+
+    public void setAccountType(BankAccountType accountType) {
+        this.accountType = accountType;
     }
 
     public void setMembers(List<StarvalPlayer> members) {

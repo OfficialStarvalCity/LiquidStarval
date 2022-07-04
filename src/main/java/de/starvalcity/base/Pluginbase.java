@@ -180,6 +180,7 @@ public class Pluginbase {
     public void connectDatabase() {
         MySQLAPI.connect();
         SQLManager.setupEconomyTable();
+        SQLManager.setupBankTable();
     }
 
     /**
