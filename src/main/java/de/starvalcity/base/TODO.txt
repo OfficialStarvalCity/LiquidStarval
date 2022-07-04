@@ -1,5 +1,9 @@
 
  - Connect economy functions with faction functions
- - Database Handling
  - Exception Handling
  - Silent Methods
+
+Economy TODO:
+ - Player Cash-System
+ - Bank System (Mobile banking)
+ - Company System

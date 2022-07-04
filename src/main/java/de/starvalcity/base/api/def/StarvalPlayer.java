@@ -45,10 +45,6 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         setUniqueId(uniqueId);
     }
 
-    public StarvalPlayer getStarvalPlayer() {
-        return this;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof StarvalPlayer)) {
@@ -98,6 +94,10 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     public Player getPlayer() {
         return player;
+    }
+
+    public StarvalPlayer getStarvalPlayer() {
+        return this;
     }
 
     public String getName() {

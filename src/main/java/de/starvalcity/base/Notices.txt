@@ -19,4 +19,4 @@
 7 Rank
 8 Balance
 9 Faction
-10 FactionRank
+10 FactionRank`

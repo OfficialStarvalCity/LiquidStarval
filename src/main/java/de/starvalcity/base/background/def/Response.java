@@ -1,7 +1,7 @@
 package de.starvalcity.base.background.def;
 
 /**
- * Die Response definiert eine spezifische Antwort für jeden individuellen Fall. Bei unbestimmten Fällen wird bei einem
+ * Die {@link Response} definiert eine spezifische Antwort für jeden individuellen Fall. Bei unbestimmten Fällen wird bei einem
  * Erfolg die ID 999 und bei einem Fehler die ID 998 aufgerufen.
  */
 public enum Response {

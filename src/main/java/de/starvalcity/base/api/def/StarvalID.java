@@ -1,9 +1,10 @@
 package de.starvalcity.base.api.def;
 
-import org.jetbrains.annotations.Contract;
-
 import java.security.SecureRandom;
 
+/**
+ * Die {@link StarvalID} ist eine benutzerdefinierte Implementation der {@link java.util.UUID}.
+ */
 public class StarvalID implements Comparable<StarvalID> {
 
     private final long mostSigBits;

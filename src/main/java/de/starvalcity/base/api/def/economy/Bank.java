@@ -1,6 +1,5 @@
 package de.starvalcity.base.api.def.economy;
 
-import de.starvalcity.base.api.def.StarvalPlayer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -9,36 +8,29 @@ import java.util.List;
 public class Bank {
 
     private String name;
-    private int id;
-    private @Nullable StarvalPlayer owner;
-    private @Nullable List<StarvalPlayer> workers;
+    private @Nullable Object owner;
+    private @Nullable Object founder;
+    private List<BankAccount> bankAccounts = new ArrayList<>();
 
-    private final ArrayList<String> bankAccounts = new ArrayList<>();
-
-    public Bank(String name, int id, @Nullable StarvalPlayer owner, @Nullable List<StarvalPlayer> workers) {
+    public Bank(String name, @Nullable Object owner, @Nullable Object founder) {
         this.name = name;
-        this.id = id;
         this.owner = owner;
-        this.workers = workers;
+        this.founder = founder;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public StarvalPlayer getOwner() {
+    public Object getOwner() {
         return owner;
     }
 
-    public List<StarvalPlayer> getWorkers() {
-        return workers;
+    public Object getFounder() {
+        return founder;
     }
 
-    public ArrayList<String> getBankAccounts() {
+    public List<BankAccount> getBankAccounts() {
         return bankAccounts;
     }
 
@@ -46,16 +38,15 @@ public class Bank {
         this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setOwner(StarvalPlayer owner) {
+    public void setOwner(Object owner) {
         this.owner = owner;
     }
 
-    public void setWorkers(List<StarvalPlayer> workers) {
-        this.workers = workers;
+    public void setFounder(Object founder) {
+        this.founder = founder;
     }
 
+    public void setBankAccounts(List<BankAccount> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
 }

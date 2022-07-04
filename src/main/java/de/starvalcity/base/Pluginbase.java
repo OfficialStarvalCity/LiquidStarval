@@ -1,7 +1,6 @@
 package de.starvalcity.base;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
-import de.starvalcity.base.api.def.economy.EconomyAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.DataManager;
 import de.starvalcity.base.api.handling.DatabaseManager;
@@ -17,6 +16,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+
 /**
  * Die {@link Pluginbase} stellt eine benutzerdefinierte Implementation von den Klassen {@link JavaPlugin},
  * {@link org.bukkit.plugin.PluginBase} und {@link org.bukkit.plugin.Plugin} dar. Sie stellt das zentrale Fundament
@@ -29,9 +30,10 @@ public class Pluginbase {
     /*------------------------------------------------------------------------------------------------------------*/
     // Plugin
     private final JavaPlugin plugin = JavaPlugin.getPlugin(Core.class);
+
     // APIs
-    private EconomyAPI economyAPI = new EconomyAPI();
     private MySQLAPI mySQLAPI = new MySQLAPI();
+
     // Managers
     private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
@@ -104,10 +106,6 @@ public class Pluginbase {
     }
 
     // APIs
-    public EconomyAPI getEconomyAPI() {
-        return economyAPI;
-    }
-
     public MySQLAPI getMySQLAPI() {
         return mySQLAPI;
     }
@@ -156,6 +154,12 @@ public class Pluginbase {
         return fileTask;
     }
 
+    // Miscellaneous
+    public File getDataFolder() {
+        return plugin.getDataFolder();
+    }
+
+
     /*------------------------------------------------------------------------------------------------------------*/
     // Hintergrundmethoden
     /*------------------------------------------------------------------------------------------------------------*/
@@ -175,6 +179,7 @@ public class Pluginbase {
      */
     public void connectDatabase() {
         MySQLAPI.connect();
+        SQLManager.setupEconomyTable();
     }
 
     /**
@@ -198,7 +203,7 @@ public class Pluginbase {
      * Lädt alle APIs
      */
     public void loadDependencies() {
-        EconomyAPI.setupTable();
+
     }
 
 }

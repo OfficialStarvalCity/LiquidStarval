@@ -1,21 +1,24 @@
 package de.starvalcity.base.api.handling;
 
-import de.starvalcity.base.Core;
-import de.starvalcity.base.api.def.StarvalID;
-import de.starvalcity.base.background.FileTask;
-import de.starvalcity.base.background.def.CustomizedFile;
-import de.starvalcity.base.background.log.LogHandler;
-import org.bukkit.entity.Player;
+import de.starvalcity.base.api.def.database.MySQLAPI;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import java.util.UUID;
-
+/**
+ * Der {@link SQLManager} sorgt für die Ausführung von benutzerdefinierten Anfragen innerhalb von Datenbanken.
+ */
 public class SQLManager implements Listener {
+
+    public static void setupEconomyTable() {
+        if (!MySQLAPI.existsTable("sc_economy")) {
+            MySQLAPI.execute("CREATE TABLE `sc_economy` ( " +
+                    "`UUID` binary(16), " +
+                    "`StarvalID` varchar(30), " +
+                    "`Playername` varchar(30), " +
+                    "`ReadyCash` double(64,2), " +
+                    "`BankBalance` double(64,2), " +
+                    "`Balance` double(64,2), " +
+                    "`SalaryAmount` double(64,2), " +
+                    "PRIMARY KEY (`UUID`));");
+        }
+    }
 }

@@ -1,71 +1,76 @@
 package de.starvalcity.base.api.def.economy;
 
 import de.starvalcity.base.api.def.StarvalID;
-import org.jetbrains.annotations.NotNull;
+import de.starvalcity.base.api.def.StarvalPlayer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * Ein {@link BankAccount} ist ein benutzerdefiniertes Bankkonto von einem {@link StarvalPlayer}.
+ */
 public class BankAccount {
 
-    public Object owner;
-    public List<Object> members;
-    public String name;
-    public StarvalID starvalID;
-    public BankAccountType accountType;
-    public double balance;
+    private String name;
+    private StarvalID starvalID;
+    private StarvalPlayer creator;
+    private Object owner;
+    private List<StarvalPlayer> members;
 
-    public BankAccount(@NotNull Object owner, @NotNull String name, StarvalID starvalID, @NotNull BankAccountType accountType) {
-        this.owner = owner;
+    private double balance;
+
+    public BankAccount(String name, StarvalID starvalID, StarvalPlayer creator, @Nullable Object owner) {
         this.name = name;
         this.starvalID = starvalID;
-        this.accountType = accountType;
-    }
-
-    public void setOwner(Object owner) {
+        this.creator = creator;
         this.owner = owner;
-    }
-
-    public void setMember(Object member) {
-        members.add(member);
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(StarvalID starvalID) {
-        this.starvalID = starvalID;
-    }
-
-    public void setAccountType(BankAccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public Object getOwner() {
-        return owner;
-    }
-
-    public List<Object> getMembers() {
-        return members;
     }
 
     public String getName() {
         return name;
     }
 
-    public StarvalID getId() {
+    public StarvalID getStarvalID() {
         return starvalID;
     }
 
-    public BankAccountType getAccountType() {
-        return accountType;
+    public StarvalPlayer getCreator() {
+        return creator;
+    }
+
+    public Object getOwner() {
+        return owner;
+    }
+
+    public List<StarvalPlayer> getMembers() {
+        return members;
     }
 
     public double getBalance() {
         return balance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStarvalID(StarvalID starvalID) {
+        this.starvalID = starvalID;
+    }
+
+    public void setCreator(StarvalPlayer creator) {
+        this.creator = creator;
+    }
+
+    public void setOwner(Object owner) {
+        this.owner = owner;
+    }
+
+    public void setMembers(List<StarvalPlayer> members) {
+        this.members = members;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
