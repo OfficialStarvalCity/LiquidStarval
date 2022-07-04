@@ -4,3 +4,7 @@ main: de.starvalcity.base.Core
 api-version: 1.16
 authors: [ StarvalCity ]
 description: StarvalCity API
+
+commands:
+  economy:
+    description: Economy Command

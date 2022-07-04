@@ -4,15 +4,18 @@ import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.DataManager;
 import de.starvalcity.base.api.handling.DatabaseManager;
+import de.starvalcity.base.api.handling.MessageManager;
 import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
+import de.starvalcity.base.command.EconomyCommand;
 import de.starvalcity.base.utilities.DataStructurizer;
 import de.starvalcity.base.utilities.DateConverter;
 import de.starvalcity.base.utilities.Formatter;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -37,6 +40,7 @@ public class Pluginbase {
     // Managers
     private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
+    private MessageManager msgManager = new MessageManager();
     private SQLManager sqlManager = new SQLManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
@@ -119,6 +123,10 @@ public class Pluginbase {
         return dbManager;
     }
 
+    public MessageManager getMsgManager() {
+        return msgManager;
+    }
+
     public SQLManager getSqlManager() {
         return sqlManager;
     }
@@ -196,6 +204,8 @@ public class Pluginbase {
      * Lädt alle Befehle
      */
     public void loadCommands() {
+        EconomyCommand economyCommand = new EconomyCommand(JavaPlugin.getPlugin(Core.class));
+        JavaPlugin.getPlugin(Core.class).getCommand("economy").setExecutor(economyCommand);
 
     }
 
