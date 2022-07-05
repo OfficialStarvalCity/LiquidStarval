@@ -8,3 +8,7 @@ description: StarvalCity API
 commands:
   economy:
     description: Economy Command
+    usage: /economy
+    aliases:
+      - eco
+      - wirtschaft

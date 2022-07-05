@@ -206,7 +206,6 @@ public class Pluginbase {
     public void loadCommands() {
         EconomyCommand economyCommand = new EconomyCommand(JavaPlugin.getPlugin(Core.class));
         JavaPlugin.getPlugin(Core.class).getCommand("economy").setExecutor(economyCommand);
-
     }
 
     /**

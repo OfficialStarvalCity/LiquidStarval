@@ -26,10 +26,15 @@ public class EconomyCommand implements CommandExecutor, Listener, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length == 0) {
             if (label.equalsIgnoreCase("eco")) {
+                sender.sendMessage(messageManager.getMessage("Commands.Economy.Insufficient_Arguments"));
+            }
+        }
+        if (args.length == 1) {
+            if (args[0].equalsIgnoreCase("eco help")) {
                 sender.sendMessage();
             }
         }
-        return false;
+        return true;
     }
 
     @Override
