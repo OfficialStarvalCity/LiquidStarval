@@ -15,7 +15,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private Player player;
     private String name;
     private UUID uniqueId;
-    private StarvalID starvalId;
+    private int playerId;
     private long firstJoin;
     private long lastSeen;
 
@@ -34,7 +34,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     private List<BankAccount> bankAccounts = new ArrayList<>(); // - Konten des Spielers
 
-    private Map<StarvalID, BankAccount> bankAccountIds = new HashMap<>(); // - Konten und KontenIDs des Spielers
+    private Map<Integer, BankAccount> bankAccountIds = new HashMap<>(); // - Konten und KontenIDs des Spielers
 
     private Set<String> pastFactions = new HashSet<>(); // - Vergangene Fraktionen des Spielers
     private Set<String> pastStaffRanks = new HashSet<>(); // - Vergangene Ränge des Spielers
@@ -76,8 +76,8 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.uniqueId = uniqueId;
     }
 
-    public void setStarvalId(StarvalID starvalId) {
-        this.starvalId = starvalId;
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
     }
 
     public void setFirstJoin(long firstJoin) {
@@ -108,8 +108,8 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         return uniqueId;
     }
 
-    public StarvalID getStarvalId() {
-        return starvalId;
+    public int getPlayerId() {
+        return playerId;
     }
 
     public long getFirstJoin() {
@@ -214,12 +214,12 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     }
 
     @Override
-    public void deposit(Object instance, double amount, StarvalID starvalID) {
+    public void deposit(Object instance, double amount, int accountId) {
 
     }
 
     @Override
-    public void withdraw(Object instance, double amount, StarvalID starvalID) {
+    public void withdraw(Object instance, double amount, int starvalID) {
 
     }
 }

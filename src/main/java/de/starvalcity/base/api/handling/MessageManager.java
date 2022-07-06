@@ -3,6 +3,7 @@ package de.starvalcity.base.api.handling;
 import de.starvalcity.base.background.def.CustomizedFile;
 import de.starvalcity.base.utilities.FileHandler;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class MessageManager {
@@ -41,19 +42,19 @@ public class MessageManager {
         messagesYML.addDefault("Commands.Economy.StaffHelp_1", "&7/eco setMoney <ID> <Betrag> - &aSetzt einer Instanz eine Menge an Geld");
         messagesYML.addDefault("Commands.Economy.StaffHelp_2", "&7/eco addMoney <ID> <Betrag> - &aFügt einer Instanz Geld hinzu");
         messagesYML.addDefault("Commands.Economy.StaffHelp_3", "&7/eco removeMoney <ID> <Betrag> - &aEntfernt einer Instanz Geld");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco setOwner <ID> <Spieler> - &aSetzt den Inhaber eines Kontos fest");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco addOwner <ID> <Spieler> - &aFügt einen Inhaber auf ein Konto hinzu");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco setMember <ID> <Spieler> - &aSetzt ein Mitglied eines Kontos fest");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco addMember <ID> <Spieler> - &aFügt ein Mitglied auf ein Konto hinzu");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_4", "&7/eco createBankAccount <Spieler> <Kontoname> <Bank> - &aErstellt ein Bankkonto für einen Spieler");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_5", "&7/eco deleteBankAccounts <Spieler> - &aEntfernt alle Konten eines Spielers");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_6", "&7/eco deleteBankAccount <ID> - &aEntfernt ein Konto eines Spielers");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_7", "&7/eco createCompanyBankAccount <Inhaber> <Kontoname> <Bank> - &aErstellt ein Firmenkonto");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_8", "&7/eco deleteCompanyBankAccounts <Inhaber> - &aEntfernt alle Konten eines Unternehmens");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_9", "&7/eco deleteCompanyAccount <ID> - &aEntfernt ein Konto eines Unternehmens");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco listCompanyAccounts - &aZeigt alle Unternehmenskonten");
-        messagesYML.addDefault("Commands.EconomyStaffHelp_11", "&7/eco topCompanyAccounts - &aZeigt die Rangliste aller Unternehmenskonten");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_10", "&7/eco listTransactions [Spieler; Unternehmen; Fraktion] - &aListet alle Transaktionen auf");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_4", "&7/eco setOwner <ID> <Spieler> - &aSetzt den Inhaber eines Kontos fest");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_5", "&7/eco addOwner <ID> <Spieler> - &aFügt einen Inhaber auf ein Konto hinzu");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_6", "&7/eco setMember <ID> <Spieler> - &aSetzt ein Mitglied eines Kontos fest");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_7", "&7/eco addMember <ID> <Spieler> - &aFügt ein Mitglied auf ein Konto hinzu");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_8", "&7/eco createBankAccount <Spieler> <Kontoname> <Bank> - &aErstellt ein Bankkonto für einen Spieler");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_9", "&7/eco deleteBankAccounts <Spieler> - &aEntfernt alle Konten eines Spielers");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_10", "&7/eco deleteBankAccount <ID> - &aEntfernt ein Konto eines Spielers");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_11", "&7/eco createCompanyBankAccount <Inhaber> <Kontoname> <Bank> - &aErstellt ein Firmenkonto");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_12", "&7/eco deleteCompanyBankAccounts <Inhaber> - &aEntfernt alle Konten eines Unternehmens");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_13", "&7/eco deleteCompanyAccount <ID> - &aEntfernt ein Konto eines Unternehmens");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_14", "&7/eco listCompanyAccounts - &aZeigt alle Unternehmenskonten");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_15", "&7/eco topCompanyAccounts - &aZeigt die Rangliste aller Unternehmenskonten");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_16", "&7/eco listTransactions [Spieler; Unternehmen; Fraktion] - &aListet alle Transaktionen auf");
 
         FileHandler.save(messagesCFG.getFile(), this.messagesYML);
     }
@@ -64,5 +65,39 @@ public class MessageManager {
         value = value.replace("%ecoPrefix%", ChatColor.translateAlternateColorCodes('&', (this.messagesCFG.getString("Prefixes.Economy_Prefix"))));
         value = value.replace("%perPrefix%", ChatColor.translateAlternateColorCodes('&', (this.messagesCFG.getString("Prefixes.Permissions_Prefix"))));
         return value;
+    }
+
+    public String getRawMessage(String path) {
+        String value = org.bukkit.ChatColor.translateAlternateColorCodes('&', (this.messagesCFG.getString(path)));
+        return value;
+    }
+
+    public void sendEconomyHelp(CommandSender commandSender) {
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_Separator_Line"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.Help_Blank_Line"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_1"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_2"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_3"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_4"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_5"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.GenHelp_6"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.Help_Blank_Line"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_Separator_Line"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_1"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_2"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_3"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_4"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_5"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_6"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_7"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_8"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_9"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_10"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_11"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_12"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_13"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_14"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_15"));
+        commandSender.sendMessage(getRawMessage("Commands.Economy.StaffHelp_16"));
     }
 }

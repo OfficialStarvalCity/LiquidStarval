@@ -1,6 +1,5 @@
 package de.starvalcity.base.api.def.economy;
 
-import de.starvalcity.base.api.def.StarvalID;
 import de.starvalcity.base.api.def.StarvalPlayer;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,7 +11,7 @@ import java.util.List;
 public class BankAccount {
 
     private String name;
-    private StarvalID starvalID;
+    private int accountId;
     private StarvalPlayer creator;
     private Object owner;
     private BankAccountType accountType;
@@ -20,9 +19,9 @@ public class BankAccount {
 
     private double balance;
 
-    public BankAccount(String name, StarvalID starvalID, StarvalPlayer creator, @Nullable Object owner, BankAccountType accountType) {
+    public BankAccount(String name, int accountId, StarvalPlayer creator, @Nullable Object owner, BankAccountType accountType) {
         this.name = name;
-        this.starvalID = starvalID;
+        this.accountId = accountId;
         this.creator = creator;
         this.owner = owner;
         this.accountType = accountType;
@@ -32,8 +31,8 @@ public class BankAccount {
         return name;
     }
 
-    public StarvalID getStarvalID() {
-        return starvalID;
+    public int getAccountId() {
+        return accountId;
     }
 
     public StarvalPlayer getCreator() {
@@ -60,8 +59,8 @@ public class BankAccount {
         this.name = name;
     }
 
-    public void setStarvalID(StarvalID starvalID) {
-        this.starvalID = starvalID;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public void setCreator(StarvalPlayer creator) {

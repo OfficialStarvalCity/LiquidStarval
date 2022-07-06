@@ -30,8 +30,8 @@ public class EconomyCommand implements CommandExecutor, Listener, TabCompleter {
             }
         }
         if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("eco help")) {
-                sender.sendMessage();
+            if (args[0].equalsIgnoreCase("help")) {
+                messageManager.sendEconomyHelp(sender);
             }
         }
         return true;

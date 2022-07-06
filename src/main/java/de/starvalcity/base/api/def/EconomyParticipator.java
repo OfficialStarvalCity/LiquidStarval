@@ -25,8 +25,8 @@ public interface EconomyParticipator {
     // Transactions
     //--------------------------------------------------------------------------------------------------//
 
-    void deposit(Object instance, double amount, StarvalID starvalID);
+    void deposit(Object instance, double amount, int accountId);
 
-    void withdraw(Object instance, double amount, StarvalID starvalID);
+    void withdraw(Object instance, double amount, int accountId);
 
 }
