@@ -15,7 +15,7 @@ public class FirstJoinListener implements Listener {
     public void onFirstJoin(PlayerFirstJoinEvent firstJoinEvent) {
         Player newbie = firstJoinEvent.getPlayer();
         if (!newbie.hasPlayedBefore()) {
-            plugin.getDataManager().attachPlayer(newbie);
+            plugin.getPlayerManager().attachPlayer(newbie);
         }
     }
 }

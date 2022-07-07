@@ -7,6 +7,7 @@ import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
+import de.starvalcity.base.command.AttachCommand;
 import de.starvalcity.base.command.EconomyCommand;
 import de.starvalcity.base.utilities.DataStructurizer;
 import de.starvalcity.base.utilities.DateConverter;
@@ -34,10 +35,11 @@ public class Pluginbase {
     private MySQLAPI mySQLAPI = new MySQLAPI();
 
     // Managers
-    private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
     private InstanceManager instanceManager = new InstanceManager();
     private MessageManager msgManager = new MessageManager();
+
+    private PlayerManager playerManager = new PlayerManager();
     private SQLManager sqlManager = new SQLManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
@@ -112,9 +114,6 @@ public class Pluginbase {
     }
 
     // Managers
-    public DataManager getDataManager() {
-        return dataManager;
-    }
 
     public DatabaseManager getDbManager() {
         return dbManager;
@@ -126,6 +125,10 @@ public class Pluginbase {
 
     public MessageManager getMsgManager() {
         return msgManager;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
     }
 
     public SQLManager getSqlManager() {
@@ -188,6 +191,8 @@ public class Pluginbase {
      */
     public void connectDatabase() {
         MySQLAPI.connect();
+        SQLManager.setupIdsTable();
+        SQLManager.setupPlayersTable();
         SQLManager.setupEconomyTable();
         SQLManager.setupBankTable();
     }
@@ -205,7 +210,9 @@ public class Pluginbase {
      * Lädt alle Befehle
      */
     public void loadCommands() {
+        AttachCommand attachCommand = new AttachCommand(JavaPlugin.getPlugin(Core.class));
         EconomyCommand economyCommand = new EconomyCommand(JavaPlugin.getPlugin(Core.class));
+        JavaPlugin.getPlugin(Core.class).getCommand("attach").setExecutor(attachCommand);
         JavaPlugin.getPlugin(Core.class).getCommand("economy").setExecutor(economyCommand);
     }
 

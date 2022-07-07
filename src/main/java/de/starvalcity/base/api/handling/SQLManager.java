@@ -11,9 +11,26 @@ public class SQLManager implements Listener {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
+    static String idsTableQuery = "CREATE TABLE `sc_ids` (" +
+            "`Instance` varchar(30), " +
+            "`Id` varchar(30), " +
+            "`CreationDate` varchar(30), " +
+            "PRIMARY KEY (`Id`));";
+    static String playersTableQuery = "CREATE TABLE `sc_players` (" +
+            "`UUID` binary(16), " +
+            "`Id` varchar(30), " +
+            "`Playername` varchar(30), " +
+            "`FirstSeen` varchar(20),  " +
+            "`LastSeen` varchar(20), " +
+            "`IP` varchar(30), " +
+            "`Playtime` varchar(30), " +
+            "`Rank` varchar(20), " +
+            "`Faction` varchar(20), " +
+            "`FactionRank` varchar(20)," +
+            "PRIMARY KEY (`UUID`));";
     static String economyTableQuery = "CREATE TABLE `sc_economy` ( " +
             "`UUID` binary(16), " +
-            "`StarvalID` varchar(30), " +
+            "`Id` varchar(30), " +
             "`Playername` varchar(30), " +
             "`ReadyCash` double(64,2), " +
             "`BankBalance` double(64,2), " +
@@ -22,11 +39,25 @@ public class SQLManager implements Listener {
             "PRIMARY KEY (`UUID`));";
     static String banksTableQuery = "CREATE TABLE `sc_banks` ( " +
             "`AccountType` text(16), " +
-            "`AccountID` varchar(30), " +
+            "`Id` varchar(30), " +
             "`AccountCreator` varchar(30), " +
             "`AccountOwner` varchar(30), " +
             "`AccountBalance` double(64,2), " +
-            "PRIMARY KEY (`AccountID`));";
+            "PRIMARY KEY (`Id`));";
+
+    public static void setupIdsTable() {
+        if (!MySQLAPI.existsTable("sc_ids")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_ids' ...");
+            MySQLAPI.execute(idsTableQuery);
+        }
+    }
+
+    public static void setupPlayersTable() {
+        if (!MySQLAPI.existsTable("sc_players")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_players' ...");
+            MySQLAPI.execute(playersTableQuery);
+        }
+    }
 
     public static void setupEconomyTable() {
         if (!MySQLAPI.existsTable("sc_economy")) {
