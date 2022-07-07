@@ -2,10 +2,7 @@ package de.starvalcity.base;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
-import de.starvalcity.base.api.handling.DataManager;
-import de.starvalcity.base.api.handling.DatabaseManager;
-import de.starvalcity.base.api.handling.MessageManager;
-import de.starvalcity.base.api.handling.SQLManager;
+import de.starvalcity.base.api.handling.*;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
@@ -39,6 +36,7 @@ public class Pluginbase {
     // Managers
     private DataManager dataManager = new DataManager();
     private DatabaseManager dbManager = new DatabaseManager();
+    private InstanceManager instanceManager = new InstanceManager();
     private MessageManager msgManager = new MessageManager();
     private SQLManager sqlManager = new SQLManager();
 
@@ -120,6 +118,10 @@ public class Pluginbase {
 
     public DatabaseManager getDbManager() {
         return dbManager;
+    }
+
+    public InstanceManager getInstanceManager() {
+        return instanceManager;
     }
 
     public MessageManager getMsgManager() {
