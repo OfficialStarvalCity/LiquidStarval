@@ -12,9 +12,8 @@ public class SQLManager implements Listener {
     private static Pluginbase pluginbase = new Pluginbase();
 
     static String idsTableQuery = "CREATE TABLE `sc_ids` (" +
-            "`Instance` varchar(30), " +
+            "`Instance` varchar(64), " +
             "`Id` varchar(30), " +
-            "`CreationDate` varchar(30), " +
             "PRIMARY KEY (`Id`));";
     static String playersTableQuery = "CREATE TABLE `sc_players` (" +
             "`UUID` binary(16), " +

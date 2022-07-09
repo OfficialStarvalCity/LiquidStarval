@@ -7,11 +7,9 @@ import java.util.UUID;
 
 public class PlayerManager {
 
-    private InstanceManager instanceManager = new InstanceManager();
-
     public void attachPlayer(Player player) {
         UUID playerUniqueId = player.getUniqueId();
-        int playerId = instanceManager.getId(player);
+        int playerId = InstanceManager.randomId();
         String playerName = player.getName();
         long firstSeen = System.currentTimeMillis();
         MySQLAPI.update("INSERT INTO `sc_players`" +
@@ -21,11 +19,14 @@ public class PlayerManager {
                 "','" + playerId +
                 "','" + playerName +
                 "','" + firstSeen +
-                "','" + null  +
+                "','" + null +
                 "','" + player.getAddress() +
                 "','" + "Spieler" +
                 "','" + "Zivilisten" +
                 "','" + "Mitglied')");
+        MySQLAPI.update("INSERT INTO `sc_ids` (`Instance`, `Id`) VALUES ('" +
+                playerUniqueId +
+                "','" + playerId + "');");
     }
 
 }

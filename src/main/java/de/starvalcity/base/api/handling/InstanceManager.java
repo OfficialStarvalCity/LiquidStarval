@@ -13,43 +13,51 @@ public class InstanceManager {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    public void generateId(Object instance) {
+    public static Object getInstanceId(Object instance) {
+        Object object = new Object();
+
+        try {
+            ResultSet resultSet = MySQLAPI.query("SELECT `Id` FROM `sc_ids` WHERE `Instance` = \"" + instance + "\";");
+
+            while (resultSet.next()) {
+                object = resultSet.getObject("Id");
+            }
+        } catch (SQLException exception) {
+            pluginbase.getLogHandler().sqlLog("SELECT Id FROM sc_ids WHERE Instance = " + instance + ";", exception);
+        }
+        return object;
+    }
+
+    public static boolean idExists(int id) {
+        int iterator = 0;
+        boolean exist = true;
+        try {
+
+            ResultSet rs = MySQLAPI.query("SELECT `Id` FROM `sc_ids` WHERE `Id` = " + id + ";");
+
+            while (rs.next()) {
+                iterator = rs.getInt("Id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(!(iterator > 0)) {
+            exist = false;
+        }
+        return exist;
+    }
+
+    public static int randomId() {
+
         Random random = new Random();
         int id = random.nextInt(9999);
 
-        while (idExists(id)) {
+        while(idExists(id)) {
             id = random.nextInt(9999);
         }
-        if (!idExists(id)) {
-            MySQLAPI.query("INSERT INTO `sc_ids` (`Instance`, `Id`, `CreationDate`) VALUES ('" +
-                    instance + "','" + id + "','" + System.currentTimeMillis() + "');");
-        }
+
+        return id;
     }
 
-    public int getId(Object instance) {
-        try {
-            return MySQLAPI.query("SELECT `Id` FROM `sc_ids` WHERE `Instance` =\"" + instance + "\";").getInt("Id");
-        } catch (SQLException exception) {
-            pluginbase.getLogHandler().sqlLog("SELECT `Id` FROM `sc_ids` WHERE `Instance` = " + instance + ";).getInt(Id)", exception);
-            throw new RuntimeException(exception);
-        }
-    }
-
-    public boolean idExists(int id) {
-        int iterator = 0;
-        boolean exists = true;
-        try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `Id` FROM `sc_ids` WHERE `Id` = " + id + ";");
-
-            while (resultSet.next()) {
-                iterator = resultSet.getInt("Id");
-            }
-        } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT `Id` FROM `sc_ids` WHERE `Id` = " + id + ";", sqlException);
-        }
-        if (!(iterator > 0)) {
-            exists = false;
-        }
-        return exists;
-    }
 }
