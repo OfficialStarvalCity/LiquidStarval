@@ -48,6 +48,16 @@ public class InstanceManager {
         return exist;
     }
 
+    public static boolean instanceExists(Object instance) {
+        ResultSet resultSet = MySQLAPI.query("SELECT `Instance` FROM `sc_ids` WHERE `Instance` = \"" + instance + "\";");
+        try {
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static int randomId() {
 
         Random random = new Random();

@@ -64,6 +64,11 @@ public class LogHandler {
         System.err.println("SQL Helper > Please make sure that the database is running.");
     }
 
+    public void sqlCustomError(String message, @Nullable Exception exception) {
+        System.err.println("SQL Error > Nachricht: " + message);
+        System.err.println("SQL Error > Exception: " + exception.getMessage());
+    }
+
     /**
      * SQL Info
      * Logt eine SQL Information

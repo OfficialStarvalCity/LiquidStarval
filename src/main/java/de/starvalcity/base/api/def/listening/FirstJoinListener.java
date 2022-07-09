@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.sql.SQLException;
+
 public class FirstJoinListener implements Listener {
 
     private Pluginbase plugin = new Pluginbase();

@@ -9,6 +9,8 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
+
 public class AttachCommand implements CommandExecutor {
 
     private static Pluginbase pluginbase = new Pluginbase();
@@ -29,7 +31,7 @@ public class AttachCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {
-                pluginbase.getPlayerManager().attachPlayer(player);
+                    pluginbase.getPlayerManager().attachPlayer(player);
                 player.sendMessage("Attached.");
             }
         }
