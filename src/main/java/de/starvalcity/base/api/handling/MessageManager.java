@@ -16,7 +16,7 @@ public class MessageManager {
         messagesYML = YamlConfiguration.loadConfiguration(messagesCFG.getFile());
         messagesYML.options().copyDefaults(true);
 
-        messagesYML.addDefault("Prefixes.Default_Prefix", "&7[&bLiquid&9Starval&7]&f ");
+        messagesYML.addDefault("Prefixes.Default_Prefix", "&7[&bLiquid&3Starval&7]&f ");
         messagesYML.addDefault("Prefixes.Economy_Prefix", "&7[&2Wirtschaft&7]&f ");
         messagesYML.addDefault("Prefixes.Permissions_Prefix", "&7[&cRechte&7]&f ");
 
@@ -26,6 +26,18 @@ public class MessageManager {
         messagesYML.addDefault("General.Reload_Pending", "%defPrefix% &bLiquid&9Starval&2 wird neugeladen ...");
         messagesYML.addDefault("General.Reload_Success", "%defPrefix% &bLiquid&9Starval&2 &aerfolgreich&2 neugeladen!");
         messagesYML.addDefault("General.Reload_Failure", "%defPrefix% &bLiquid&9Starval&2 &cfehlerhaft&2 neugeladen!");
+        messagesYML.addDefault("General.Target_Player_Does_Not_Exist", "%defPrefix% &cDer angegebene Spieler existiert nicht!");
+
+        messagesYML.addDefault("Commands.Attach.Console_Cannot_Be_Attached", "%defPrefix% &cDie Konsole kann nicht in der Datenbank gespeichert werden.");
+        messagesYML.addDefault("Commands.Attach.ID_Already_Exists", "%defPrefix% &cID existiert bereits in der Datenbank.");
+        messagesYML.addDefault("Commands.Attach.ID_Adding_Success", "%defPrefix% &aID erfolgreich zu der Datenbank &2hinzugefügt.");
+        messagesYML.addDefault("Commands.Attach.ID_Deletion_Success", "%defPrefix% &aID erfolgreich aus der Datenbank &centfernt.");
+        messagesYML.addDefault("Commands.Attach.ID_Invalid", "%defPrefix% &cID ungültig.");
+        messagesYML.addDefault("Commands.Attach.ID_Show_Own", "%defPrefix% &9Deine ID:&e ");
+        messagesYML.addDefault("Commands.Attach.Instance_Already_Exists", "%defPrefix% &cInstanz existiert bereits in der Datenbank.");
+        messagesYML.addDefault("Commands.Attach.Instance_Attach_Failure", "%defPrefix% &cInstanz konnte nicht in der Datenbank gespeichert werden.");
+        messagesYML.addDefault("Commands.Attach.Instance_Attach_Success", "%defPrefix% &aInstanz erfolgreich in der Datenbank gespeichert.");
+        messagesYML.addDefault("Commands.Attach.Instance_Could_Not_Be_Found", "%defPrefix% &cInstanz konnte nicht in der Datenbank gefunden werden.");
 
         messagesYML.addDefault("Commands.Economy.Insufficient_Arguments", "%ecoPrefix% &cUngültige Ausführung! Nutze &7/eco help&c für Hilfe.");
 

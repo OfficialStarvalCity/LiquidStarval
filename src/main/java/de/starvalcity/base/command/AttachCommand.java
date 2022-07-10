@@ -2,18 +2,17 @@ package de.starvalcity.base.command;
 
 import de.starvalcity.base.Core;
 import de.starvalcity.base.Pluginbase;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
+import de.starvalcity.base.api.handling.InstanceManager;
+import de.starvalcity.base.api.handling.MessageManager;
+import org.bukkit.Bukkit;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.sql.SQLException;
 
 public class AttachCommand implements CommandExecutor {
 
     private static Pluginbase pluginbase = new Pluginbase();
+    private MessageManager messageManager = new MessageManager();
 
     private static Core plugin;
 
@@ -30,9 +29,72 @@ public class AttachCommand implements CommandExecutor {
         }
         if (sender instanceof Player) {
             Player player = (Player) sender;
+
             if (args.length == 0) {
-                    pluginbase.getPlayerManager().attachPlayer(player);
-                player.sendMessage("Attached.");
+                if (InstanceManager.instanceExists(player)) {
+                    sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Already_Exists"));
+                } else {
+                    pluginbase.getInstanceManager().attachObject(player);
+                    sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
+                }
+            }
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("show")) {
+                    int playerId = pluginbase.getInstanceManager().getObjectId(player);
+                    if (InstanceManager.instanceExists(player)) {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Own") + playerId);
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                    }
+                } else if (args[0].equalsIgnoreCase("clear")) {
+                    if (InstanceManager.instanceExists(player)) {
+                        pluginbase.getInstanceManager().unattachObject(player);
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                    }
+                } else if (args[0].equalsIgnoreCase("randomize")) {
+                    if (!InstanceManager.instanceExists(player)) {
+                        pluginbase.getInstanceManager().attachObject(player);
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Already_Exists"));
+                    }
+                }
+            }
+            if (args.length == 2) {
+                if (args[0].equalsIgnoreCase("remove")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+
+                    if (target != null) {
+                        if (InstanceManager.instanceExists(target)) {
+                            pluginbase.getInstanceManager().unattachObject(target);
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
+                        } else {
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                        }
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("General.Target_Player_Does_Not_Exist"));
+                    }
+                }
+            }
+            if (args.length == 3) {
+                if (args[0].equalsIgnoreCase("set")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    int id = Integer.parseInt(args[2]);
+
+                    if (target != null) {
+                        if (!InstanceManager.idExists(id)) {
+                            pluginbase.getInstanceManager().unattachObject(target);
+                            pluginbase.getInstanceManager().setObjectId(target, id);
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Adding_Success"));
+                        } else {
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Already_Exists"));
+                        }
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("General.Target_Player_Does_Not_Exist"));
+                    }
+                }
             }
         }
         return true;

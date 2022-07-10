@@ -6,7 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * Ein {@link BankAccount} ist ein benutzerdefiniertes Bankkonto von einem {@link StarvalPlayer}.
+ * Ein {@link BankAccount} ist ein benutzerdefiniertes Bankkonto von einem {@link StarvalPlayer}, einer {@link de.starvalcity.base.api.def.faction.Faction}
+ * oder einer Firma.
  */
 public class BankAccount {
 

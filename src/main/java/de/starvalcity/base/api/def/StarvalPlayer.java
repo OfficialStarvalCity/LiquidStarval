@@ -5,7 +5,6 @@ import de.starvalcity.base.api.def.faction.Faction;
 import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.*;
@@ -27,7 +26,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private double readyCash; // - Bargeld des Spielers
 
     private Faction faction; // - Fraktion des Spielers
-    private @Nullable FactionRank factionRank; // - Fraktionsrang des Spielers
+    private FactionRank factionRank; // - Fraktionsrang des Spielers
     private boolean isFactionOwner; // - Ist der Spieler Inhaber einer Fraktion
     private int kills; // - Morde an andere Spieler
     private int deaths; // - Tode des Spielers

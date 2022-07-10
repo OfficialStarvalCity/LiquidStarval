@@ -16,7 +16,7 @@ public class SQLManager implements Listener {
             "`Id` varchar(30), " +
             "PRIMARY KEY (`Id`));";
     static String playersTableQuery = "CREATE TABLE `sc_players` (" +
-            "`UUID` binary(16), " +
+            "`UUID` varchar(64), " +
             "`Id` varchar(30), " +
             "`Playername` varchar(30), " +
             "`FirstSeen` varchar(20),  " +
@@ -28,7 +28,7 @@ public class SQLManager implements Listener {
             "`FactionRank` varchar(20)," +
             "PRIMARY KEY (`UUID`));";
     static String economyTableQuery = "CREATE TABLE `sc_economy` ( " +
-            "`UUID` binary(16), " +
+            "`UUID` varchar(64), " +
             "`Id` varchar(30), " +
             "`Playername` varchar(30), " +
             "`ReadyCash` double(64,2), " +
