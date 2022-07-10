@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
-public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable {
+public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
 
     private Player player;
     private String name;
     private UUID uniqueId;
-    private int playerId;
+    private int id;
     private long firstJoin;
     private long lastSeen;
 
@@ -75,8 +75,9 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.uniqueId = uniqueId;
     }
 
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setFirstJoin(long firstJoin) {
@@ -107,8 +108,9 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         return uniqueId;
     }
 
-    public int getPlayerId() {
-        return playerId;
+    @Override
+    public int getId() {
+        return id;
     }
 
     public long getFirstJoin() {

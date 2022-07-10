@@ -2,55 +2,24 @@ package de.starvalcity.base.api.def.economy;
 
 import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.UniqueObject;
-import org.jetbrains.annotations.Nullable;
+import de.starvalcity.base.api.handling.InstanceManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Bank implements EconomyParticipator, UniqueObject {
+public class Company implements EconomyParticipator, UniqueObject {
 
     private String name;
+    private CompanyType companyType;
     private int id;
-    private @Nullable Object owner;
-    private @Nullable Object founder;
-    private List<BankAccount> bankAccounts = new ArrayList<>();
+    private Object founder;
+    private List<Object> owners;
+    private List<Object> workers;
 
-    public Bank(String name, @Nullable Object owner, @Nullable Object founder) {
+    public Company(String name, CompanyType companyType, int id, Object founder) {
         this.name = name;
-        this.owner = owner;
+        this.companyType = companyType;
+        this.id = id;
         this.founder = founder;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Object getOwner() {
-        return owner;
-    }
-
-    public Object getFounder() {
-        return founder;
-    }
-
-    public List<BankAccount> getBankAccounts() {
-        return bankAccounts;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setOwner(Object owner) {
-        this.owner = owner;
-    }
-
-    public void setFounder(Object founder) {
-        this.founder = founder;
-    }
-
-    public void setBankAccounts(List<BankAccount> bankAccounts) {
-        this.bankAccounts = bankAccounts;
     }
 
     @Override

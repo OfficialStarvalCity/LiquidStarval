@@ -34,6 +34,7 @@ public class MessageManager {
         messagesYML.addDefault("Commands.Attach.ID_Deletion_Success", "%defPrefix% &aID erfolgreich aus der Datenbank &centfernt.");
         messagesYML.addDefault("Commands.Attach.ID_Invalid", "%defPrefix% &cID ungültig.");
         messagesYML.addDefault("Commands.Attach.ID_Show_Own", "%defPrefix% &9Deine ID:&e ");
+        messagesYML.addDefault("Commands.Attach.ID_Show_Others", "%defPrefix% &9ID des angegebenen Spielers:&e ");
         messagesYML.addDefault("Commands.Attach.Instance_Already_Exists", "%defPrefix% &cInstanz existiert bereits in der Datenbank.");
         messagesYML.addDefault("Commands.Attach.Instance_Attach_Failure", "%defPrefix% &cInstanz konnte nicht in der Datenbank gespeichert werden.");
         messagesYML.addDefault("Commands.Attach.Instance_Attach_Success", "%defPrefix% &aInstanz erfolgreich in der Datenbank gespeichert.");

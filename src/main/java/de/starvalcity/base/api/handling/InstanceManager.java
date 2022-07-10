@@ -2,30 +2,43 @@ package de.starvalcity.base.api.handling;
 
 import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.database.MySQLAPI;
-import org.bukkit.Material;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Random;
 
 public class InstanceManager {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    public static Object getInstanceId(Object instance) {
-        Object object = new Object();
+    public static int getInstanceId(Object instance) {
+        int id = 0;
 
         try {
             ResultSet resultSet = MySQLAPI.query("SELECT `Id` FROM `sc_ids` WHERE `Instance` = \"" + instance + "\";");
 
             while (resultSet.next()) {
-                object = resultSet.getObject("Id");
+                id = resultSet.getInt("Id");
             }
-        } catch (SQLException exception) {
-            pluginbase.getLogHandler().sqlLog("SELECT Id FROM sc_ids WHERE Instance = " + instance + ";", exception);
+        } catch (SQLException sqlException) {
+            pluginbase.getLogHandler().sqlLog("SELECT Id FROM sc_ids WHERE Instance = " + instance + ";", sqlException);
         }
-        return object;
+        return id;
+    }
+
+    public static Object getInstance(int id) {
+        Object instance = new Object();
+
+        try {
+            ResultSet resultSet = MySQLAPI.query("SELECT `Instance` FROM `sc_ids` WHERE `Id` = \"" + id + "\";");
+
+            while (resultSet.next()) {
+                instance = resultSet.getObject("Instance");
+            }
+        } catch (SQLException sqlException) {
+            pluginbase.getLogHandler().sqlLog("SELECT Instance FROM sc_ids WHERE Id = " + id + ";", sqlException);
+        }
+        return instance;
     }
 
     public static boolean idExists(int id) {
@@ -38,8 +51,8 @@ public class InstanceManager {
             while (rs.next()) {
                 iterator = rs.getInt("Id");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
 
         if(!(iterator > 0)) {
@@ -52,8 +65,8 @@ public class InstanceManager {
         ResultSet resultSet = MySQLAPI.query("SELECT `Instance` FROM `sc_ids` WHERE `Instance` = \"" + instance + "\";");
         try {
             return resultSet.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
         }
         return false;
     }

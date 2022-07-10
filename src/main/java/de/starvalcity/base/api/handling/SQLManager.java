@@ -27,15 +27,14 @@ public class SQLManager implements Listener {
             "`Faction` varchar(20), " +
             "`FactionRank` varchar(20)," +
             "PRIMARY KEY (`UUID`));";
-    static String economyTableQuery = "CREATE TABLE `sc_economy` ( " +
-            "`UUID` varchar(64), " +
+    static String economyTableQuery = "CREATE TABLE `sc_economy` (" +
+            "`Instance` varchar(64), " +
             "`Id` varchar(30), " +
-            "`Playername` varchar(30), " +
             "`ReadyCash` double(64,2), " +
             "`BankBalance` double(64,2), " +
             "`Balance` double(64,2), " +
             "`SalaryAmount` double(64,2), " +
-            "PRIMARY KEY (`UUID`));";
+            "PRIMARY KEY (`Id`));";
     static String banksTableQuery = "CREATE TABLE `sc_banks` ( " +
             "`AccountType` text(16), " +
             "`Id` varchar(30), " +

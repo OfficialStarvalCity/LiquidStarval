@@ -76,6 +76,28 @@ public class AttachCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage(messageManager.getMessage("General.Target_Player_Does_Not_Exist"));
                     }
+                } else if (args[0].equalsIgnoreCase("getPlayerID")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+
+                    if (target != null) {
+                        if (InstanceManager.instanceExists(target)) {
+                            int targetId = InstanceManager.getInstanceId(target);
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Others") + targetId);
+                        } else {
+                            sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                        }
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                    }
+                } else if (args[0].equalsIgnoreCase("getInstanceID")) {
+                    Object object = args[1];
+
+                    if (InstanceManager.instanceExists(object)) {
+                        int objectId = InstanceManager.getInstanceId(object);
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Others") + objectId);
+                    } else {
+                        sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
+                    }
                 }
             }
             if (args.length == 3) {
