@@ -11,8 +11,8 @@ public class SQLManager implements Listener {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    static String idsTableQuery = "CREATE TABLE `sc_ids` (" +
-            "`Instance` varchar(64), " +
+    static String objectsTableQuery = "CREATE TABLE `AttachedObjects` (" +
+            "`Object` varchar(64), " +
             "`Id` varchar(30), " +
             "PRIMARY KEY (`Id`));";
     static String playersTableQuery = "CREATE TABLE `sc_players` (" +
@@ -36,6 +36,7 @@ public class SQLManager implements Listener {
             "`SalaryAmount` double(64,2), " +
             "PRIMARY KEY (`Id`));";
     static String banksTableQuery = "CREATE TABLE `sc_banks` ( " +
+            "`Bank` varchar(20), " +
             "`AccountType` text(16), " +
             "`Id` varchar(30), " +
             "`AccountCreator` varchar(30), " +
@@ -44,9 +45,9 @@ public class SQLManager implements Listener {
             "PRIMARY KEY (`Id`));";
 
     public static void setupIdsTable() {
-        if (!MySQLAPI.existsTable("sc_ids")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_ids' ...");
-            MySQLAPI.execute(idsTableQuery);
+        if (!MySQLAPI.existsTable("AttachedObjects")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'AttachedObjects' ...");
+            MySQLAPI.execute(objectsTableQuery);
         }
     }
 

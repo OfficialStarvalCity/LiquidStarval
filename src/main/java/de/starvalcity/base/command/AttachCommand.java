@@ -2,8 +2,8 @@ package de.starvalcity.base.command;
 
 import de.starvalcity.base.Core;
 import de.starvalcity.base.Pluginbase;
-import de.starvalcity.base.api.handling.InstanceManager;
 import de.starvalcity.base.api.handling.MessageManager;
+import de.starvalcity.base.api.handling.ObjectManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -31,31 +31,31 @@ public class AttachCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (InstanceManager.instanceExists(player)) {
+                if (ObjectManager.objectExists(player)) {
                     sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Already_Exists"));
                 } else {
-                    pluginbase.getInstanceManager().attachObject(player);
+                    pluginbase.getObjectManager().attachObject(player);
                     sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
                 }
             }
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("show")) {
-                    int playerId = pluginbase.getInstanceManager().getObjectId(player);
-                    if (InstanceManager.instanceExists(player)) {
+                    int playerId = pluginbase.getObjectManager().getObjectId(player);
+                    if (ObjectManager.objectExists(player)) {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Own") + playerId);
                     } else {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
                     }
                 } else if (args[0].equalsIgnoreCase("clear")) {
-                    if (InstanceManager.instanceExists(player)) {
-                        pluginbase.getInstanceManager().unattachObject(player);
+                    if (ObjectManager.objectExists(player)) {
+                        pluginbase.getObjectManager().unattachObject(player);
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
                     } else {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
                     }
                 } else if (args[0].equalsIgnoreCase("randomize")) {
-                    if (!InstanceManager.instanceExists(player)) {
-                        pluginbase.getInstanceManager().attachObject(player);
+                    if (!ObjectManager.objectExists(player)) {
+                        pluginbase.getObjectManager().attachObject(player);
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
                     } else {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Already_Exists"));
@@ -67,8 +67,8 @@ public class AttachCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[1]);
 
                     if (target != null) {
-                        if (InstanceManager.instanceExists(target)) {
-                            pluginbase.getInstanceManager().unattachObject(target);
+                        if (ObjectManager.objectExists(target)) {
+                            pluginbase.getObjectManager().unattachObject(target);
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
                         } else {
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
@@ -80,8 +80,8 @@ public class AttachCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayer(args[1]);
 
                     if (target != null) {
-                        if (InstanceManager.instanceExists(target)) {
-                            int targetId = InstanceManager.getInstanceId(target);
+                        if (ObjectManager.objectExists(target)) {
+                            int targetId = ObjectManager.getObjectId(target);
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Others") + targetId);
                         } else {
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
@@ -92,8 +92,8 @@ public class AttachCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("getInstanceID")) {
                     Object object = args[1];
 
-                    if (InstanceManager.instanceExists(object)) {
-                        int objectId = InstanceManager.getInstanceId(object);
+                    if (ObjectManager.objectExists(object)) {
+                        int objectId = ObjectManager.getObjectId(object);
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Show_Others") + objectId);
                     } else {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
@@ -106,9 +106,9 @@ public class AttachCommand implements CommandExecutor {
                     int id = Integer.parseInt(args[2]);
 
                     if (target != null) {
-                        if (!InstanceManager.idExists(id)) {
-                            pluginbase.getInstanceManager().unattachObject(target);
-                            pluginbase.getInstanceManager().setObjectId(target, id);
+                        if (!ObjectManager.idExists(id)) {
+                            pluginbase.getObjectManager().unattachObject(target);
+                            pluginbase.getObjectManager().setObjectId(target, id);
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Adding_Success"));
                         } else {
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Already_Exists"));

@@ -3,6 +3,9 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
+import de.starvalcity.base.api.handling.economy.BalanceHandler;
+import de.starvalcity.base.api.handling.economy.BankAccountHandler;
+import de.starvalcity.base.api.handling.economy.TransactionHandler;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
@@ -34,9 +37,14 @@ public class Pluginbase {
     // APIs
     private MySQLAPI mySQLAPI = new MySQLAPI();
 
+    // Handlers
+    BalanceHandler balanceHandler = new BalanceHandler();
+    BankAccountHandler bankAccountHandler = new BankAccountHandler();
+    TransactionHandler transactionHandler = new TransactionHandler();
+
     // Managers
     private DatabaseManager dbManager = new DatabaseManager();
-    private InstanceManager instanceManager = new InstanceManager();
+    private ObjectManager objectManager = new ObjectManager();
     private MessageManager msgManager = new MessageManager();
 
     private PlayerManager playerManager = new PlayerManager();
@@ -113,14 +121,28 @@ public class Pluginbase {
         return mySQLAPI;
     }
 
+    // Handlers
+
+    public BalanceHandler getBalanceHandler() {
+        return balanceHandler;
+    }
+
+    public BankAccountHandler getBankAccountHandler() {
+        return bankAccountHandler;
+    }
+
+    public TransactionHandler getTransactionHandler() {
+        return transactionHandler;
+    }
+
     // Managers
 
     public DatabaseManager getDbManager() {
         return dbManager;
     }
 
-    public InstanceManager getInstanceManager() {
-        return instanceManager;
+    public ObjectManager getObjectManager() {
+        return objectManager;
     }
 
     public MessageManager getMsgManager() {
