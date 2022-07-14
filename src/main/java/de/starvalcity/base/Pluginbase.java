@@ -5,6 +5,7 @@ import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
 import de.starvalcity.base.api.handling.economy.BalanceHandler;
 import de.starvalcity.base.api.handling.economy.BankAccountHandler;
+import de.starvalcity.base.api.handling.economy.BankHandler;
 import de.starvalcity.base.api.handling.economy.TransactionHandler;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
@@ -39,11 +40,13 @@ public class Pluginbase {
 
     // Handlers
     BalanceHandler balanceHandler = new BalanceHandler();
+    BankHandler bankHandler = new BankHandler();
     BankAccountHandler bankAccountHandler = new BankAccountHandler();
     TransactionHandler transactionHandler = new TransactionHandler();
 
     // Managers
     private DatabaseManager dbManager = new DatabaseManager();
+    private EconomyManager economyManager = new EconomyManager();
     private ObjectManager objectManager = new ObjectManager();
     private MessageManager msgManager = new MessageManager();
 
@@ -127,6 +130,10 @@ public class Pluginbase {
         return balanceHandler;
     }
 
+    public BankHandler getBankHandler() {
+        return bankHandler;
+    }
+
     public BankAccountHandler getBankAccountHandler() {
         return bankAccountHandler;
     }
@@ -139,6 +146,10 @@ public class Pluginbase {
 
     public DatabaseManager getDbManager() {
         return dbManager;
+    }
+
+    public EconomyManager getEconomyManager() {
+        return economyManager;
     }
 
     public ObjectManager getObjectManager() {

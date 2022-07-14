@@ -11,7 +11,7 @@ public class SQLManager implements Listener {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    static String objectsTableQuery = "CREATE TABLE `AttachedObjects` (" +
+    static String objectsTableQuery = "CREATE TABLE `LiquidObjects` (" +
             "`Object` varchar(64), " +
             "`Id` varchar(30), " +
             "PRIMARY KEY (`Id`));";
@@ -27,9 +27,11 @@ public class SQLManager implements Listener {
             "`Faction` varchar(20), " +
             "`FactionRank` varchar(20)," +
             "PRIMARY KEY (`UUID`));";
-    static String economyTableQuery = "CREATE TABLE `sc_economy` (" +
-            "`Instance` varchar(64), " +
+    static String economyTableQuery = "CREATE TABLE `LiquidEconomy` (" +
+            "`Object` varchar(64), " +
             "`Id` varchar(30), " +
+            "`AccountHolder` varchar(30), " +
+            "`AccountName` varchar(30), " +
             "`ReadyCash` double(64,2), " +
             "`BankBalance` double(64,2), " +
             "`Balance` double(64,2), " +
@@ -45,8 +47,8 @@ public class SQLManager implements Listener {
             "PRIMARY KEY (`Id`));";
 
     public static void setupIdsTable() {
-        if (!MySQLAPI.existsTable("AttachedObjects")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'AttachedObjects' ...");
+        if (!MySQLAPI.existsTable("LiquidObjects")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidObjects' ...");
             MySQLAPI.execute(objectsTableQuery);
         }
     }
@@ -59,8 +61,8 @@ public class SQLManager implements Listener {
     }
 
     public static void setupEconomyTable() {
-        if (!MySQLAPI.existsTable("sc_economy")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_economy' ...");
+        if (!MySQLAPI.existsTable("LiquidEconomy")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidEconomy' ...");
             MySQLAPI.execute(economyTableQuery);
         }
     }
