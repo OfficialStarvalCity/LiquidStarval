@@ -15,7 +15,7 @@ public class SQLManager implements Listener {
             "`Object` varchar(64), " +
             "`Id` varchar(30), " +
             "PRIMARY KEY (`Id`));";
-    static String playersTableQuery = "CREATE TABLE `sc_players` (" +
+    static String playersTableQuery = "CREATE TABLE `LiquidPlayers` (" +
             "`UUID` varchar(64), " +
             "`Id` varchar(30), " +
             "`Playername` varchar(30), " +
@@ -37,7 +37,14 @@ public class SQLManager implements Listener {
             "`Balance` double(64,2), " +
             "`SalaryAmount` double(64,2), " +
             "PRIMARY KEY (`Id`));";
-    static String banksTableQuery = "CREATE TABLE `sc_banks` ( " +
+    static String banksTableQuery = "CREATE TABLE `LiquidBanks` ( " +
+            "`Name` varchar(20), " +
+            "`Id` varchar(30), " +
+            "`Founder` varchar(30), " +
+            "`Owner` varchar(30), " +
+            "`Accounts` varchar(10), " +
+            "PRIMARY KEY (`Id`));";
+    static String bankAccountsTableQuery = "CREATE TABLE `LiquidBankAccounts` ( " +
             "`Bank` varchar(20), " +
             "`AccountType` text(16), " +
             "`Id` varchar(30), " +
@@ -46,7 +53,7 @@ public class SQLManager implements Listener {
             "`AccountBalance` double(64,2), " +
             "PRIMARY KEY (`Id`));";
 
-    public static void setupIdsTable() {
+    public static void setupObjectsTable() {
         if (!MySQLAPI.existsTable("LiquidObjects")) {
             pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidObjects' ...");
             MySQLAPI.execute(objectsTableQuery);
@@ -54,8 +61,8 @@ public class SQLManager implements Listener {
     }
 
     public static void setupPlayersTable() {
-        if (!MySQLAPI.existsTable("sc_players")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_players' ...");
+        if (!MySQLAPI.existsTable("LiquidPlayers")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidPlayers' ...");
             MySQLAPI.execute(playersTableQuery);
         }
     }
@@ -67,10 +74,17 @@ public class SQLManager implements Listener {
         }
     }
 
-    public static void setupBankTable() {
-        if (!MySQLAPI.existsTable("sc_banks")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'sc_banks' ...");
+    public static void setupBanksTable() {
+        if (!MySQLAPI.existsTable("LiquidBanks")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidBanks' ...");
             MySQLAPI.execute(banksTableQuery);
+        }
+    }
+
+    public static void setupBankAccountsTable() {
+        if (!MySQLAPI.existsTable("LiquidBankAccounts")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidBankAccounts' ...");
+            MySQLAPI.execute(bankAccountsTableQuery);
         }
     }
 }

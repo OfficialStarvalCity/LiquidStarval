@@ -224,10 +224,11 @@ public class Pluginbase {
      */
     public void connectDatabase() {
         MySQLAPI.connect();
-        SQLManager.setupIdsTable();
+        SQLManager.setupObjectsTable();
         SQLManager.setupPlayersTable();
         SQLManager.setupEconomyTable();
-        SQLManager.setupBankTable();
+        SQLManager.setupBanksTable();
+        SQLManager.setupBankAccountsTable();
     }
 
     /**
