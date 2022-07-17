@@ -11,15 +11,23 @@ public interface EconomyParticipator {
 
     boolean hasEnoughMoney(double requiredAmount);
 
+    boolean hasEnoughMoney(int requiredAmount);
+
     double getBalance();
 
     void setDefaultBalance();
 
     void setBalance(double amount);
 
+    void setBalance(int amount);
+
     void addMoney(double amount);
 
+    void addMoney(int amount);
+
     void removeMoney(double amount);
+
+    void removeMoney(int amount);
 
     //--------------------------------------------------------------------------------------------------//
     // Transactions

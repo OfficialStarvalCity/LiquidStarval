@@ -3,6 +3,7 @@ package de.starvalcity.base.api.handling;
 import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.api.def.database.MySQLAPI;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
@@ -30,11 +31,37 @@ public class PlayerManager {
         }
     }
 
+    public void attachPlayer(@NotNull Player player) {
+        UUID uniqueId = player.getUniqueId();
+        int id = ObjectManager.getObjectId(player);
+        String name = player.getName();
+        pluginbase.getObjectManager().attachObject(player.getPlayer());
+        if (!playerExists(uniqueId)) {
+            MySQLAPI.update("INSERT INTO `LiquidPlayers` (`UUID`, `Id`, `Playername`, `FirstSeen`) VALUES (' " +
+                    uniqueId + "','" + id + "','" + name + "','" + System.currentTimeMillis() + "');");
+            pluginbase.getLogHandler().sqlInfo("Attaching: Player successfully attached and saved to database.");
+        } else {
+            pluginbase.getLogHandler().sqlCustomError("Attaching: Player already attached.", null);
+        }
+    }
+
     public void unattachPlayer(@NotNull StarvalPlayer starvalPlayer) {
         UUID uniqueId = starvalPlayer.getUniqueId();
         int id = ObjectManager.getObjectId(starvalPlayer);
         String name = starvalPlayer.getName();
         pluginbase.getObjectManager().unattachObject(starvalPlayer);
+        if (playerExists(uniqueId)) {
+            MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `UUID` = \"" + uniqueId + "\";");
+        } else {
+            pluginbase.getLogHandler().sqlCustomError("Attaching: Player could not be deleted because it does not exist.", null);
+        }
+    }
+
+    public void unattachPlayer(@NotNull Player player) {
+        UUID uniqueId = player.getUniqueId();
+        int id = ObjectManager.getObjectId(player);
+        String name = player.getName();
+        pluginbase.getObjectManager().unattachObject(player);
         if (playerExists(uniqueId)) {
             MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `UUID` = \"" + uniqueId + "\";");
         } else {
