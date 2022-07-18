@@ -27,6 +27,11 @@ public class Company implements EconomyParticipator, UniqueObject {
     }
 
     @Override
+    public boolean hasEnoughMoney(int requiredAmount) {
+        return false;
+    }
+
+    @Override
     public double getBalance() {
         return 0;
     }
@@ -42,12 +47,27 @@ public class Company implements EconomyParticipator, UniqueObject {
     }
 
     @Override
+    public void setBalance(int amount) {
+
+    }
+
+    @Override
     public void addMoney(double amount) {
 
     }
 
     @Override
+    public void addMoney(int amount) {
+
+    }
+
+    @Override
     public void removeMoney(double amount) {
+
+    }
+
+    @Override
+    public void removeMoney(int amount) {
 
     }
 

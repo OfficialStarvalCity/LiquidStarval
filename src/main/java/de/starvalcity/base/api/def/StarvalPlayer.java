@@ -246,6 +246,14 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.balance = amount;
     }
 
+    public void setReadyCash(double amount) {
+        this.readyCash = amount;
+    }
+
+    public void setReadyCash(int amount) {
+        this.readyCash = amount;
+    }
+
     public void setHasBankAccount() {
         this.hasBankAccount = true;
     }
@@ -301,16 +309,28 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.balance = getBalance() + amount;
     }
 
+    /**
+     * (Interne Funktion)
+     * @param amount
+     */
     @Override
     public void addMoney(int amount) {
         this.balance = getBalance() + amount;
     }
 
+    /**
+     * (Interne Funktion)
+     * @param amount
+     */
     @Override
     public void removeMoney(double amount) {
         this.balance = getBalance() - amount;
     }
 
+    /**
+     * (Interne Funktion)
+     * @param amount
+     */
     @Override
     public void removeMoney(int amount) {
         this.balance = getBalance() - amount;

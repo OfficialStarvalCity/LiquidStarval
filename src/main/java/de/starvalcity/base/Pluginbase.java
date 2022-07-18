@@ -3,10 +3,6 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
-import de.starvalcity.base.api.handling.economy.BalanceHandler;
-import de.starvalcity.base.api.handling.economy.BankAccountHandler;
-import de.starvalcity.base.api.handling.economy.BankHandler;
-import de.starvalcity.base.api.handling.economy.TransactionHandler;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
@@ -39,15 +35,8 @@ public class Pluginbase {
     private MySQLAPI mySQLAPI = new MySQLAPI();
 
     // Handlers
-    BalanceHandler balanceHandler = new BalanceHandler();
-    BankHandler bankHandler = new BankHandler();
-    BankAccountHandler bankAccountHandler = new BankAccountHandler();
-    TransactionHandler transactionHandler = new TransactionHandler();
 
-    // Managers
-    private DatabaseManager dbManager = new DatabaseManager();
-    private EconomyManager economyManager = new EconomyManager();
-    private ObjectManager objectManager = new ObjectManager();
+    //
     private MessageManager msgManager = new MessageManager();
 
     private PlayerManager playerManager = new PlayerManager();
@@ -79,7 +68,6 @@ public class Pluginbase {
      * Server-Start Funktion
      */
     public void onStartup() {
-        this.dbManager = new DatabaseManager();
         taskHandler.executeTask(fileTask);
         taskHandler.executeTask(eventTask);
         initialize();
@@ -126,35 +114,7 @@ public class Pluginbase {
 
     // Handlers
 
-    public BalanceHandler getBalanceHandler() {
-        return balanceHandler;
-    }
-
-    public BankHandler getBankHandler() {
-        return bankHandler;
-    }
-
-    public BankAccountHandler getBankAccountHandler() {
-        return bankAccountHandler;
-    }
-
-    public TransactionHandler getTransactionHandler() {
-        return transactionHandler;
-    }
-
     // Managers
-
-    public DatabaseManager getDbManager() {
-        return dbManager;
-    }
-
-    public EconomyManager getEconomyManager() {
-        return economyManager;
-    }
-
-    public ObjectManager getObjectManager() {
-        return objectManager;
-    }
 
     public MessageManager getMsgManager() {
         return msgManager;
@@ -226,9 +186,9 @@ public class Pluginbase {
         MySQLAPI.connect();
         SQLManager.setupObjectsTable();
         SQLManager.setupPlayersTable();
-        SQLManager.setupEconomyTable();
         SQLManager.setupBanksTable();
         SQLManager.setupBankAccountsTable();
+        SQLManager.setupAccountsTable();
     }
 
     /**

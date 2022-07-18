@@ -17,16 +17,18 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
     private int id;
     private StarvalPlayer creator;
     private Object owner;
+    private Bank bank;
     private BankAccountType accountType;
     private List<StarvalPlayer> members;
 
     private double balance;
 
-    public BankAccount(String name, int id, StarvalPlayer creator, @Nullable Object owner, BankAccountType accountType) {
+    public BankAccount(String name, int id, StarvalPlayer creator, @Nullable Object owner, Bank bank, BankAccountType accountType) {
         this.name = name;
         this.id = id;
         this.creator = creator;
         this.owner = owner;
+        this.bank = bank;
         this.accountType = accountType;
     }
 
@@ -46,6 +48,10 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
         return owner;
     }
 
+    public Bank getBank() {
+        return bank;
+    }
+
     public BankAccountType getAccountType() {
         return accountType;
     }
@@ -56,6 +62,11 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
 
     @Override
     public boolean hasEnoughMoney(double requiredAmount) {
+        return false;
+    }
+
+    @Override
+    public boolean hasEnoughMoney(int requiredAmount) {
         return false;
     }
 
@@ -84,6 +95,10 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
         this.owner = owner;
     }
 
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
     public void setAccountType(BankAccountType accountType) {
         this.accountType = accountType;
     }
@@ -97,12 +112,27 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
     }
 
     @Override
+    public void setBalance(int amount) {
+
+    }
+
+    @Override
     public void addMoney(double amount) {
 
     }
 
     @Override
+    public void addMoney(int amount) {
+
+    }
+
+    @Override
     public void removeMoney(double amount) {
+
+    }
+
+    @Override
+    public void removeMoney(int amount) {
 
     }
 

@@ -17,11 +17,11 @@ public class PlayerManager {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    public void attachPlayer(@NotNull StarvalPlayer starvalPlayer) {
+    public void attachStarvalPlayer(@NotNull StarvalPlayer starvalPlayer) {
         UUID uniqueId = starvalPlayer.getUniqueId();
-        int id = ObjectManager.getObjectId(starvalPlayer);
+        int id = SQLManager.getObjectId(starvalPlayer);
         String name = starvalPlayer.getName();
-        pluginbase.getObjectManager().attachObject(starvalPlayer.getPlayer());
+        SQLManager.attachObject(starvalPlayer.getPlayer());
         if (!playerExists(uniqueId)) {
             MySQLAPI.update("INSERT INTO `LiquidPlayers` (`UUID`, `Id`, `Playername`, `FirstSeen`) VALUES (' " +
                     uniqueId + "','" + id + "','" + name + "','" + System.currentTimeMillis() + "');");
@@ -33,9 +33,9 @@ public class PlayerManager {
 
     public void attachPlayer(@NotNull Player player) {
         UUID uniqueId = player.getUniqueId();
-        int id = ObjectManager.getObjectId(player);
+        int id = SQLManager.getObjectId(player);
         String name = player.getName();
-        pluginbase.getObjectManager().attachObject(player.getPlayer());
+        SQLManager.attachObject(player.getPlayer());
         if (!playerExists(uniqueId)) {
             MySQLAPI.update("INSERT INTO `LiquidPlayers` (`UUID`, `Id`, `Playername`, `FirstSeen`) VALUES (' " +
                     uniqueId + "','" + id + "','" + name + "','" + System.currentTimeMillis() + "');");
@@ -45,11 +45,11 @@ public class PlayerManager {
         }
     }
 
-    public void unattachPlayer(@NotNull StarvalPlayer starvalPlayer) {
+    public void unattachStarvalPlayer(@NotNull StarvalPlayer starvalPlayer) {
         UUID uniqueId = starvalPlayer.getUniqueId();
-        int id = ObjectManager.getObjectId(starvalPlayer);
+        int id = SQLManager.getObjectId(starvalPlayer);
         String name = starvalPlayer.getName();
-        pluginbase.getObjectManager().unattachObject(starvalPlayer);
+        SQLManager.unattachObject(starvalPlayer);
         if (playerExists(uniqueId)) {
             MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `UUID` = \"" + uniqueId + "\";");
         } else {
@@ -59,9 +59,9 @@ public class PlayerManager {
 
     public void unattachPlayer(@NotNull Player player) {
         UUID uniqueId = player.getUniqueId();
-        int id = ObjectManager.getObjectId(player);
+        int id = SQLManager.getObjectId(player);
         String name = player.getName();
-        pluginbase.getObjectManager().unattachObject(player);
+        SQLManager.unattachObject(player);
         if (playerExists(uniqueId)) {
             MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `UUID` = \"" + uniqueId + "\";");
         } else {
