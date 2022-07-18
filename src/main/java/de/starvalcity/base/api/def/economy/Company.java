@@ -83,11 +83,15 @@ public class Company implements EconomyParticipator, UniqueObject {
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
     public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
     }
 }

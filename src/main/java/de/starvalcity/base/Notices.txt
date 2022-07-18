@@ -14,7 +14,8 @@ Table 2: LiquidPlayers
 5 > LastSeen
 6 > Playtime
 7 > Rank
-8 > Balance
+8 > ReadyCash
+9 > BankBalance
 9 > Faction
 10 > FactionRank
 
@@ -36,10 +37,9 @@ Table 4: LiquidBankAccounts
 7 > Members
 8 > Balance
 
-Table 5: LiquidAccounts
+Table 5: LiquidCompanies
 1 > ID
-2 > Type
-3 > Name
-4 > Owner
-5 > ReadyCash
-6 > Balance
+2 > Name
+3 > Founder (UUID)
+4 > Owner (UUID)
+5 > Balance

@@ -20,17 +20,18 @@ public class SQLManager implements Listener {
             "`ID` varchar(30), " +
             "PRIMARY KEY (`ID`));";
     static String playersTableQuery = "CREATE TABLE `LiquidPlayers` (" +
-            "`UUID` varchar(64), " +
             "`ID` varchar(30), " +
+            "`UUID` varchar(64), " +
             "`Name` varchar(30), " +
             "`FirstSeen` varchar(20),  " +
             "`LastSeen` varchar(20), " +
             "`Playtime` varchar(30), " +
             "`Rank` varchar(20), " +
-            "`Balance` double(64,2), " +
-            "`Faction` varchar(20)," +
+            "`ReadyCash` double(64,2), " +
+            "`BankBalance` double(64,2), " +
+            "`Faction` varchar(20), " +
             "`FactionRank varchar(20), " +
-            "PRIMARY KEY (`UUID`));";
+            "PRIMARY KEY (`ID`));";
     static String banksTableQuery = "CREATE TABLE `LiquidBanks` (" +
             "`ID` varchar(30), " +
             "`Name` varchar(30), " +
@@ -49,12 +50,11 @@ public class SQLManager implements Listener {
             "`Members` varchar(64), " +
             "`Balance` double(64,2), " +
             "PRIMARY KEY (`ID`));";
-    static String accountsTableQuery = "CREATE TABLE `LiquidAccounts` (" +
+    static String companiesTableQuery = "CREATE TABLE `LiquidCompanies` (" +
             "`ID` varchar(30), " +
-            "`Type` varchar(30), " +
             "`Name` varchar(30), " +
-            "`Owner` varchar(30), " +
-            "`ReadyCash` double(64,2), " +
+            "`Founder` varchar(64), " +
+            "`Owner` varchar(64), " +
             "`Balance` double(64,2), " +
             "PRIMARY KEY (`ID`));";
 
@@ -86,10 +86,10 @@ public class SQLManager implements Listener {
         }
     }
 
-    public static void setupAccountsTable() {
-        if (!MySQLAPI.existsTable("LiquidAccounts")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidAccounts' ...");
-            MySQLAPI.execute(bankAccountsTableQuery);
+    public static void setupCompaniesTable() {
+        if (!MySQLAPI.existsTable("LiquidCompanies")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidCompanies' ...");
+            MySQLAPI.execute(companiesTableQuery);
         }
     }
 
