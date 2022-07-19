@@ -2,11 +2,14 @@ package de.starvalcity.base.api.def.economy;
 
 import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.UniqueObject;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter @Setter
 public class Bank implements EconomyParticipator, UniqueObject {
 
     private String name;
@@ -19,38 +22,6 @@ public class Bank implements EconomyParticipator, UniqueObject {
         this.name = name;
         this.owner = owner;
         this.founder = founder;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Object getOwner() {
-        return owner;
-    }
-
-    public Object getFounder() {
-        return founder;
-    }
-
-    public List<BankAccount> getBankAccounts() {
-        return bankAccounts;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setOwner(Object owner) {
-        this.owner = owner;
-    }
-
-    public void setFounder(Object founder) {
-        this.founder = founder;
-    }
-
-    public void setBankAccounts(List<BankAccount> bankAccounts) {
-        this.bankAccounts = bankAccounts;
     }
 
     @Override

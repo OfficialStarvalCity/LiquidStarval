@@ -3,6 +3,8 @@ package de.starvalcity.base.api.def.economy;
 import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.api.def.UniqueObject;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  * Ein {@link BankAccount} ist ein benutzerdefiniertes Bankkonto von einem {@link StarvalPlayer}, einer {@link de.starvalcity.base.api.def.faction.Faction}
  * oder einer Firma.
  */
+@Getter @Setter
 public class BankAccount implements EconomyParticipator, UniqueObject {
 
     private String name;
@@ -32,34 +35,6 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
         this.accountType = accountType;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public StarvalPlayer getCreator() {
-        return creator;
-    }
-
-    public Object getOwner() {
-        return owner;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public BankAccountType getAccountType() {
-        return accountType;
-    }
-
-    public List<StarvalPlayer> getMembers() {
-        return members;
-    }
-
     @Override
     public boolean hasEnoughMoney(double requiredAmount) {
         return false;
@@ -79,36 +54,9 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
 
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @Override
+    public void setBalance(double amount) {
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setCreator(StarvalPlayer creator) {
-        this.creator = creator;
-    }
-
-    public void setOwner(Object owner) {
-        this.owner = owner;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public void setAccountType(BankAccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public void setMembers(List<StarvalPlayer> members) {
-        this.members = members;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 
     @Override

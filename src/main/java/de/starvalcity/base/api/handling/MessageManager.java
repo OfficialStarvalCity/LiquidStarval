@@ -42,6 +42,8 @@ public class MessageManager {
 
         messagesYML.addDefault("Commands.Economy.Insufficient_Arguments", "%ecoPrefix% &cUngültige Ausführung! Nutze &7/eco help&c für Hilfe.");
 
+        messagesYML.addDefault("Commands.Economy.Money", "%ecoPrefix% &2Bargeld: &e");
+
         messagesYML.addDefault("Commands.Economy.GenHelp_Separator_Line", "&7--------------------- Allgemein ---------------------");
         messagesYML.addDefault("Commands.Economy.Help_Blank_Line", "                                                         ");
         messagesYML.addDefault("Commands.Economy.GenHelp_1", "&7/eco help - &aZeigt dieses Hilfemenü an");
@@ -52,7 +54,7 @@ public class MessageManager {
         messagesYML.addDefault("Commands.Economy.GenHelp_6", "&7/money pay <Spieler> <Betrag> - &aÜberweist Geld an einen anderen Spieler");
 
         messagesYML.addDefault("Commands.Economy.StaffHelp_Separator_Line", "&7------------------- Administration ------------------");
-        messagesYML.addDefault("Commands.Economy.StaffHelp_1", "&7/eco setMoney <ID> <Betrag> - &aSetzt einer Instanz eine Menge an Geld");
+        messagesYML.addDefault("Commands.Economy.StaffHelp_1", "&7/eco setMoney <ID> <Betrag> - &aSetzt einer Instanz eine bestimmte Menge an Geld");
         messagesYML.addDefault("Commands.Economy.StaffHelp_2", "&7/eco addMoney <ID> <Betrag> - &aFügt einer Instanz Geld hinzu");
         messagesYML.addDefault("Commands.Economy.StaffHelp_3", "&7/eco removeMoney <ID> <Betrag> - &aEntfernt einer Instanz Geld");
         messagesYML.addDefault("Commands.Economy.StaffHelp_4", "&7/eco setOwner <ID> <Spieler> - &aSetzt den Inhaber eines Kontos fest");

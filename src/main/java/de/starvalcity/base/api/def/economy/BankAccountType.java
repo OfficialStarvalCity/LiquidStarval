@@ -1,5 +1,8 @@
 package de.starvalcity.base.api.def.economy;
 
+import lombok.Getter;
+
+@Getter
 public enum BankAccountType {
 
     DEFAULT_ACCOUNT(1),
@@ -12,10 +15,5 @@ public enum BankAccountType {
     BankAccountType(int id) {
         this.id = id;
     }
-
-    public int getId() {
-        return id;
-    }
-
 
 }

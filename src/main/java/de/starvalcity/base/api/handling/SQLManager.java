@@ -30,7 +30,7 @@ public class SQLManager implements Listener {
             "`ReadyCash` double(64,2), " +
             "`BankBalance` double(64,2), " +
             "`Faction` varchar(20), " +
-            "`FactionRank varchar(20), " +
+            "`FactionRank` varchar(20), " +
             "PRIMARY KEY (`ID`));";
     static String banksTableQuery = "CREATE TABLE `LiquidBanks` (" +
             "`ID` varchar(30), " +

@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // TODO: Rank with LuckPerms
+// TODO: Lombok?
 public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
 
     private Player player;

@@ -2,9 +2,12 @@ package de.starvalcity.base.api.def.economy;
 
 import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.UniqueObject;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter @Setter
 public class Company implements EconomyParticipator, UniqueObject {
 
     private String name;
@@ -89,9 +92,5 @@ public class Company implements EconomyParticipator, UniqueObject {
     @Override
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
     }
 }

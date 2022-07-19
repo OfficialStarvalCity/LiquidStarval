@@ -59,12 +59,12 @@ public class EconomySQL {
 
     /**
      * Bargeld Getter
-     * Gibt die Menge an Bargeld eines Spielers aus der Datenbank wieder.
-     * @param starvalPlayer Spieler aus der Datenbank
-     * @return Bargeld des Spielers
+     * Gibt die Menge an Bargeld eines Objektes aus der Datenbank wieder.
+     * @param economyObject Objekt aus der Datenbank
+     * @return Bargeld des Objektes
      */
-    public double getReadyCash(@NotNull StarvalPlayer starvalPlayer) {
-        int objectId = starvalPlayer.getId();
+    public double getReadyCash(@NotNull Object economyObject) {
+        int objectId = SQLManager.getObjectId(economyObject);
 
         double amount = 1000;
 
@@ -132,6 +132,36 @@ public class EconomySQL {
                 objectId + "','" + name + "','" + amount + "');");
         pluginbase.getLogHandler().sqlInfo("INSERTION: Objekt - " + bankAccount.getName());
         pluginbase.getLogHandler().sqlInfo("SET: Geldmenge - " + amount);
+    }
+
+    /**
+     * Hinzufügung von Kontogeld
+     * Fügt einem Konto eine bestimmte Menge an Geld hinzu.
+     * @param bankAccount Konto, welches die Menge an Geld hinzugefügt bekommen soll
+     * @param amount Menge an Geld, welche hinzugefügt werden soll
+     */
+    public void addMoneyToBankAccount(@NotNull BankAccount bankAccount, double amount) {
+        int objectId = bankAccount.getId();
+        String name = bankAccount.getName();
+        double previousAmount = getBankAccountBalance(bankAccount);
+        double currentAmount = previousAmount + amount;
+        MySQLAPI.update("INSERT INTO `LiquidBankAccounts` (`ID`, `Name`, `Balance`) VALUES ('" +
+                objectId + "','" + name + "','" + currentAmount + "');");
+    }
+
+    /**
+     * Entfernung von Kontogeld
+     * Entfernt einem Konto eine bestimmte Menge an Geld.
+     * @param bankAccount Konto, welches die Menge an Geld entfernt bekommen soll
+     * @param amount Menge an Geld, welche entfernt werden soll
+     */
+    public void removeMoneyFromBankAccount(@NotNull BankAccount bankAccount, double amount) {
+        int objectId = bankAccount.getId();
+        String name = bankAccount.getName();
+        double previousAmount = getBankAccountBalance(bankAccount);
+        double currentAmount = previousAmount - amount;
+        MySQLAPI.update("INSERT INTO `LiquidBankAccounts` (`ID`, `Name`, `Balance`) VALUES ('" +
+                objectId + "','" + name + "','" + currentAmount + "');");
     }
 
     /**

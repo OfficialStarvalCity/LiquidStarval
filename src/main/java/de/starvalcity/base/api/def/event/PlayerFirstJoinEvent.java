@@ -15,16 +15,16 @@ public class PlayerFirstJoinEvent extends Event {
         this.playerName = playerName;
     }
 
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
+
     public Player getPlayer() {
         return player;
     }
 
     public String getPlayerName() {
         return playerName;
-    }
-
-    public static HandlerList getHandlerList() {
-        return HANDLERS;
     }
 
     @Override

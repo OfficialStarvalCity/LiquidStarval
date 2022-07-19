@@ -14,4 +14,5 @@ commands:
     usage: /economy
     aliases:
       - eco
+      - money
       - wirtschaft
