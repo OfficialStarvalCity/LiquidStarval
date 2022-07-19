@@ -120,22 +120,6 @@ public class EconomySQL {
     }
 
     /**
-     * Bargeld Setter (Datentyp: Integer)
-     * Setzt einem Spieler eine bestimmte Menge an Bargeld.
-     * @param starvalPlayer Spieler, für welchen das Bargeld gesetzt werden soll
-     * @param amount Menge an Bargeld, welche gesetzt werden soll
-     */
-    public void setReadyCash(@NotNull StarvalPlayer starvalPlayer, int amount) {
-        int objectId = starvalPlayer.getId();
-        String name = starvalPlayer.getName();
-        UUID uniqueId = starvalPlayer.getUniqueId();
-        MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`, `ReadyCash`, `BankBalance`) VALUES ('" +
-                objectId + "','" + uniqueId + "','" + name + "','" + amount + "','" + 0 + "');");
-        pluginbase.getLogHandler().sqlInfo("INSERTION: Objekt - " + starvalPlayer.getName());
-        pluginbase.getLogHandler().sqlInfo("SET: Geldmenge - " + amount);
-    }
-
-    /**
      * Bankkonto Geld Setter (Datentyp: Double)
      * Setzt einem Bankkonto eine bestimmte Menge an Geld.
      * @param bankAccount Konto, für welches der Kontostand gesetzt werden soll
@@ -151,20 +135,11 @@ public class EconomySQL {
     }
 
     /**
-     * Bankkonto Geld Setter (Datentyp: Integer)
-     * Setzt einem Bankkonto eine bestimmte Menge an Geld.
-     * @param bankAccount Konto, für welches der Kontostand gesetzt werden soll
-     * @param amount Menge an Geld, welche gesetzt werden soll
+     * Hinzufügung von Bargeld
+     * Fügt einem Spieler eine bestimmte Menge an Geld zu seinem Bargeld hinzu.
+     * @param starvalPlayer Spieler, der die Menge an Geld erhalten soll
+     * @param amount Menge an Geld, die gegeben werden soll
      */
-    public void setBankAccountBalance(@NotNull BankAccount bankAccount, int amount) {
-        int objectId = bankAccount.getId();
-        String name = bankAccount.getName();
-        MySQLAPI.update("INSERT INTO `LiquidBankAccounts` (`ID`, `Name`, `Balance`) VALUES ('" +
-                objectId + "','" + name + "','" + amount + "');");
-        pluginbase.getLogHandler().sqlInfo("INSERTION: Objekt - " + bankAccount.getName());
-        pluginbase.getLogHandler().sqlInfo("SET: Geldmenge - " + amount);
-    }
-
     public void addReadyCash(@NotNull StarvalPlayer starvalPlayer, double amount) {
         int objectId = starvalPlayer.getId();
         String name = starvalPlayer.getName();
@@ -175,15 +150,19 @@ public class EconomySQL {
                 objectId + "','" + uniqueId + "','" + name + "','" + currentAmount + "');");
     }
 
-    public void addReadyCash(@NotNull StarvalPlayer starvalPlayer, int amount) {
+    /**
+     * Entfernung von Bargeld
+     * Entfernt einem Spieler eine bestimmte Menge an Geld von seinem Bargeld.
+     * @param starvalPlayer Spieler, der die Menge an Geld entfernt bekommen soll
+     * @param amount Menge an Geld, die entfernt werden soll
+     */
+    public void removeReadyCash(@NotNull StarvalPlayer starvalPlayer, double amount) {
         int objectId = starvalPlayer.getId();
         String name = starvalPlayer.getName();
         UUID uniqueId = starvalPlayer.getUniqueId();
         double previousAmount = getReadyCash(starvalPlayer);
-        double currentAmount = previousAmount + amount;
+        double currentAmount = previousAmount - amount;
         MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`, `ReadyCash`) VALUES ('" +
                 objectId + "','" + uniqueId + "','" + name + "','" + currentAmount + "');");
     }
-
-
 }

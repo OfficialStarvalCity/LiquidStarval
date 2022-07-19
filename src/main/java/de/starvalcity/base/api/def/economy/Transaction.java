@@ -23,4 +23,16 @@ public class Transaction {
     public int getAmount() {
         return amount;
     }
+
+    public void setSender(Object sender) {
+        this.sender = sender;
+    }
+
+    public void setReceiver(Object receiver) {
+        this.receiver = receiver;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }
