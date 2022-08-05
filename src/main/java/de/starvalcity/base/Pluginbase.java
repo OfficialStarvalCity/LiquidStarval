@@ -1,5 +1,6 @@
 package de.starvalcity.base;
 
+import de.starvalcity.base.api.def.command.CommandManager;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
@@ -38,6 +39,7 @@ public class Pluginbase {
     // Handlers
 
     // Managers
+    private CommandManager commandManager = new CommandManager(plugin);
     private MessageManager msgManager = new MessageManager();
 
     private PlayerManager playerManager = new PlayerManager();
@@ -119,6 +121,9 @@ public class Pluginbase {
     // Handlers
 
     // Managers
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
 
     public MessageManager getMsgManager() {
         return msgManager;
@@ -133,7 +138,6 @@ public class Pluginbase {
     }
 
     // SQL
-
     public EconomySQL getEconomySQL() {
         return economySQL;
     }

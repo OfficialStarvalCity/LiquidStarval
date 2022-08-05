@@ -23,9 +23,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     private boolean hasBankAccount; // - Hat der Spieler bereits ein Konto
     private boolean isBankAccountOwner; // - Ist der Spieler Besitzer von einem Konto oder von mehreren Konten
-    private boolean isOwnerOfBankAccount;
     private boolean isBankAccountMember; // - Ist der Spieler Mitglied von einem Konto oder von mehreren Konten
-    private boolean isMemberOfBankAccount;
     private double balance; // - Gesamter Kontostand des Spielers // TODO
     private double readyCash; // - Bargeld des Spielers
 
@@ -261,12 +259,10 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     public void setIsBankAccountOwner() {
         this.isBankAccountOwner = true;
-        this.isOwnerOfBankAccount = true;
     }
 
     public void setIsBankAccountMember() {
         this.isBankAccountMember = true;
-        this.isMemberOfBankAccount = true;
     }
 
     //--------------------------------------------------------------------------------------------------//
@@ -295,7 +291,6 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     public void withdraw(Object instance, double amount, int accountId) {
 
     }
-
 
     //--------------------------------------------------------------------------------------------------//
     // Economy Misc
