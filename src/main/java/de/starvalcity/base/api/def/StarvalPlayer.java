@@ -1,5 +1,6 @@
 package de.starvalcity.base.api.def;
 
+import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.economy.BalanceType;
 import de.starvalcity.base.api.def.economy.BankAccount;
 import de.starvalcity.base.api.def.faction.Faction;
@@ -12,7 +13,7 @@ import java.util.*;
 
 // TODO: Rank with LuckPerms
 // TODO: Lombok?
-public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
+public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
 
     private Player player;
     private String name;
@@ -27,7 +28,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private boolean isBankAccountMember; // - Ist der Spieler Mitglied von einem Konto oder von mehreren Konten
     private boolean isMemberOfBankAccount;
     private double balance; // - Gesamter Kontostand des Spielers // TODO
-    private double readyCash; // - Bargeld des Spielers
+    private int readyCash; // - Bargeld des Spielers
 
     private Faction faction; // - Fraktion des Spielers
     private FactionRank factionRank; // - Fraktionsrang des Spielers
@@ -247,10 +248,6 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.balance = amount;
     }
 
-    public void setReadyCash(double amount) {
-        this.readyCash = amount;
-    }
-
     public void setReadyCash(int amount) {
         this.readyCash = amount;
     }
@@ -278,7 +275,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         return balance;
     }
 
-    public double getReadyCash() {
+    public int getReadyCash() {
         return readyCash;
     }
 
@@ -337,20 +334,20 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
         this.balance = getBalance() - amount;
     }
 
-    public void addReadyCash(double amount) {
-        this.readyCash = getReadyCash() + amount;
-    }
-
     public void addReadyCash(int amount) {
         this.readyCash = getReadyCash() + amount;
-    }
-
-    public void removeReadyCash(double amount) {
-        this.readyCash = getReadyCash() - amount;
     }
 
     public void removeReadyCash(int amount) {
         this.readyCash = getReadyCash() - amount;
     }
 
+    //--------------------------------------------------------------------------------------------------//
+    // Database Object Methods
+    //--------------------------------------------------------------------------------------------------//
+
+    @Override
+    public void setValue(String statement, String table, String column, Object value) {
+        MySQLAPI.update(statement + " INTO " + "`" + table + "`" + "WHERE ");
+    }
 }

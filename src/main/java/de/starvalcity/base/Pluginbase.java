@@ -3,7 +3,8 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
-import de.starvalcity.base.api.handling.economy.EconomySQL;
+import de.starvalcity.base.api.handling.object.ObjectSQLManager;
+import de.starvalcity.base.api.handling.player.PlayerManager;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
@@ -39,14 +40,12 @@ public class Pluginbase {
 
     // Managers
     private MessageManager msgManager = new MessageManager();
-
     private PlayerManager playerManager = new PlayerManager();
-    private SQLManager sqlManager = new SQLManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
     // SQL
-    private EconomySQL economySQL = new EconomySQL();
+    private ObjectSQLManager objectSQLManager = new ObjectSQLManager();
 
     // Utilities
     private DataStructurizer dataStructurizer = new DataStructurizer();
@@ -119,23 +118,16 @@ public class Pluginbase {
     // Handlers
 
     // Managers
-
     public MessageManager getMsgManager() {
         return msgManager;
     }
-
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
 
-    public SQLManager getSqlManager() {
-        return sqlManager;
-    }
-
     // SQL
-
-    public EconomySQL getEconomySQL() {
-        return economySQL;
+    public ObjectSQLManager getObjectSQLManager() {
+        return objectSQLManager;
     }
 
     // Utilities

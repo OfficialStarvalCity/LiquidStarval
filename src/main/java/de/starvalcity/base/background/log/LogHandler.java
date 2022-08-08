@@ -66,7 +66,7 @@ public class LogHandler {
 
     public void sqlCustomError(String message, @Nullable Exception exception) {
         System.err.println("SQL Error > Nachricht: " + message);
-        System.err.println("SQL Error > Exception: " + exception.getMessage());
+        System.err.println("SQL Error > Exception: " + exception);
     }
 
     /**
