@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
+/**
+ * Der {@link PlayerManager} sorgt für die Verwaltung aller Spieler-Instanzen auf dem Server und unter anderem für die
+ * Erstellung und Speicherung der {@link StarvalPlayer} Instanz.
+ */
 public class PlayerManager {
 
     private static Pluginbase pluginbase = new Pluginbase();

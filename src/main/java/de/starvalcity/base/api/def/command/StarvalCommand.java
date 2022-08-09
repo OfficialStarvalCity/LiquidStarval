@@ -6,6 +6,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 
+/**
+ * {@link StarvalCommand}
+ * <p>An unique implementation of a {@link org.bukkit.command.Command}.</p>
+ *
+ * <p>This class is <b>optional</b> and can or cannot be used.</p>
+ */
 public abstract class StarvalCommand {
 
     protected JavaPlugin plugin;

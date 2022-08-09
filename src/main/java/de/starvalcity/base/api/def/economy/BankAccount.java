@@ -1,6 +1,5 @@
 package de.starvalcity.base.api.def.economy;
 
-import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.api.def.UniqueObject;
 import lombok.Getter;
@@ -41,26 +40,7 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public boolean hasEnoughMoney(int requiredAmount) {
-        return false;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    @Override
     public void setDefaultBalance() {
-
-    }
-
-    @Override
-    public void setBalance(double amount) {
-
-    }
-
-    @Override
-    public void setBalance(int amount) {
 
     }
 
@@ -70,27 +50,32 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public void addMoney(int amount) {
-
-    }
-
-    @Override
     public void removeMoney(double amount) {
 
     }
 
     @Override
-    public void removeMoney(int amount) {
-
+    public boolean hasBankAccount() {
+        return false;
     }
 
     @Override
-    public void deposit(Object instance, double amount, int accountId) {
-
+    public boolean isBankAccountOwner() {
+        return false;
     }
 
     @Override
-    public void withdraw(Object instance, double amount, int accountId) {
+    public boolean isBankAccountMember() {
+        return false;
+    }
 
+    @Override
+    public boolean isOwnerOfBankAccount(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean isMemberOfBankAccount(int id) {
+        return false;
     }
 }

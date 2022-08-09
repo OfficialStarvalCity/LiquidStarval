@@ -4,6 +4,11 @@ import de.starvalcity.base.background.log.LogHandler;
 
 import java.sql.*;
 
+/**
+ * {@link MySQLAPI}
+ * <p>The {@link MySQLAPI} defines an API class which is used to register the main database of StarvalCity and its table.
+ * It is also used to execute queries and statements within different MySQL tables.</p>
+ */
 public class MySQLAPI {
 
     private static LogHandler log = new LogHandler();

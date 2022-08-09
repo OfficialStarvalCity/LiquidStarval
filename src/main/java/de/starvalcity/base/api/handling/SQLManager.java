@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 /**
- * Der {@link SQLManager} sorgt für die Ausführung von benutzerdefinierten Anfragen innerhalb von Datenbanken.
+ * Der {@link SQLManager} sorgt für die Erstellung der standardisierten MySQL Datenbanktabellen.
  */
 public class SQLManager implements Listener {
 

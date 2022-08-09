@@ -1,14 +1,15 @@
 package de.starvalcity.base.api.def;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
-import de.starvalcity.base.api.def.economy.BalanceType;
 import de.starvalcity.base.api.def.economy.BankAccount;
+import de.starvalcity.base.api.def.economy.EconomyParticipator;
 import de.starvalcity.base.api.def.faction.Faction;
 import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.*;
 
 // TODO: Rank with LuckPerms
@@ -26,7 +27,7 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
     private boolean isBankAccountOwner; // - Ist der Spieler Besitzer von einem Konto oder von mehreren Konten
     private boolean isBankAccountMember; // - Ist der Spieler Mitglied von einem Konto oder von mehreren Konten
     private double balance; // - Gesamter Kontostand des Spielers // TODO
-    private int readyCash; // - Bargeld des Spielers
+    private double readyCash; // - Bargeld des Spielers
 
     private Faction faction; // - Fraktion des Spielers
     private FactionRank factionRank; // - Fraktionsrang des Spielers
@@ -44,6 +45,14 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
     // Constructor
     //--------------------------------------------------------------------------------------------------//
 
+    /**
+     * Constructor
+     * <p>This <b>constructor</b> is used to create instances depending on the <b>{@link Player} instance, name and {@link UUID}</b>
+     * of the given {@link Player}.</p>
+     * @param player
+     * @param name
+     * @param uniqueId
+     */
     public StarvalPlayer(Player player, String name, UUID uniqueId) {
         setPlayer(player);
         setName(name);
@@ -151,38 +160,7 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
         }
     }
 
-    @Override
-    public boolean hasEnoughMoney(int requiredAmount) {
-        if (requiredAmount > getBalance()) {
-            return false;
-        }
-        if (requiredAmount < getBalance()) {
-            return true;
-        }
-        if (requiredAmount == getBalance()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     public boolean hasEnoughReadyCash(double requiredAmount) {
-        if (requiredAmount > getReadyCash()) {
-            return false;
-        }
-        if (requiredAmount < getReadyCash()) {
-            return true;
-        }
-        if (requiredAmount == getReadyCash()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    public boolean hasEnoughReadyCash(int requiredAmount) {
         if (requiredAmount > getReadyCash()) {
             return false;
         }
@@ -241,12 +219,7 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
         this.balance = amount;
     }
 
-    @Override
-    public void setBalance(int amount) {
-        this.balance = amount;
-    }
-
-    public void setReadyCash(int amount) {
+    public void setReadyCash(double amount) {
         this.readyCash = amount;
     }
 
@@ -271,22 +244,8 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
         return balance;
     }
 
-    public int getReadyCash() {
+    public double getReadyCash() {
         return readyCash;
-    }
-
-    //--------------------------------------------------------------------------------------------------//
-    // Economy Interactions
-    //--------------------------------------------------------------------------------------------------//
-
-    @Override
-    public void deposit(Object instance, double amount, int accountId) {
-
-    }
-
-    @Override
-    public void withdraw(Object instance, double amount, int accountId) {
-
     }
 
     //--------------------------------------------------------------------------------------------------//
@@ -307,33 +266,15 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
      * @param amount
      */
     @Override
-    public void addMoney(int amount) {
-        this.balance = getBalance() + amount;
-    }
-
-    /**
-     * (Interne Funktion)
-     * @param amount
-     */
-    @Override
     public void removeMoney(double amount) {
         this.balance = getBalance() - amount;
     }
 
-    /**
-     * (Interne Funktion)
-     * @param amount
-     */
-    @Override
-    public void removeMoney(int amount) {
-        this.balance = getBalance() - amount;
-    }
-
-    public void addReadyCash(int amount) {
+    public void addReadyCash(double amount) {
         this.readyCash = getReadyCash() + amount;
     }
 
-    public void removeReadyCash(int amount) {
+    public void removeReadyCash(double amount) {
         this.readyCash = getReadyCash() - amount;
     }
 

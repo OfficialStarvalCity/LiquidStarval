@@ -1,6 +1,5 @@
 package de.starvalcity.base.api.def.economy;
 
-import de.starvalcity.base.api.def.EconomyParticipator;
 import de.starvalcity.base.api.def.UniqueObject;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +24,17 @@ public class Company implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public boolean hasEnoughMoney(double requiredAmount) {
-        return false;
+    public int getId() {
+        return id;
     }
 
     @Override
-    public boolean hasEnoughMoney(int requiredAmount) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean hasEnoughMoney(double requiredAmount) {
         return false;
     }
 
@@ -50,17 +54,7 @@ public class Company implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public void setBalance(int amount) {
-
-    }
-
-    @Override
     public void addMoney(double amount) {
-
-    }
-
-    @Override
-    public void addMoney(int amount) {
 
     }
 
@@ -70,27 +64,27 @@ public class Company implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public void removeMoney(int amount) {
-
+    public boolean hasBankAccount() {
+        return false;
     }
 
     @Override
-    public void deposit(Object instance, double amount, int accountId) {
-
+    public boolean isBankAccountOwner() {
+        return false;
     }
 
     @Override
-    public void withdraw(Object instance, double amount, int accountId) {
-
+    public boolean isBankAccountMember() {
+        return false;
     }
 
     @Override
-    public int getId() {
-        return id;
+    public boolean isOwnerOfBankAccount(int id) {
+        return false;
     }
 
     @Override
-    public void setId(int id) {
-        this.id = id;
+    public boolean isMemberOfBankAccount(int id) {
+        return false;
     }
 }

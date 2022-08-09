@@ -10,6 +10,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+/**
+ * {@link CommandManager}
+ * <p>The {@link CommandManager} handles registering and executing <b>commands</b>.</p>
+ *
+ * <p>This class is <b>optional</b> and can be used or cannot be used.</p>
+ */
 public class CommandManager implements CommandExecutor {
 
     private ArrayList<StarvalCommand> commands;
