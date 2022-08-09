@@ -1,8 +1,8 @@
 package de.starvalcity.base.api.handling.player;
 
 import de.starvalcity.base.Pluginbase;
+import de.starvalcity.base.api.def.TableHandler;
 import de.starvalcity.base.api.def.database.MySQLAPI;
-import de.starvalcity.base.api.handling.SQLManager;
 import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * Der {@link PlayerSQLManager} sorgt für die Verwaltung der LiquidPlayers Datenbank-Tabelle.
  */
-public class PlayerSQLManager {
+public class PlayerSQLManager extends TableHandler {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
@@ -23,11 +23,16 @@ public class PlayerSQLManager {
         UUID uniqueId = player.getUniqueId();
         String name = player.getName();
 
-        if (!playerExists(player.getUniqueId())) {
+        if (!idExists(id, "LiquidPlayers")) {
             if (ObjectSQLManager.objectExists(player)) {
                 MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId + "','" + name + "');");
             }
         }
+    }
+
+    @Override
+    public boolean idExists(int id, String table) {
+        return super.idExists(id, table);
     }
 
     /**
@@ -70,32 +75,5 @@ public class PlayerSQLManager {
             pluginbase.getLogHandler().sqlLog("SELECT `Name` FROM `LiquidPlayers` WHERE `ID` = " + id + ";", sqlException);
         }
         return name;
-    }
-
-
-    /**
-     * Exist Überprüfung
-     * Überprüft, ob eine UUID bereits in der Datenbank existiert.
-     * @param uniqueId UUID, welche geprüft werden soll
-     * @return true / false
-     */
-    public static boolean playerExists(UUID uniqueId) {
-        int iterator = 0;
-        boolean exist = true;
-        try {
-
-            ResultSet rs = MySQLAPI.query("SELECT `UUID` FROM `LiquidObjects` WHERE `UUID` = " + uniqueId + ";");
-
-            while (rs.next()) {
-                iterator = rs.getInt("UUID");
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-        if(!(iterator > 0)) {
-            exist = false;
-        }
-        return exist;
     }
 }

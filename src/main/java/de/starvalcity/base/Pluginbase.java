@@ -3,7 +3,9 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
-import de.starvalcity.base.api.handling.economy.EconomySQL;
+import de.starvalcity.base.api.handling.object.ObjectSQLManager;
+import de.starvalcity.base.api.handling.player.PlayerManager;
+import de.starvalcity.base.api.handling.player.PlayerSQLManager;
 import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
@@ -40,13 +42,14 @@ public class Pluginbase {
     // Managers
     private MessageManager msgManager = new MessageManager();
 
+    private ObjectSQLManager objectSQLManager = new ObjectSQLManager();
     private PlayerManager playerManager = new PlayerManager();
+    private PlayerSQLManager playerSQLManager = new PlayerSQLManager();
     private SQLManager sqlManager = new SQLManager();
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
     // SQL
-    private EconomySQL economySQL = new EconomySQL();
 
     // Utilities
     private DataStructurizer dataStructurizer = new DataStructurizer();
@@ -124,8 +127,16 @@ public class Pluginbase {
         return msgManager;
     }
 
+    public ObjectSQLManager getObjectSQLManager() {
+        return objectSQLManager;
+    }
+
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public PlayerSQLManager getPlayerSQLManager() {
+        return playerSQLManager;
     }
 
     public SQLManager getSqlManager() {
@@ -133,10 +144,6 @@ public class Pluginbase {
     }
 
     // SQL
-
-    public EconomySQL getEconomySQL() {
-        return economySQL;
-    }
 
     // Utilities
     public DataStructurizer getDataStructurizer() {

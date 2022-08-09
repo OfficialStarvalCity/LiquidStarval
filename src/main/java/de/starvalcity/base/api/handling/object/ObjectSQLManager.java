@@ -1,6 +1,7 @@
 package de.starvalcity.base.api.handling.object;
 
 import de.starvalcity.base.Pluginbase;
+import de.starvalcity.base.api.def.TableHandler;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 
 import java.sql.ResultSet;
@@ -10,7 +11,7 @@ import java.util.Random;
 /**
  * Der {@link ObjectSQLManager} sorgt für die Verwaltung der LiquidObjects Datenbank-Tabelle.
  */
-public class ObjectSQLManager {
+public class ObjectSQLManager extends TableHandler {
 
     private static Pluginbase pluginbase = new Pluginbase();
 

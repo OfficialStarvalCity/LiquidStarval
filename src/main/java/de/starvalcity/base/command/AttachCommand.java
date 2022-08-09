@@ -34,7 +34,6 @@ public class AttachCommand implements CommandExecutor {
                 if (ObjectSQLManager.objectExists(player)) {
                     sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Already_Exists"));
                 } else {
-                    ObjectSQLManager.attachObject(player);
                     pluginbase.getPlayerManager().createStarvalPlayer(player);
                     sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
                 }
@@ -49,15 +48,13 @@ public class AttachCommand implements CommandExecutor {
                     }
                 } else if (args[0].equalsIgnoreCase("clear")) {
                     if (ObjectSQLManager.objectExists(player)) {
-                        ObjectSQLManager.unattachObject(player);
-                        pluginbase.getPlayerManager().unattachPlayer(player);
+                        pluginbase.getPlayerManager().deleteStarvalPlayer(player);
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
                     } else {
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
                     }
                 } else if (args[0].equalsIgnoreCase("randomize")) {
                     if (!ObjectSQLManager.objectExists(player)) {
-                        ObjectSQLManager.attachObject(player);
                         pluginbase.getPlayerManager().createStarvalPlayer(player);
                         sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Attach_Success"));
                     } else {
@@ -71,8 +68,7 @@ public class AttachCommand implements CommandExecutor {
 
                     if (target != null) {
                         if (ObjectSQLManager.objectExists(target)) {
-                            ObjectSQLManager.unattachObject(target);
-                            pluginbase.getPlayerManager().unattachPlayer(target);
+                            pluginbase.getPlayerManager().deleteStarvalPlayer(target);
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Deletion_Success"));
                         } else {
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.Instance_Could_Not_Be_Found"));
@@ -111,9 +107,8 @@ public class AttachCommand implements CommandExecutor {
 
                     if (target != null) {
                         if (!ObjectSQLManager.idExists(id)) {
-                            ObjectSQLManager.unattachObject(target);
                             ObjectSQLManager.setObjectId(target, id);
-                            pluginbase.getPlayerManager().unattachPlayer(target);
+                            pluginbase.getPlayerManager().deleteStarvalPlayer(target);
                             // set playerID in Player Manager TODO
                             sender.sendMessage(messageManager.getMessage("Commands.Attach.ID_Adding_Success"));
                         } else {

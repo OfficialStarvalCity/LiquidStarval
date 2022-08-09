@@ -2,14 +2,10 @@ package de.starvalcity.base.api.handling.player;
 
 import de.starvalcity.base.Pluginbase;
 import de.starvalcity.base.api.def.StarvalPlayer;
-import de.starvalcity.base.api.def.database.MySQLAPI;
-import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class PlayerManager {
@@ -27,9 +23,10 @@ public class PlayerManager {
 
         starvalPlayer.setId(id);
 
-        if (!ObjectSQLManager.objectExists(starvalPlayer) && !ObjectSQLManager.objectExists(player)) {
+        if (!ObjectSQLManager.objectExists(player)) {
             ObjectSQLManager.attachObject(starvalPlayer.getPlayer());
-            ObjectSQLManager.setObjectId(starvalPlayer.getPlayer(), id);
+
+            pluginbase.getPlayerSQLManager().addToTable(player);
 
             pluginbase.getLogHandler().logWithLevel("Attaching > Player has been attached successfully.", Level.INFO);
             pluginbase.getLogHandler().logWithLevel("Attaching > Player Name: " + player.getName(), Level.INFO);
@@ -39,6 +36,23 @@ public class PlayerManager {
             pluginbase.getLogHandler().logWithLevel("Attaching > Player already attached.", Level.SEVERE);
             pluginbase.getLogHandler().logWithLevel("Attaching > Player Name: " + player.getName(), Level.SEVERE);
             pluginbase.getLogHandler().logWithLevel("Attaching > Player ID:" + starvalPlayer.getId(), Level.SEVERE);
+        }
+    }
+
+    public void deleteStarvalPlayer(@NotNull Player player) {
+        int id = ObjectSQLManager.getObjectId(player);
+
+        if (ObjectSQLManager.objectExists(player)) {
+            ObjectSQLManager.unattachObject(player);
+
+            pluginbase.getLogHandler().logWithLevel("Removing > Player has been removed successfully.", Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("Removing > Player Name: " + player.getName(), Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("Removing > Player ID:" + id, Level.INFO);
+        } else {
+            pluginbase.getLogHandler().logWithLevel("Removing > Player could not be attached.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("Removing > Player is not attached.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("Removing > Player Name: " + player.getName(), Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("Removing > Player ID:" + id, Level.SEVERE);
         }
     }
 

@@ -1,6 +1,7 @@
 package de.starvalcity.base.command;
 
 import de.starvalcity.base.Core;
+import de.starvalcity.base.Pluginbase;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,6 +12,8 @@ public class EconomyCommand implements CommandExecutor {
 
     private static Core plugin;
 
+    private static Pluginbase pluginbase = new Pluginbase();
+
     public EconomyCommand(Core plugin) {
         this.plugin = plugin;
     }
@@ -20,6 +23,7 @@ public class EconomyCommand implements CommandExecutor {
         if (args.length == 0) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
+                pluginbase.getPlayerManager().createStarvalPlayer(player);
             }
         }
         return false;
