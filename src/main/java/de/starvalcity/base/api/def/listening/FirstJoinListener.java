@@ -18,9 +18,7 @@ public class FirstJoinListener implements Listener {
         Player newbie = firstJoinEvent.getPlayer();
         StarvalPlayer starvalPlayer = new StarvalPlayer(newbie, newbie.getName(), newbie.getUniqueId());
         if (!newbie.hasPlayedBefore()) {
-            ObjectSQLManager.attachObject(newbie);
             plugin.getPlayerManager().createStarvalPlayer(starvalPlayer.getPlayer());
-            starvalPlayer.setId(ObjectSQLManager.getObjectId(starvalPlayer));
         }
     }
 }

@@ -2,6 +2,8 @@ package de.starvalcity.base.command;
 
 import de.starvalcity.base.Core;
 import de.starvalcity.base.Pluginbase;
+import de.starvalcity.base.api.handling.economy.EconomyManager;
+import de.starvalcity.base.api.handling.economy.EconomySQLManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +25,7 @@ public class EconomyCommand implements CommandExecutor {
         if (args.length == 0) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                pluginbase.getPlayerManager().createStarvalPlayer(player);
+                EconomyManager.createBank(sender.getName(), sender, sender);
             }
         }
         return false;

@@ -23,7 +23,7 @@ public class PlayerSQLManager extends TableHandler {
         UUID uniqueId = player.getUniqueId();
         String name = player.getName();
 
-        if (!idExists(id, "LiquidPlayers")) {
+        if (!databaseObjectExists(id, "LiquidPlayers")) {
             if (ObjectSQLManager.objectExists(player)) {
                 MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId + "','" + name + "');");
             }
@@ -31,8 +31,8 @@ public class PlayerSQLManager extends TableHandler {
     }
 
     @Override
-    public boolean idExists(int id, String table) {
-        return super.idExists(id, table);
+    public boolean databaseObjectExists(int id, String table) {
+        return super.databaseObjectExists(id, table);
     }
 
     /**

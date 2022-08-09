@@ -3,6 +3,8 @@ package de.starvalcity.base;
 import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
+import de.starvalcity.base.api.handling.economy.EconomyManager;
+import de.starvalcity.base.api.handling.economy.EconomySQLManager;
 import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import de.starvalcity.base.api.handling.player.PlayerManager;
 import de.starvalcity.base.api.handling.player.PlayerSQLManager;
@@ -42,6 +44,8 @@ public class Pluginbase {
     // Managers
     private MessageManager msgManager = new MessageManager();
 
+    private EconomyManager economyManager = new EconomyManager();
+    private EconomySQLManager economySQLManager = new EconomySQLManager();
     private ObjectSQLManager objectSQLManager = new ObjectSQLManager();
     private PlayerManager playerManager = new PlayerManager();
     private PlayerSQLManager playerSQLManager = new PlayerSQLManager();
@@ -125,6 +129,14 @@ public class Pluginbase {
 
     public MessageManager getMsgManager() {
         return msgManager;
+    }
+
+    public EconomyManager getEconomyManager() {
+        return economyManager;
+    }
+
+    public EconomySQLManager getEconomySQLManager() {
+        return economySQLManager;
     }
 
     public ObjectSQLManager getObjectSQLManager() {

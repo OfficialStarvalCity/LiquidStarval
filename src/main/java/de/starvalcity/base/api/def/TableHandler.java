@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public abstract class TableHandler {
 
-    public boolean idExists(int id, String table) {
+    public boolean databaseObjectExists(int id, String table) {
         int iterator = 0;
         boolean exist = true;
 
