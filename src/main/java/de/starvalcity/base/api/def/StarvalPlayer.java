@@ -14,7 +14,7 @@ import java.util.*;
 
 // TODO: Rank with LuckPerms
 // TODO: Lombok?
-public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
+public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
 
     private Player player;
     private String name;
@@ -278,12 +278,4 @@ public class StarvalPlayer extends DatabaseObject implements Comparable<StarvalP
         this.readyCash = getReadyCash() - amount;
     }
 
-    //--------------------------------------------------------------------------------------------------//
-    // Database Object Methods
-    //--------------------------------------------------------------------------------------------------//
-
-    @Override
-    public void setValue(String statement, String table, String column, Object value) {
-        MySQLAPI.update(statement + " INTO " + "`" + table + "`" + "WHERE ");
-    }
 }

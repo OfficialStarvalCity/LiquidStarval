@@ -4,6 +4,7 @@ import de.starvalcity.base.api.def.StarvalPlayer;
 import de.starvalcity.base.api.def.UniqueObject;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
 
     private String name;
     private int id;
-    private StarvalPlayer creator;
+    private Object creator;
     private Object owner;
     private Bank bank;
     private BankAccountType accountType;
@@ -25,7 +26,7 @@ public class BankAccount implements EconomyParticipator, UniqueObject {
 
     private double balance;
 
-    public BankAccount(String name, int id, StarvalPlayer creator, @Nullable Object owner, Bank bank, BankAccountType accountType) {
+    public BankAccount(String name, int id, @NotNull Object creator, @Nullable Object owner, Bank bank, BankAccountType accountType) {
         this.name = name;
         this.id = id;
         this.creator = creator;

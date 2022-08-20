@@ -1,0 +1,6 @@
+
+/bank create <Name> [ID] - Erstellt eine Bank
+/bank delete <Name> / <ID> - Entfernt eine Bank
+/bank setOwner <Name> / <ID> <Spieler> - Setzt einer Bank einen Inhaber
+/bank addOwner <Name> / <ID>  <Spieler> - Fügt einer Bank einen Inhaber hinzu
+/bank removeOwner <Name> / <ID> < Spieler> - Entfernt einer Bank einen Inhaber
