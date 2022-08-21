@@ -11,8 +11,6 @@ public class EconomyManager extends TableHandler {
     private static Pluginbase pluginbase = new Pluginbase();
     private static EconomySQLManager ecoSQL = new EconomySQLManager();
 
-
-
     @Override
     public boolean databaseObjectExists(int id, String table) {
         return super.databaseObjectExists(id, table);

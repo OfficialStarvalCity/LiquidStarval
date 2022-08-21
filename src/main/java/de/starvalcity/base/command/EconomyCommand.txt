@@ -1,6 +1,49 @@
 
+-- Permissions --
+economy.* - Alle Wirtschaftsrechte
+economy.admin - Alle administrativen Wirtschaftsrechte
+economy.mod - Alle moderativen Wirtschaftsrechte
+economy.general - Alle allgemeinen Wirtschaftsrechte
+
+economy.bank.create - Erlaubt es, eine Bank zu erstellen
+economy.bank.remove - Erlaubt es, eine Bank zu entfernen
+economy.bank.clear - Erlaubt es, alle Eigenschaften einer Bank zu entfernen
+economy.bank.setname = Erlaubt es, einer Bank einen Namen zu setzen
+economy.bank.setowner - Erlaubt es, einer Bank einen Inhaber zu setzen
+economy.bank.addowner - Erlaubt es, einer Bank einen Inhaber hinzuzufügen
+economy.bank.removeowner - Erlaubt es, einer Bank einen Inhaber zu entfernen
+economy.bank.addworker - Erlaubt es, einer Bank einen Mitarbeiter hinzuzfügen
+economy.bank.removeworker - Erlaubt es, einer Bank einen Mitarbeiter zu entfernen
+economy.bank.setbalance - Erlaubt es, einer Bank einen bestimmten Kontostand zu setzen
+economy.bank.addmoney - Erlaubt es, einer Bank eine bestimmte Menge an Geld zum Kontostand hinzuzufügen
+economy.bank.removemoney - Erlaubt es, einer Bank eine bestimmte Menge an Geld vom Kontostand zu entfernen
+economy.bank.addaccount - Erlaubt es, einer Bank ein Konto hinzuzufügen
+economy.bank.removeaccount - Erlaubt es, einer Bank ein Konto zu entfernen
+economy.bank.openingtimes - Erlaubt es, die Öffnungszeiten einer Bank zu editieren
+economy.bank.interestcharges - Erlaubt es, die Zinsen einer Bank zu editieren
+economy.bank.fees - Erlaubt es, die Transaktionsgebühren einer Bank zu editieren
+economy.bank.accountlimit - Erlaubt es, das Kontenlimit einer Bank zu editieren
+
+economy.player.showmoney.own - Erlaubt es, den eigenen Kontostand anzuzeigen
+economy.player.showmoney.other - Erlaubt es, den Kontostand von anderen Spielern anzeigen zu lassen
+
 /bank create <Name> [ID] - Erstellt eine Bank
 /bank delete <Name> / <ID> - Entfernt eine Bank
+/bank clear <Name> / <ID> - Entfernt alle Eigenschaften einer Bank
+/bank setName <Name> </ID> <Name> - Setzt einer Bank einen Namen
 /bank setOwner <Name> / <ID> <Spieler> - Setzt einer Bank einen Inhaber
 /bank addOwner <Name> / <ID>  <Spieler> - Fügt einer Bank einen Inhaber hinzu
 /bank removeOwner <Name> / <ID> < Spieler> - Entfernt einer Bank einen Inhaber
+/bank addWorker <Name> / <ID> <Spieler> - Fügt einer Bank einen Mitarbeiter hinzu
+/bank removeWorker <Name> / <ID> <Spieler> - Entfernt einer Bank einen Mitarbeiter
+/bank setBalance <Name> / <ID> <Kontostand> - Setzt einer Bank einen Kontostand
+/bank addMoney <Name> / <ID> <Menge> - Fügt einer Bank eine Menge an Geld hinzu
+/bank removeMoney <Name> / <ID> <Menge> - Entfernt einer Bank eine Menge an Geld
+/bank addAccount <Name> / <ID> <AccountID> - Fügt einer Bank ein Bankkonto hinzu
+/bank removeAccount <Name> / <ID> <AccountID> - Entfernt einer Bank ein Bankkonto
+/bank openingtimes <Öffnungszeit> <Schließungszeit> - Editiert die Öffnungszeiten einer Bank
+/bank interestcharges <Menge> - Editiert den monatlichen Zinssatz einer Bank
+/bank fees <Menge> - Editiert die Transaktionsgebühren einer Bank
+/bank accountlimit <Menge> - Editiert das Kontenlimit einer Bank
+
+
