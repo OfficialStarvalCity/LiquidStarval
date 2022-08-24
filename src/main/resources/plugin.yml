@@ -9,10 +9,3 @@ commands:
   attach:
     description: Attach Command
     usage: /attach
-  economy:
-    description: Economy Command
-    usage: /economy
-    aliases:
-      - eco
-      - money
-      - wirtschaft

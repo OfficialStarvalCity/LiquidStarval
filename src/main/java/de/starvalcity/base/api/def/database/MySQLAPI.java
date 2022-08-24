@@ -25,6 +25,10 @@ public class MySQLAPI {
         return connection != null;
     }
 
+    /**
+     * Connection
+     * Connects to the database through the given database parameters.
+     */
     public static void connect() {
         if (!isConnected()) {
             try {
@@ -38,6 +42,10 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * Disconnection
+     * Disconnects from the database.
+     */
     public static void disconnect() {
         try {
             connection.close();
@@ -48,6 +56,12 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * Statement Getter
+     * Gets the {@link PreparedStatement} from {@link java.sql} from a SQL query.
+     * @param sql query
+     * @return PreparedStatement
+     */
     public static PreparedStatement getStatement(String sql) {
         if (isConnected()) {
             PreparedStatement statement;
@@ -62,6 +76,12 @@ public class MySQLAPI {
         return null;
     }
 
+    /**
+     * ResultSet Getter
+     * Gets the {@link ResultSet} from {@link java.sql} from a SQL query.
+     * @param sql query
+     * @return ResultSet
+     */
     public static ResultSet getResult(String sql) {
         if (isConnected()) {
             PreparedStatement statement;
@@ -78,6 +98,12 @@ public class MySQLAPI {
         return null;
     }
 
+    /**
+     * Update
+     * Updates objects in the database.
+     * @param query query
+     * @return true / false
+     */
     public static boolean update(String query) {
         try {
             Statement st = connection.createStatement();
@@ -90,6 +116,11 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * Query Execution
+     * Executes a query.
+     * @param query query
+     */
     public static void execute(String query) {
         try {
             getConnection().createStatement().execute(query);
@@ -98,6 +129,12 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * ResultSet Query
+     * Executes a ResultSet query.
+     * @param query query
+     * @return ResultSet
+     */
     public static ResultSet query(String query) {
         ResultSet rs = null;
 
@@ -110,6 +147,12 @@ public class MySQLAPI {
         return rs;
     }
 
+    /**
+     * Table Check
+     * Checks whether a table exists or not.
+     * @param table table to check
+     * @return true / false
+     */
     public static boolean existsTable(String table) {
         try {
             ResultSet tables = getConnection().getMetaData().getTables(null, null, table, null);
@@ -120,6 +163,13 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * Column Check
+     * Checks whether a column exists or not.
+     * @param table table with the column
+     * @param column column to check
+     * @return true / false
+     */
     public static boolean existsColumn(String table, String column) {
         try {
             ResultSet columns = getConnection().getMetaData().getColumns(null, null, table, column);
@@ -130,7 +180,57 @@ public class MySQLAPI {
         }
     }
 
+    /**
+     * Returns the {@link Connection} object from {@link java.sql}.
+     *
+     * @return SQL connection
+     */
     public static Connection getConnection() {
         return connection;
+    }
+
+    /**
+     * Returns the <b>host</b> of the database.
+     *
+     * @return host
+     */
+    public static String getHost() {
+        return host;
+    }
+
+    /**
+     * Returns the <b>port</b> of the database.
+     *
+     * @return port
+     */
+    public static String getPort() {
+        return port;
+    }
+
+    /**
+     * Returns the <b>database</b>.
+     *
+     * @return database
+     */
+    public static String getDatabase() {
+        return database;
+    }
+
+    /**
+     * Returns the <b>username</b> of the database.
+     *
+     * @return username
+     */
+    public static String getUsername() {
+        return username;
+    }
+
+    /**
+     * Returns the <b>password</b> of the database.
+     *
+     * @return password
+     */
+    public static String getPassword() {
+        return password;
     }
 }
