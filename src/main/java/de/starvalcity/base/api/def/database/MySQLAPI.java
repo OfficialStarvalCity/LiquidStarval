@@ -19,6 +19,8 @@ public class MySQLAPI {
     public static String username = "starvalcity_dev";
     public static String password = "KDLJ5WBNRO5GsjWD";
 
+    public static DatabaseMetaData databaseMetaData;
+
     public static Connection connection;
 
     public static boolean isConnected() {
@@ -232,5 +234,9 @@ public class MySQLAPI {
      */
     public static String getPassword() {
         return password;
+    }
+
+    public static DatabaseMetaData getDatabaseMetaData() {
+        return databaseMetaData;
     }
 }
