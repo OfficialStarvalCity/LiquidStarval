@@ -25,7 +25,7 @@ public class PlayerSQLManager extends TableHandler {
 
         if (!databaseObjectExists(id, "LiquidPlayers")) {
             if (ObjectSQLManager.objectExists(player)) {
-                MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId + "','" + name + "');");
+                MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId.toString() + "','" + name + "');");
             }
         }
     }
@@ -45,13 +45,13 @@ public class PlayerSQLManager extends TableHandler {
         int id = 0;
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `LiquidPlayers` WHERE `UUID` = \"" + player.getUniqueId() + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `LiquidPlayers` WHERE `UUID` = \"" + player.getUniqueId().toString() + "\";");
 
             while (resultSet.next()) {
                 id = resultSet.getInt("ID");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT ID FROM LiquidPlayers WHERE Object = " + player.getUniqueId() + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT ID FROM LiquidPlayers WHERE Object = " + player.getUniqueId().toString() + ";", sqlException);
         }
         return id;
     }
