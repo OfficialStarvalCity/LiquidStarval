@@ -26,7 +26,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the Integer you are searching for or '0'
      */
-    public int getInteger(String table, String column, String identifier, String value) {
+    public int getInteger(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -47,7 +47,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the Double you are searching for or '0'
      */
-    public double getDouble(String table, String column, String identifier, String value) {
+    public double getDouble(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -67,7 +67,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the String you are searching for or 'null'
      */
-    public String getString(String table, String column, String identifier, String value) {
+    public String getString(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -87,7 +87,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the Boolean you are searching for or 'false'
      */
-    public boolean getBoolean(String table, String column, String identifier, String value) {
+    public boolean getBoolean(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -107,7 +107,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the Long you are searching for or 'null'
      */
-    public Long getLong(String table, String column, String identifier, String value) {
+    public Long getLong(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -127,7 +127,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the Float you are searching for or 'null'
      */
-    public Float getFloat(String table, String column, String identifier, String value) {
+    public Float getFloat(String table, String column, Object identifier, String value) {
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
                     ("SELECT * FROM " + table + " WHERE " + identifier + " = '" + value + "'").executeQuery();
@@ -191,7 +191,7 @@ public class SQLFunctions {
      * @param value      Value you target for
      * @return Returns the List you are searching for
      */
-    public List<String> getList(String table, String column, String identifier, String value) {
+    public List<String> getList(String table, String column, Object identifier, String value) {
         List<String> list = new LinkedList<>();
         try {
             ResultSet resultSet = mySQLAPI.getConnection().prepareStatement
