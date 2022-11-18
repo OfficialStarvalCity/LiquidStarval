@@ -1,11 +1,7 @@
 de.starvalcity.base
 de.starvalcity.base.api.def
-de.starvalcity.base.api.def.command
 de.starvalcity.base.api.def.database
 de.starvalcity.base.api.def.economy
-de.starvalcity.base.api.def.event
-de.starvalcity.base.api.def.faction
-de.starvalcity.base.api.def.listening
 de.starvalcity.base.api.handling
 de.starvalcity.base.api.handling.object
 de.starvalcity.base.api.handling.player

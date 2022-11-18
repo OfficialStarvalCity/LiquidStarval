@@ -1,19 +1,14 @@
 package de.starvalcity.base.api.def;
 
-import de.starvalcity.base.api.def.database.MySQLAPI;
 import de.starvalcity.base.api.def.economy.BankAccount;
 import de.starvalcity.base.api.def.economy.EconomyParticipator;
-import de.starvalcity.base.api.def.faction.Faction;
-import de.starvalcity.base.api.def.faction.FactionRank;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.*;
 
 // TODO: Rank with LuckPerms
-// TODO: Lombok?
 public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticipator, Serializable, UniqueObject {
 
     private Player player;
@@ -26,14 +21,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
     private boolean hasBankAccount; // - Hat der Spieler bereits ein Konto
     private boolean isBankAccountOwner; // - Ist der Spieler Besitzer von einem Konto oder von mehreren Konten
     private boolean isBankAccountMember; // - Ist der Spieler Mitglied von einem Konto oder von mehreren Konten
-    private double balance; // - Gesamter Kontostand des Spielers // TODO
     private double readyCash; // - Bargeld des Spielers
-
-    private Faction faction; // - Fraktion des Spielers
-    private FactionRank factionRank; // - Fraktionsrang des Spielers
-    private boolean isFactionOwner; // - Ist der Spieler Inhaber einer Fraktion
-    private int kills; // - Morde an andere Spieler
-    private int deaths; // - Tode des Spielers
 
     private List<BankAccount> bankAccounts = new ArrayList<>(); // - Konten des Spielers
     private Map<Integer, BankAccount> bankAccountIds = new HashMap<>(); // - Konten und KontenIDs des Spielers
@@ -211,12 +199,12 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     @Override
     public void setDefaultBalance() {
-        this.balance = 1000;
+        this.readyCash = 1000;
     }
 
     @Override
     public void setBalance(double amount) {
-        this.balance = amount;
+        this.readyCash = amount;
     }
 
     public void setReadyCash(double amount) {
@@ -241,7 +229,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
 
     @Override
     public double getBalance() {
-        return balance;
+        return readyCash;
     }
 
     public double getReadyCash() {
@@ -258,7 +246,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
      */
     @Override
     public void addMoney(double amount) {
-        this.balance = getBalance() + amount;
+        this.readyCash = getBalance() + amount;
     }
 
     /**
@@ -267,7 +255,7 @@ public class StarvalPlayer implements Comparable<StarvalPlayer>, EconomyParticip
      */
     @Override
     public void removeMoney(double amount) {
-        this.balance = getBalance() - amount;
+        this.readyCash = getBalance() - amount;
     }
 
     public void addReadyCash(double amount) {

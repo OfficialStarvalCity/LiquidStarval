@@ -1,6 +1,5 @@
 package de.starvalcity.base;
 
-import de.starvalcity.base.api.def.command.CommandManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Core extends JavaPlugin {
@@ -15,7 +14,6 @@ public final class Core extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         setPluginbase(new Pluginbase());
-        new CommandManager(this);
         this.getPluginbase().onStartup();
     }
 

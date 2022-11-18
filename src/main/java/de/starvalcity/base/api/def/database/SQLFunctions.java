@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * SQL Functions class
+ * Diese Klasse enthält alle Funktionen der {@link MySQLAPI}.
  */
 public class SQLFunctions {
 

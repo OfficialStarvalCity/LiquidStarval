@@ -1,12 +1,10 @@
 package de.starvalcity.base;
 
 import de.starvalcity.base.api.def.database.MySQLAPI;
-import de.starvalcity.base.api.def.listening.FirstJoinListener;
 import de.starvalcity.base.api.handling.*;
 import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import de.starvalcity.base.api.handling.player.PlayerManager;
 import de.starvalcity.base.api.handling.player.PlayerSQLManager;
-import de.starvalcity.base.background.EventTask;
 import de.starvalcity.base.background.FileTask;
 import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
@@ -62,7 +60,6 @@ public class Pluginbase {
     private TaskHandler taskHandler = new TaskHandler();
 
     // Tasks
-    private final EventTask eventTask = new EventTask("EventTask", 4);
     private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
     /*------------------------------------------------------------------------------------------------------------*/
@@ -75,7 +72,6 @@ public class Pluginbase {
      */
     public void onStartup() {
         taskHandler.executeTask(fileTask);
-        taskHandler.executeTask(eventTask);
         initialize();
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
@@ -88,7 +84,6 @@ public class Pluginbase {
         MySQLAPI.disconnect();
         plugin.saveConfig();
         taskHandler.terminateTask(fileTask);
-        taskHandler.terminateTask(eventTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
@@ -167,10 +162,6 @@ public class Pluginbase {
     }
 
     // Tasks
-    public EventTask getEventTask() {
-        return eventTask;
-    }
-
     public FileTask getFileTask() {
         return fileTask;
     }
@@ -202,9 +193,6 @@ public class Pluginbase {
         MySQLAPI.connect();
         SQLManager.setupObjectsTable();
         SQLManager.setupPlayersTable();
-        SQLManager.setupBanksTable();
-        SQLManager.setupBankAccountsTable();
-        SQLManager.setupCompaniesTable();
     }
 
     /**
@@ -212,7 +200,7 @@ public class Pluginbase {
      * Lädt alle Events und Listener
      */
     public void loadEvents() {
-        pluginManager.registerEvents(new FirstJoinListener(), plugin);
+
     }
 
     /**

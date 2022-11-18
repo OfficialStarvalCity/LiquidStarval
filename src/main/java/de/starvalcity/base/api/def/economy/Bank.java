@@ -69,11 +69,6 @@ public class Bank implements EconomyParticipator, UniqueObject {
     }
 
     @Override
-    public boolean isBankAccountOwner() {
-        return false;
-    }
-
-    @Override
     public boolean isBankAccountMember() {
         return false;
     }

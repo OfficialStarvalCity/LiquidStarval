@@ -6,8 +6,7 @@ import java.sql.*;
 
 /**
  * {@link MySQLAPI}
- * <p>The {@link MySQLAPI} defines an API class which is used to register the main database of StarvalCity and its table.
- * It is also used to execute queries and statements within different MySQL tables.</p>
+ * <p>Die {@link MySQLAPI} ist die eigene <b>MySQL API</b> von StarvalCity.</p>
  */
 public class MySQLAPI {
 
