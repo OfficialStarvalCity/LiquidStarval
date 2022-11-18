@@ -5,8 +5,6 @@ import de.starvalcity.base.api.handling.*;
 import de.starvalcity.base.api.handling.object.ObjectSQLManager;
 import de.starvalcity.base.api.handling.player.PlayerManager;
 import de.starvalcity.base.api.handling.player.PlayerSQLManager;
-import de.starvalcity.base.background.FileTask;
-import de.starvalcity.base.background.TaskHandler;
 import de.starvalcity.base.background.log.LogHandler;
 import de.starvalcity.base.command.AttachCommand;
 import de.starvalcity.base.utilities.DataStructurizer;
@@ -57,10 +55,6 @@ public class Pluginbase {
     /*------------------------------------------------------------------------------------------------------------*/
     // Handlers
     private final LogHandler logHandler = new LogHandler();
-    private TaskHandler taskHandler = new TaskHandler();
-
-    // Tasks
-    private final FileTask fileTask = new FileTask("FileTask", 2, 200L);
 
     /*------------------------------------------------------------------------------------------------------------*/
     // Logiken
@@ -71,7 +65,6 @@ public class Pluginbase {
      * Server-Start Funktion
      */
     public void onStartup() {
-        taskHandler.executeTask(fileTask);
         initialize();
         pluginManager.enablePlugin(JavaPlugin.getPlugin(Core.class));
     }
@@ -83,7 +76,6 @@ public class Pluginbase {
     public void onShutdown() {
         MySQLAPI.disconnect();
         plugin.saveConfig();
-        taskHandler.terminateTask(fileTask);
         pluginManager.disablePlugin(JavaPlugin.getPlugin(Core.class));
     }
 
@@ -155,15 +147,6 @@ public class Pluginbase {
     // Handlers
     public LogHandler getLogHandler() {
         return logHandler;
-    }
-
-    public TaskHandler getTaskHandler() {
-        return taskHandler;
-    }
-
-    // Tasks
-    public FileTask getFileTask() {
-        return fileTask;
     }
 
     // Miscellaneous
