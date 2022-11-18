@@ -30,6 +30,16 @@ public class PlayerSQLManager extends TableHandler {
         }
     }
 
+    public void removeFromTable(@NotNull Player player) {
+        int id = ObjectSQLManager.getObjectId(player);
+
+        if (databaseObjectExists(id, "LiquidPlayers")) {
+            if (ObjectSQLManager.objectExists(player)) {
+                MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `ID` = \"" + id + "\";");
+            }
+        }
+    }
+
     @Override
     public boolean databaseObjectExists(int id, String table) {
         return super.databaseObjectExists(id, table);

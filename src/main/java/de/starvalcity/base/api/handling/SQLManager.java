@@ -32,31 +32,6 @@ public class SQLManager implements Listener {
             "`Faction` varchar(20), " +
             "`FactionRank` varchar(20), " +
             "PRIMARY KEY (`ID`));";
-    static String banksTableQuery = "CREATE TABLE `LiquidBanks` (" +
-            "`ID` varchar(30), " +
-            "`Name` varchar(30), " +
-            "`Founder` varchar(30), " +
-            "`Owner` varchar(30), " +
-            "`Balance` double(64,2), " +
-            "`Accounts` varchar(30), " +
-            "PRIMARY KEY (`ID`));";
-    static String bankAccountsTableQuery = "CREATE TABLE `LiquidBankAccounts` (" +
-            "`ID` varchar(30), " +
-            "`Name` varchar(30), " +
-            "`Bank` varchar(30), " +
-            "`Founder` varchar(64), " +
-            "`Owner` varchar(64), " +
-            "`Moderators` varchar(64), " +
-            "`Members` varchar(64), " +
-            "`Balance` double(64,2), " +
-            "PRIMARY KEY (`ID`));";
-    static String companiesTableQuery = "CREATE TABLE `LiquidCompanies` (" +
-            "`ID` varchar(30), " +
-            "`Name` varchar(30), " +
-            "`Founder` varchar(64), " +
-            "`Owner` varchar(64), " +
-            "`Balance` double(64,2), " +
-            "PRIMARY KEY (`ID`));";
 
     /**
      * Setup: LiquidObjects Tabelle
@@ -75,36 +50,6 @@ public class SQLManager implements Listener {
         if (!MySQLAPI.existsTable("LiquidPlayers")) {
             pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidPlayers' ...");
             MySQLAPI.execute(playersTableQuery);
-        }
-    }
-
-    /**
-     * Setup: LiquidBnaks Tabelle
-     */
-    public static void setupBanksTable() {
-        if (!MySQLAPI.existsTable("LiquidBanks")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidBanks' ...");
-            MySQLAPI.execute(banksTableQuery);
-        }
-    }
-
-    /**
-     * Setup: LiquidBankAccounts Tabelle
-     */
-    public static void setupBankAccountsTable() {
-        if (!MySQLAPI.existsTable("LiquidBankAccounts")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidBankAccounts' ...");
-            MySQLAPI.execute(bankAccountsTableQuery);
-        }
-    }
-
-    /**
-     * Setup: LiquidCompanies Tabelle
-     */
-    public static void setupCompaniesTable() {
-        if (!MySQLAPI.existsTable("LiquidCompanies")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidCompanies' ...");
-            MySQLAPI.execute(companiesTableQuery);
         }
     }
 }

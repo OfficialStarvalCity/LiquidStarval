@@ -28,8 +28,8 @@ public class PlayerManager {
         starvalPlayer.setId(id);
 
         if (!ObjectSQLManager.objectExists(player)) {
-            ObjectSQLManager.attachObject(starvalPlayer.getPlayer());
 
+            ObjectSQLManager.attachObject(starvalPlayer.getPlayer());
             pluginbase.getPlayerSQLManager().addToTable(player);
 
             pluginbase.getLogHandler().logWithLevel("Attaching > Player has been attached successfully.", Level.INFO);
@@ -47,7 +47,9 @@ public class PlayerManager {
         int id = ObjectSQLManager.getObjectId(player);
 
         if (ObjectSQLManager.objectExists(player)) {
+
             ObjectSQLManager.unattachObject(player);
+            pluginbase.getPlayerSQLManager().removeFromTable(player);
 
             pluginbase.getLogHandler().logWithLevel("Removing > Player has been removed successfully.", Level.INFO);
             pluginbase.getLogHandler().logWithLevel("Removing > Player Name: " + player.getName(), Level.INFO);
