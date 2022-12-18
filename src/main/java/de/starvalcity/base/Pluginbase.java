@@ -44,8 +44,6 @@ public class Pluginbase {
 
     public static final PluginManager pluginManager = Bukkit.getPluginManager();
 
-    // SQL
-
     // Utilities
     private DataStructurizer dataStructurizer = new DataStructurizer();
     private DateConverter dateConverter;
@@ -166,6 +164,7 @@ public class Pluginbase {
     public void loadConfig() {
         plugin.getConfig().options().copyDefaults(false);
         plugin.saveConfig();
+
     }
 
     /**

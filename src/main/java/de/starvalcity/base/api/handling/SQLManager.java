@@ -15,30 +15,30 @@ public class SQLManager implements Listener {
 
     private static Pluginbase pluginbase = new Pluginbase();
 
-    static String objectsTableQuery = "CREATE TABLE `LiquidObjects` (" +
-            "`Object` varchar(64), " +
+    static String objectsTableQuery = "CREATE TABLE `Objekte` (" +
+            "`Objekt` varchar(64), " +
             "`ID` varchar(30), " +
             "PRIMARY KEY (`ID`));";
-    static String playersTableQuery = "CREATE TABLE `LiquidPlayers` (" +
+    static String playersTableQuery = "CREATE TABLE `Spieler` (" +
             "`ID` varchar(30), " +
             "`UUID` varchar(64), " +
             "`Name` varchar(30), " +
-            "`FirstSeen` varchar(20),  " +
-            "`LastSeen` varchar(20), " +
-            "`Playtime` varchar(30), " +
-            "`Rank` varchar(20), " +
-            "`ReadyCash` double(64,2), " +
-            "`BankBalance` double(64,2), " +
-            "`Faction` varchar(20), " +
-            "`FactionRank` varchar(20), " +
+            "`Erster Beitritt` varchar(20),  " +
+            "`Letzter Beitritt` varchar(20), " +
+            "`Spielzeit` varchar(30), " +
+            "`Rang` varchar(20), " +
+            "`Bargeld` double(64,2), " +
+            "`Kontostand` double(64,2), " +
+            "`Fraktion` varchar(20), " +
+            "`Fraktionsrang` varchar(20), " +
             "PRIMARY KEY (`ID`));";
 
     /**
      * Setup: LiquidObjects Tabelle
      */
     public static void setupObjectsTable() {
-        if (!MySQLAPI.existsTable("LiquidObjects")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidObjects' ...");
+        if (!MySQLAPI.existsTable("Objekte")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'Objekte' ...");
             MySQLAPI.execute(objectsTableQuery);
         }
     }
@@ -47,8 +47,8 @@ public class SQLManager implements Listener {
      * Setup: LiquidPlayers Tabelle
      */
     public static void setupPlayersTable() {
-        if (!MySQLAPI.existsTable("LiquidPlayers")) {
-            pluginbase.getLogHandler().sqlInfo("Creating table 'LiquidPlayers' ...");
+        if (!MySQLAPI.existsTable("Spieler")) {
+            pluginbase.getLogHandler().sqlInfo("Creating table 'Spieler' ...");
             MySQLAPI.execute(playersTableQuery);
         }
     }

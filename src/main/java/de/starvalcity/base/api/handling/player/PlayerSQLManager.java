@@ -23,9 +23,9 @@ public class PlayerSQLManager extends TableHandler {
         UUID uniqueId = player.getUniqueId();
         String name = player.getName();
 
-        if (!databaseObjectExists(id, "LiquidPlayers")) {
+        if (!databaseObjectExists(id, "Spieler")) {
             if (ObjectSQLManager.objectExists(player)) {
-                MySQLAPI.update("INSERT INTO `LiquidPlayers` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId.toString() + "','" + name + "');");
+                MySQLAPI.update("INSERT INTO `Spieler` (`ID`, `UUID`, `Name`) VALUES ('" + id + "','" + uniqueId.toString() + "','" + name + "');");
             }
         }
     }
@@ -33,9 +33,9 @@ public class PlayerSQLManager extends TableHandler {
     public void removeFromTable(@NotNull Player player) {
         int id = ObjectSQLManager.getObjectId(player);
 
-        if (databaseObjectExists(id, "LiquidPlayers")) {
+        if (databaseObjectExists(id, "Spieler")) {
             if (ObjectSQLManager.objectExists(player)) {
-                MySQLAPI.update("DELETE FROM `LiquidPlayers` WHERE `ID` = \"" + id + "\";");
+                MySQLAPI.update("DELETE FROM `Spieler` WHERE `ID` = \"" + id + "\";");
             }
         }
     }
@@ -55,13 +55,13 @@ public class PlayerSQLManager extends TableHandler {
         int id = 0;
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `LiquidPlayers` WHERE `UUID` = \"" + player.getUniqueId().toString() + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `Spieler` WHERE `UUID` = \"" + player.getUniqueId().toString() + "\";");
 
             while (resultSet.next()) {
                 id = resultSet.getInt("ID");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT ID FROM LiquidPlayers WHERE Object = " + player.getUniqueId().toString() + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT ID FROM Spieler WHERE Spieler = " + player.getUniqueId().toString() + ";", sqlException);
         }
         return id;
     }
@@ -76,13 +76,13 @@ public class PlayerSQLManager extends TableHandler {
         String name = "";
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `Name` FROM `LiquidPlayers` WHERE `ID` = \"" + id + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `Name` FROM `Spieler` WHERE `ID` = \"" + id + "\";");
 
             while (resultSet.next()) {
                 name = resultSet.getString("Name");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT `Name` FROM `LiquidPlayers` WHERE `ID` = " + id + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT `Name` FROM `Spieler` WHERE `ID` = " + id + ";", sqlException);
         }
         return name;
     }

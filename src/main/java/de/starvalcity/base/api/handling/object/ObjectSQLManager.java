@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 /**
- * Der {@link ObjectSQLManager} sorgt für die Verwaltung der LiquidObjects Datenbank-Tabelle.
+ * Der {@link ObjectSQLManager} sorgt für die Verwaltung der Objekte Datenbank-Tabelle.
  */
 public class ObjectSQLManager extends TableHandler {
 
@@ -25,13 +25,13 @@ public class ObjectSQLManager extends TableHandler {
         int id = 0;
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `LiquidObjects` WHERE `Object` = \"" + object + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `ID` FROM `Objekte` WHERE `Objekt` = \"" + object + "\";");
 
             while (resultSet.next()) {
                 id = resultSet.getInt("ID");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT ID FROM LiquidObjects WHERE Object = " + object + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT ID FROM Objekte WHERE Objekt = " + object + ";", sqlException);
         }
         return id;
     }
@@ -46,13 +46,13 @@ public class ObjectSQLManager extends TableHandler {
         String name = "";
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `Object` FROM `LiquidObjects` WHERE `ID` = \"" + id + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `Objekt` FROM `Objekte` WHERE `ID` = \"" + id + "\";");
 
             while (resultSet.next()) {
-                name = resultSet.getString("Object");
+                name = resultSet.getString("Objekt");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT `Object` FROM `LiquidObjects` WHERE `ID` = " + id + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT `Objekt` FROM `Objekte` WHERE `ID` = " + id + ";", sqlException);
         }
         return name;
     }
@@ -68,13 +68,13 @@ public class ObjectSQLManager extends TableHandler {
         Object object = new Object();
 
         try {
-            ResultSet resultSet = MySQLAPI.query("SELECT `Object` FROM `LiquidObjects` WHERE `ID` = \"" + id + "\";");
+            ResultSet resultSet = MySQLAPI.query("SELECT `Objekt` FROM `Objekte` WHERE `ID` = \"" + id + "\";");
 
             while (resultSet.next()) {
-                object = resultSet.getObject("Object");
+                object = resultSet.getObject("Objekt");
             }
         } catch (SQLException sqlException) {
-            pluginbase.getLogHandler().sqlLog("SELECT Instance FROM LiquidObjects WHERE ID = " + id + ";", sqlException);
+            pluginbase.getLogHandler().sqlLog("SELECT Instance FROM Objekte WHERE ID = " + id + ";", sqlException);
         }
         return object;
     }
@@ -90,7 +90,7 @@ public class ObjectSQLManager extends TableHandler {
         boolean exist = true;
         try {
 
-            ResultSet rs = MySQLAPI.query("SELECT `ID` FROM `LiquidObjects` WHERE `ID` = " + id + ";");
+            ResultSet rs = MySQLAPI.query("SELECT `ID` FROM `Objekte` WHERE `ID` = " + id + ";");
 
             while (rs.next()) {
                 iterator = rs.getInt("ID");
@@ -112,7 +112,7 @@ public class ObjectSQLManager extends TableHandler {
      * @return true / false
      */
     public static boolean objectExists(Object object) {
-        ResultSet resultSet = MySQLAPI.query("SELECT `Object` FROM `LiquidObjects` WHERE `Object` = \"" + object + "\";");
+        ResultSet resultSet = MySQLAPI.query("SELECT `Objekt` FROM `Objekte` WHERE `Objekt` = \"" + object + "\";");
         try {
             return resultSet.next();
         } catch (SQLException sqlException) {
@@ -147,7 +147,7 @@ public class ObjectSQLManager extends TableHandler {
         int objectId = randomId();
         if (!idExists(objectId)) {
             if (!objectExists(object)) {
-                MySQLAPI.update("INSERT INTO `LiquidObjects` (`Object`, `ID`) VALUES ('" + object + "','" + objectId + "');");
+                MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + objectId + "');");
                 pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully attached and saved to database.");
             } else {
                 pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
@@ -166,7 +166,7 @@ public class ObjectSQLManager extends TableHandler {
     public static void attachObjectWithId(Object object, int id) {
         if (!idExists(id)) {
             if (!objectExists(object)) {
-                MySQLAPI.update("INSERT INTO `LiquidObjects` (`Object`, `ID`) VALUES ('" + object + "','" + id + "');");
+                MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + id + "');");
                 pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully attached and saved to database.");
             } else {
                 pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
@@ -186,7 +186,7 @@ public class ObjectSQLManager extends TableHandler {
         if (!objectExists(object)) {
             pluginbase.getLogHandler().sqlCustomError("Attaching: Object could not be deleted because it does not exist.", null);
         } else {
-            MySQLAPI.update("DELETE FROM `LiquidObjects` WHERE `Object` = \"" + object + "\";");
+            MySQLAPI.update("DELETE FROM `Objekte` WHERE `Objekt` = \"" + object + "\";");
             pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully unattached and deleted from database.");
         }
     }
@@ -200,7 +200,7 @@ public class ObjectSQLManager extends TableHandler {
         if (!objectExists(object)) {
             pluginbase.getLogHandler().sqlCustomError("Attaching: Object Id could not be deleted because it does not exist.", null);
         } else {
-            MySQLAPI.update("INSERT INTO `LiquidObjects` (`Object`, `ID`) VALUES ('" + object + "','" + "0" + "');");
+            MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + "0" + "');");
             pluginbase.getLogHandler().sqlInfo("Attaching: Object ID  was deleted.");
         }
     }
@@ -212,7 +212,7 @@ public class ObjectSQLManager extends TableHandler {
      * @param id ID, welche gesetzt werden soll
      */
     public static void setObjectId(Object object, int id) {
-        MySQLAPI.update("INSERT INTO `LiquidObjects` (`Object`, `ID`) VALUES ('" + object + "','" + id + "');");
+        MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + id + "');");
         pluginbase.getLogHandler().sqlInfo("Attaching: Object ID successfully set.");
     }
 
