@@ -148,12 +148,12 @@ public class ObjectSQLManager extends TableHandler {
         if (!idExists(objectId)) {
             if (!objectExists(object)) {
                 MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + objectId + "');");
-                pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully attached and saved to database.");
+                pluginbase.getLogHandler().sqlInfo("Registrierung: Objekt erfolgreich in der Datenbank registriert.");
             } else {
-                pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
+                pluginbase.getLogHandler().sqlCustomError("Registrierung: Objekt bereits in der Datenbank registriert.", null);
             }
         } else {
-            pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
+            pluginbase.getLogHandler().sqlCustomError("DB-Registrierung: Objekt bereits in der Datenbank registriert.", null);
         }
     }
 
@@ -167,12 +167,12 @@ public class ObjectSQLManager extends TableHandler {
         if (!idExists(id)) {
             if (!objectExists(object)) {
                 MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + id + "');");
-                pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully attached and saved to database.");
+                pluginbase.getLogHandler().sqlInfo("Registrierung: Objekt erfolgreich in der Datenbank registriert.");
             } else {
-                pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
+                pluginbase.getLogHandler().sqlCustomError("Registrierung: Objekt bereits in der Datenbank registriert.", null);
             }
         } else {
-            pluginbase.getLogHandler().sqlCustomError("Attaching: Object already attached.", null);
+            pluginbase.getLogHandler().sqlCustomError("DB-Registrierung: Objekt bereits in der Datenbank registriert.", null);
         }
     }
 
@@ -184,10 +184,10 @@ public class ObjectSQLManager extends TableHandler {
     public static void unattachObject(Object object) {
         int objectId = getObjectId(object);
         if (!objectExists(object)) {
-            pluginbase.getLogHandler().sqlCustomError("Attaching: Object could not be deleted because it does not exist.", null);
+            pluginbase.getLogHandler().sqlCustomError("Registrierung: Objekt nicht in der Datenbank registriert.", null);
         } else {
             MySQLAPI.update("DELETE FROM `Objekte` WHERE `Objekt` = \"" + object + "\";");
-            pluginbase.getLogHandler().sqlInfo("Attaching: Object successfully unattached and deleted from database.");
+            pluginbase.getLogHandler().sqlInfo("DB-Entfernung: Objekt erfolgreich aus der Datenbank entfernt.");
         }
     }
 
@@ -198,10 +198,10 @@ public class ObjectSQLManager extends TableHandler {
      */
     public static void removeObjectId(Object object) {
         if (!objectExists(object)) {
-            pluginbase.getLogHandler().sqlCustomError("Attaching: Object Id could not be deleted because it does not exist.", null);
+            pluginbase.getLogHandler().sqlCustomError("Registrierung: Objekt-ID nicht in der Datenbank registriert.", null);
         } else {
             MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + "0" + "');");
-            pluginbase.getLogHandler().sqlInfo("Attaching: Object ID  was deleted.");
+            pluginbase.getLogHandler().sqlInfo("DB-Entfernung: Objekt-ID erfolgreich aus der Datenbank entfernt.");
         }
     }
 
@@ -213,7 +213,7 @@ public class ObjectSQLManager extends TableHandler {
      */
     public static void setObjectId(Object object, int id) {
         MySQLAPI.update("INSERT INTO `Objekte` (`Objekt`, `ID`) VALUES ('" + object + "','" + id + "');");
-        pluginbase.getLogHandler().sqlInfo("Attaching: Object ID successfully set.");
+        pluginbase.getLogHandler().sqlInfo("DB-Registrierung: Objekt-ID erfolgreich für Objekt in der Datenbank gesetzt.");
     }
 
 }

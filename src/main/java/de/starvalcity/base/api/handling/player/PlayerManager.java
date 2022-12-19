@@ -32,14 +32,14 @@ public class PlayerManager {
             ObjectSQLManager.attachObject(starvalPlayer.getPlayer());
             pluginbase.getPlayerSQLManager().addToTable(player);
 
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player has been attached successfully.", Level.INFO);
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player Name: " + player.getName(), Level.INFO);
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player ID:" + starvalPlayer.getId(), Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spieler erfolgreich in der Datenbank registriert.", Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spielername: " + player.getName(), Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spieler-ID: " + starvalPlayer.getId(), Level.INFO);
         } else {
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player could not be attached.", Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player already attached.", Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player Name: " + player.getName(), Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Attaching > Player ID:" + starvalPlayer.getId(), Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler konnte nicht in der Datenbank registriert werden.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler bereits in der Datenbank registriert.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spielername: " + player.getName(), Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler-ID: " + starvalPlayer.getId(), Level.SEVERE);
         }
     }
 
@@ -51,14 +51,14 @@ public class PlayerManager {
             ObjectSQLManager.unattachObject(player);
             pluginbase.getPlayerSQLManager().removeFromTable(player);
 
-            pluginbase.getLogHandler().logWithLevel("Removing > Player has been removed successfully.", Level.INFO);
-            pluginbase.getLogHandler().logWithLevel("Removing > Player Name: " + player.getName(), Level.INFO);
-            pluginbase.getLogHandler().logWithLevel("Removing > Player ID:" + id, Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spieler erfolgreich aus der Datenbank entfernt.", Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spielername: " + player.getName(), Level.INFO);
+            pluginbase.getLogHandler().logWithLevel("DB-Registrierung > Spieler-ID: " + id, Level.INFO);
         } else {
-            pluginbase.getLogHandler().logWithLevel("Removing > Player could not be attached.", Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Removing > Player is not attached.", Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Removing > Player Name: " + player.getName(), Level.SEVERE);
-            pluginbase.getLogHandler().logWithLevel("Removing > Player ID:" + id, Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler konnte nicht aus der Datenbank entfernt werden.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler nicht in der Datenbank registriert.", Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spielername: " + player.getName(), Level.SEVERE);
+            pluginbase.getLogHandler().logWithLevel("DB-Entfernung > Spieler-ID:" + id, Level.SEVERE);
         }
     }
 

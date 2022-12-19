@@ -50,8 +50,8 @@ public class LogHandler {
      * @param exception exception
      */
     public void sqlError(@Nullable String query, String message, @NotNull Exception exception) {
-        System.err.println("SQL Error > " + message + " Exception: " + exception.getMessage());
-        System.err.println("SQL Error > Query: " + query);
+        System.err.println("SQL Fehler > " + message + " Exception: " + exception.getMessage());
+        System.err.println("SQL Fehler > Query: " + query);
     }
 
     /**
@@ -59,14 +59,14 @@ public class LogHandler {
      * Logt einen SQL Verbindungsfehler mit Problemhilfe
      */
     public void sqlConnectionError() {
-        System.err.println("SQL Error > Database is not connected.");
-        System.err.println("SQL Helper > Please make sure all credentials and login information are correct.");
-        System.err.println("SQL Helper > Please make sure that the database is running.");
+        System.err.println("SQL Fehler > Datenbank nicht verbunden.");
+        System.err.println("SQL Hilfe > Bitte überprüfe die Logindaten auf Korrektheit.");
+        System.err.println("SQL Hilfe > Bitte überprüfe, ob die Datenbank aktiv ist.");
     }
 
     public void sqlCustomError(String message, @Nullable Exception exception) {
-        System.err.println("SQL Error > Nachricht: " + message);
-        System.err.println("SQL Error > Exception: " + exception);
+        System.err.println("SQL Fehler > Nachricht: " + message);
+        System.err.println("SQL Fehler > Exception: " + exception);
     }
 
     /**
